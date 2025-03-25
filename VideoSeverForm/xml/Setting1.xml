@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="D:\xob\programing\Videos\VideoServer\VideoSeverForm\xml\CameraViwer.xsd">
+	<CamerasView>
+		<CameraView ViewName="">
+			<CameraName CameraName="">
+				<week>
+					<monday/>
+					<tuesday/>
+					<wednesday/>
+					<thursday/>
+					<friday/>
+					<saturday/>
+					<sunday/>
+				</week>
+			</CameraName>
+		</CameraView>
+	</CamerasView>
+	<Cameras>
+		<Camera CameraName="">
+			<CameraName/>
+			<CameraType/>
+			<CameraDescription/>
+			<SaveToFile/>
+			<MoviDetect/>
+			<FileDirectoryPath/>
+		</Camera>
+	</Cameras>
+</ROOT>

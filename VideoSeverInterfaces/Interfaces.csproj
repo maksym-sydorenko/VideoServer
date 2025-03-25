@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{78E56702-1926-4F72-938C-935293779AA2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Interfaces</RootNamespace>
+    <AssemblyName>Interfaces</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge, Version=1.2.0.0, Culture=neutral, PublicKeyToken=75f8e82c5042a70f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>references\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging, Version=1.2.0.0, Culture=neutral, PublicKeyToken=38eb47741dd0492e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>references\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math, Version=1.2.0.0, Culture=neutral, PublicKeyToken=e12ceb15b47eb5cc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>references\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="avi\AviReader.cs" />
+    <Compile Include="avi\AviWriter.cs" />
+    <Compile Include="avi\Win32.cs" />
+    <Compile Include="CameraAdapter.cs" />
+    <Compile Include="dshow\Core\IBaseFilter.cs" />
+    <Compile Include="dshow\Core\IBasicVideo.cs" />
+    <Compile Include="dshow\Core\ICreateDevEnum.cs" />
+    <Compile Include="dshow\Core\IEnumPins.cs" />
+    <Compile Include="dshow\Core\IFileSourceFilter.cs" />
+    <Compile Include="dshow\Core\IFilterGraph.cs" />
+    <Compile Include="dshow\Core\IGraphBuilder.cs" />
+    <Compile Include="dshow\Core\IMediaControl.cs" />
+    <Compile Include="dshow\Core\IMediaEvent.cs" />
+    <Compile Include="dshow\Core\IMediaPosition.cs" />
+    <Compile Include="dshow\Core\IMediaSeeking.cs" />
+    <Compile Include="dshow\Core\IPin.cs" />
+    <Compile Include="dshow\Core\IPropertyBag.cs" />
+    <Compile Include="dshow\Core\ISampleGrabber.cs" />
+    <Compile Include="dshow\Core\IVideoFrameStep.cs" />
+    <Compile Include="dshow\Core\IVideoWindow.cs" />
+    <Compile Include="dshow\Core\Structures.cs" />
+    <Compile Include="dshow\Core\Uuids.cs" />
+    <Compile Include="dshow\Core\Win32.cs" />
+    <Compile Include="MotionDetector2.cs" />
+    <Compile Include="Events.cs" />
+    <Compile Include="dshow\Filter.cs" />
+    <Compile Include="dshow\FilterCollection.cs" />
+    <Compile Include="ISetupPage.cs" />
+    <Compile Include="ISourceAdaptee.cs" />
+    <Compile Include="Jpeg.cs" />
+    <Compile Include="LocalCaptureDevice.cs" />
+    <Compile Include="Mjpeg.cs" />
+    <Compile Include="MotionDetector.cs" />
+    <Compile Include="Mpeg.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SourceFormater.cs" />
+    <Compile Include="SourseTypes.cs" />
+    <Compile Include="dshow\Tools.cs" />
+    <Compile Include="Stream.cs" />
+    <Compile Include="ThreadPool.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Interfaces.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\1.gif" />
+    <EmbeddedResource Include="Resources\2.gif" />
+    <EmbeddedResource Include="Resources\3.gif" />
+    <EmbeddedResource Include="Resources\4.gif" />
+    <EmbeddedResource Include="Resources\5.gif" />
+    <EmbeddedResource Include="Resources\6.gif" />
+    <EmbeddedResource Include="Resources\7.gif" />
+    <EmbeddedResource Include="Resources\8.gif" />
+    <EmbeddedResource Include="Resources\9.gif" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

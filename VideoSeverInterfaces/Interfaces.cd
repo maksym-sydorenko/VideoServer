@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Interfaces.CameraAdapter" Collapsed="true">
+    <Position X="1.5" Y="0.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAASAAAAhAAAAAEQAABBEgAAQCIAAQCAAAAAA=</HashCode>
+      <FileName>CameraAdapter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SourceFormat" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Interfaces.SourceFormater" Collapsed="true">
+    <Position X="1.5" Y="2" Width="1.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AEgARgAgACAAEAkIgACAQAQAAAAAAAAIIQAAQAAAAxA=</HashCode>
+      <FileName>SourceFormat.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CameraAdapter" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Interfaces.Mjpeg" Collapsed="true">
+    <Position X="2" Y="3" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAACAAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Mjpeg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interfaces.Jpeg" Collapsed="true">
+    <Position X="0.5" Y="3" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAACAAAAgAAAAAAAAAAQAAAAAAIEAAAAAAAAA=</HashCode>
+      <FileName>Jpeg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interfaces.MotionDetector" Collapsed="true">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAwgAABAQQQAIAAAAAAAAQAAEAAAAAACIAAIA=</HashCode>
+      <FileName>MotionDetector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interfaces.avi.AVIWriter" Collapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEACBWAAIAVAQAAAIEAgAAAAAgAADCEAAACAAAA=</HashCode>
+      <FileName>avi\AviWriter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Interfaces.avi.Win32" Collapsed="true">
+    <Position X="3.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgACBAAAsQAgAAAFAAAAAAAAAAcEIAAKQQAAAAIACA=</HashCode>
+      <FileName>avi\Win32.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interfaces.Mpeg" Collapsed="true">
+    <Position X="3.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAACAAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Mpeg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interfaces.LocalCaptureDevice" Collapsed="true">
+    <Position X="5.25" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAABAACACAAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>LocalCaptureDevice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Interfaces.ISourceAdaptee" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAgggEAAAJAAAAAEAAACCAgAAACAAAUCAAAAAg=</HashCode>
+      <FileName>ISourceAdaptee.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ISetupPage" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Interfaces.ISetupPage" Collapsed="true">
+    <Position X="5.75" Y="1.25" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAQAAAAAAAAQAAAAAAAAAACA=</HashCode>
+      <FileName>ISetupPage.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

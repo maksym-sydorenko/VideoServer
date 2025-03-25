@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by Max (Natan) -->
+<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CameraViwer.xsd">
+	<CameraView ViewName="Main">
+			<CameraName CameraName="D-Link">
+				
+			</CameraName>
+	</CameraView>
+	<Camera CameraName="Local">
+			<CameraName>Local</CameraName>
+			<CameraType>Local Capture Device</CameraType>
+			<CameraDescription></CameraDescription>
+            <SourceType>Local</SourceType>
+		    <SaveToFile>false</SaveToFile>
+			<MoviDetect>false</MoviDetect>
+			<FileDirectoryPath>C:\</FileDirectoryPath>
+		  <Url>ICatch (VI) PC Camera</Url>
+		  <Login></Login>
+		  <Password></Password>
+		  <Quality></Quality>
+		  <Resolution></Resolution>
+		  <FrameFrequncy></FrameFrequncy>
+	</Camera>
+	<Camera CameraName="DLink">
+			<CameraName>DLink</CameraName>
+			<CameraType>D-Link DCS-2102 web camera</CameraType>
+			<CameraDescription></CameraDescription>
+			<SourceType>MJPEG</SourceType>
+			<SaveToFile>false</SaveToFile>
+			<MoviDetect>false</MoviDetect>
+			<FileDirectoryPath></FileDirectoryPath>
+			<Url>192.168.1.20</Url>
+			<Login>admin</Login>
+			<Password>123456</Password>
+			<Quality></Quality>
+			<Resolution></Resolution>
+			<FrameFrequncy></FrameFrequncy>
+	</Camera>
+	<Camera CameraName="D-Link">
+			<CameraName>D-Link</CameraName>
+			<CameraType>D-Link DCS-2102 web camera</CameraType>
+			<CameraDescription></CameraDescription>
+			<SaveToFile>true</SaveToFile>
+			<MoviDetect>true</MoviDetect>
+			<FileDirectoryPath>E:\camera</FileDirectoryPath>
+			<Url>192.168.1.20</Url>
+			<Login>admin</Login>
+			<Password>123456</Password>
+			<SourceType>MJPEG</SourceType>
+			<Quality></Quality>
+			<Resolution></Resolution>
+			<FrameFrequncy></FrameFrequncy>
+		</Camera>
+	<Camera CameraName="Panasonic">
+			<CameraName>Panasonic</CameraName>
+			<CameraType>Panasonic web camera</CameraType>
+			<CameraDescription> </CameraDescription>
+			<SaveToFile>true</SaveToFile>
+			<MoviDetect>true</MoviDetect>
+			<FileDirectoryPath>E:\camera\Panasonic</FileDirectoryPath>
+			<Url>192.168.2.253:8080</Url>
+			<Login>user_camera</Login>
+			<Password>123456</Password>
+			<SourceType>MJPEG</SourceType>
+			<Quality>Standard</Quality>
+			<Resolution>320x240</Resolution>
+			<FrameFrequncy>3 s</FrameFrequncy>
+	</Camera>
+</ROOT>

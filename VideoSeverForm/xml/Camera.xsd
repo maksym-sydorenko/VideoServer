@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by Max (Natan) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Camera">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CameraName" type="xs:string"/>
+				<xs:element name="CameraType" type="xs:string"/>
+				<xs:element name="CameraDescription" type="xs:string"/>
+				<xs:element name="SourceType" type="xs:string"/>
+				<xs:element name="SaveToFile" type="xs:boolean"/>
+				<xs:element name="MoviDetect" type="xs:boolean"/>
+				<xs:element name="FileDirectoryPath" type="xs:string"/>
+				<xs:element name="Url" type="xs:string" minOccurs="0"/>
+				<xs:element name="Login" type="xs:string" minOccurs="0"/>
+				<xs:element name="Password" type="xs:string" minOccurs="0"/>
+				<xs:element name="Quality" type="xs:string" minOccurs="0"/>
+				<xs:element name="Resolution" type="xs:string" minOccurs="0"/>
+				<xs:element name="FrameFrequncy" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="CameraName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

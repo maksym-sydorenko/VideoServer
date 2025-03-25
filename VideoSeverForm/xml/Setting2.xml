@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CameraViwer.xsd">
+<Cameras>
+	<Camera CameraName="Local">
+			<CameraName>Local</CameraName>
+			<CameraType>Local Capture Device</CameraType>
+			<CameraDescription></CameraDescription>
+            <SourceType>Local</SourceType>
+		    <SaveToFile>false</SaveToFile>
+			<MoviDetect>false</MoviDetect>
+			<FileDirectoryPath>C:\</FileDirectoryPath>
+		  <Url>ICatch (VI) PC Camera</Url>
+		  <Login></Login>
+		  <Password></Password>
+		  <Quality></Quality>
+		  <Resolution></Resolution>
+		  <FrameFrequncy></FrameFrequncy>
+	</Camera>
+	<Camera CameraName="DLink">
+			<CameraName>DLink</CameraName>
+			<CameraType>D-Link DCS-2102 web camera</CameraType>
+			<CameraDescription></CameraDescription>
+			<SourceType>MJPEG</SourceType>
+			<SaveToFile>false</SaveToFile>
+			<MoviDetect>false</MoviDetect>
+			<FileDirectoryPath></FileDirectoryPath>
+			<Url>192.168.1.20</Url>
+			<Login>admin</Login>
+			<Password>123456</Password>
+			<Quality></Quality>
+			<Resolution></Resolution>
+			<FrameFrequncy></FrameFrequncy>
+	</Camera>
+	<Camera CameraName="D-Link">
+			<CameraName>D-Link</CameraName>
+			<CameraType>D-Link DCS-2102 web camera</CameraType>
+			<CameraDescription></CameraDescription>
+			<SourceType>MJPEG</SourceType>
+			<SaveToFile>true</SaveToFile>
+			<MoviDetect>true</MoviDetect>
+			<FileDirectoryPath>E:\camera</FileDirectoryPath>
+			<Url>192.168.1.20</Url>
+			<Login>admin</Login>
+			<Password>123456</Password>
+			
+			<Quality></Quality>
+			<Resolution></Resolution>
+			<FrameFrequncy></FrameFrequncy>
+		</Camera>
+</Cameras>
+<CamerasViews>
+	<CamerasView ViewName="main1">
+		<row/>
+		<col/>
+		<width/>
+		<height/>
+		<SelectedCamera CameraName="Local">
+			<row></row>
+			<col></col>
+				<monday/>
+				<tuesday/>
+				<wednesday/>
+				<thursday/>
+				<friday/>
+				<saturday/>
+				<sunday/>
+		</SelectedCamera>
+		<SelectedCamera CameraName="Dlink">
+			<row></row>
+			<col></col>
+				<monday/>
+				<tuesday/>
+				<wednesday/>
+				<thursday/>
+				<friday/>
+				<saturday/>
+				<sunday/>
+		</SelectedCamera>
+	</CamerasView>
+	<CamerasView ViewName="main2">
+		<row/>
+		<col/>
+		<width/>
+		<height/>
+		<SelectedCamera CameraName="Local">
+			<row></row>
+			<col></col>
+				<monday/>
+				<tuesday/>
+				<wednesday/>
+				<thursday/>
+				<friday/>
+				<saturday/>
+				<sunday/>
+			
+		</SelectedCamera>
+		
+	</CamerasView>
+</CamerasViews>
+</ROOT>

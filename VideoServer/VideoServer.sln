@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "VideoServer", "VideoServer\VideoServer.vdproj", "{73CE757C-F5F3-470C-A493-AF7E2637FD8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73CE757C-F5F3-470C-A493-AF7E2637FD8C}.Debug|Default.ActiveCfg = Debug
+		{73CE757C-F5F3-470C-A493-AF7E2637FD8C}.Debug|Default.Build.0 = Debug
+		{73CE757C-F5F3-470C-A493-AF7E2637FD8C}.Release|Default.ActiveCfg = Release
+		{73CE757C-F5F3-470C-A493-AF7E2637FD8C}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

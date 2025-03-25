@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by Max (Natan) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="camera.xsd"/>
+	<xs:include schemaLocation="week.xsd"/>
+	<xs:element name="ROOT">
+		<xs:annotation>
+			<xs:documentation>Camera </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Cameras">
+					<xs:complexType>
+						<xs:sequence minOccurs="0" maxOccurs="unbounded">
+							<xs:element ref="Camera"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="CamerasViews">
+					<xs:complexType>
+						<xs:sequence minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="CamerasView">
+								<xs:complexType>
+									<xs:sequence minOccurs="0" maxOccurs="unbounded">
+										<xs:element name="row" type="xs:string"/>
+										<xs:element name="col" type="xs:string"/>
+										<xs:element name="width" type="xs:string"/>
+										<xs:element name="height" type="xs:string"/>
+										<xs:element name="description"/>
+										<xs:element name="SelectedCamera" maxOccurs="25">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="row"/>
+													<xs:element name="col"/>
+													<xs:element name="monday"/>
+													<xs:element name="tuesday "/>
+													<xs:element name="wednesday"/>
+													<xs:element name="thursday"/>
+													<xs:element name="friday"/>
+													<xs:element name="saturday"/>
+													<xs:element name="sunday"/>
+												</xs:sequence>
+												<xs:attribute name="CameraName" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="ViewName" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

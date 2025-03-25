@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="VideoServer.UserInterface.AddCameraForm" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAIAAAAiAAABAQAACAAAASAAAABAAIACAAAQAAAAA=</HashCode>
+      <FileName>UserInterface\AddCameraForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VideoServer.Tools.Camera" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEwAQAAAACAAEAsIAACAAQQAAAAAAAAIIAAAAgAAEAA=</HashCode>
+      <FileName>Tools\Camera.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ICameraTarget" />
+      <Property Name="ISourceAdaptee" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="Interfaces.ICameraTarget" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Interfaces.ISourceAdaptee" Collapsed="true">
+    <Position X="3" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
