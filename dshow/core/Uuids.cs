@@ -2,7 +2,7 @@
  * DirectShow UUIDs (Universally Unique Identifiers)
  */
 
-namespace Interfaces.dshow.Core
+namespace dshow.Core
 {
 	using System;
 	using System.Runtime.InteropServices;

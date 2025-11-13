@@ -1,6 +1,6 @@
 ﻿using System;
-using Interfaces.dshow;
-using Interfaces.dshow.Core;
+using dshow;
+using dshow.Core;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;

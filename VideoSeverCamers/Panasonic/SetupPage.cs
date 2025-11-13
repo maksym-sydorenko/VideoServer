@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+using Interfaces;
 using System.Windows.Forms;
 using System.Xml;
 
 
 namespace Panasonic
 {
-    public partial class SetupPage : System.Windows.Forms.UserControl, Interfaces.ISetupPage
+    public partial class SetupPage : System.Windows.Forms.UserControl, ISetupPage
     {
 
         string frameFrequncy = "";
@@ -28,9 +24,8 @@ namespace Panasonic
             cbPeriod.SelectedIndex = 0;
             cbPeriod.Visible = false;
             lbInterval.Visible = false;
-            
         }
-             
+
         private void btSelectPath_Click(object sender, EventArgs e)
         {
 
@@ -160,7 +155,7 @@ namespace Panasonic
         #endregion
 
 
-        internal void Update(Interfaces.ISourceAdaptee panasonicCamera) 
+        internal void Update(ISourceAdaptee panasonicCamera) 
         {
             
             {

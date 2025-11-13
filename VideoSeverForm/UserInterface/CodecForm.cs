@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
+using dshow;
+using dshow.Core;
 using System.Windows.Forms;
-using Interfaces.dshow;
-using Interfaces.dshow.Core;
 using Microsoft.Win32;
 using System.Collections;
 

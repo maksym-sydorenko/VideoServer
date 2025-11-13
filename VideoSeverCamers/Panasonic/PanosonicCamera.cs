@@ -4,7 +4,7 @@ using System.Text;
 using Interfaces;
 namespace Panasonic
 {
-    public class PanosonicCamera : Interfaces.ISourceAdaptee
+    public class PanosonicCamera : ISourceAdaptee
     {
 
 
