@@ -1,7 +1,6 @@
 ﻿using System;
 using Interfaces;
-using Interfaces.dshow;
-using Interfaces.dshow.Core;
+using AForge.Video.DirectShow;
 
 namespace LocalCaptureDevice
 {
@@ -167,13 +166,12 @@ namespace LocalCaptureDevice
 
             if (sourceType == SourceTypes.LOCAL)
             {
-                FilterCollection filters = new FilterCollection(FilterCategory.VideoInputDevice);
-                foreach (Filter filter in filters) 
+                FilterInfoCollection filters = new FilterInfoCollection(AForge.Video.DirectShow.FilterCategory.VideoInputDevice);
+                foreach (AForge.Video.DirectShow.FilterInfo filter in filters) 
                 {
                     if (filter.Name == sourcePath)
                         return filter.MonikerString;
                 }
-                
             }
             return "";
         }

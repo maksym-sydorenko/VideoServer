@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+
 using System.Windows.Forms;
 using Interfaces;
-using Interfaces.dshow;
-using Interfaces.dshow.Core;
 using System.Xml;
+using AForge.Video.DirectShow;
 
 namespace LocalCaptureDevice
 {
     public partial class SetupPage : System.Windows.Forms.UserControl, Interfaces.ISetupPage
     {
-        FilterCollection filters;
+        FilterInfoCollection filters;
         //private bool completed = false;
         
         
@@ -24,7 +19,7 @@ namespace LocalCaptureDevice
         {
             InitializeComponent();
           //cbCaptureDevice.
-            filters = new FilterCollection(FilterCategory.VideoInputDevice);
+            filters = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
             if (filters.Count == 0)
             {
@@ -34,7 +29,7 @@ namespace LocalCaptureDevice
             else
             {
                 // add all devices to combo
-                foreach (Filter filter in filters)
+                foreach (FilterInfo filter in filters)
                 {
                     cbCaptureDevice.Items.Add(filter.Name);
                 }

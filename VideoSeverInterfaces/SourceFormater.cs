@@ -10,6 +10,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using Interfaces.avi;
 using Microsoft.Win32;
+using DirectShowLib;
+using System.Runtime.InteropServices;
 
 namespace Interfaces
 {
@@ -176,6 +178,66 @@ namespace Interfaces
                 writer.Dispose();
                 writer = null;
             }
+        }
+
+        public static IPin GetOutPin(IBaseFilter filter, int index)
+        {
+            IEnumPins enumPins;
+            int hr = filter.EnumPins(out enumPins);
+            DsError.ThrowExceptionForHR(hr);
+
+            IPin[] pins = new IPin[1];
+            IntPtr fetched = IntPtr.Zero;
+            int i = 0;
+
+            while (enumPins.Next(1, pins, fetched) == 0)
+            {
+                PinInfo pinInfo;
+                pins[0].QueryPinInfo(out pinInfo);
+
+                if (pinInfo.dir == PinDirection.Output)
+                {
+                    if (i == index)
+                    {
+                        return pins[0];
+                    }
+                    i++;
+                }
+
+                Marshal.ReleaseComObject(pins[0]);
+            }
+
+            return null;
+        }
+
+        public static IPin GetInPin(IBaseFilter filter, int index)
+        {
+            IEnumPins enumPins;
+            int hr = filter.EnumPins(out enumPins);
+            DsError.ThrowExceptionForHR(hr);
+
+            IPin[] pins = new IPin[1];
+            IntPtr fetched = IntPtr.Zero;
+            int i = 0;
+
+            while (enumPins.Next(1, pins, fetched) == 0)
+            {
+                PinInfo pinInfo;
+                pins[0].QueryPinInfo(out pinInfo);
+
+                if (pinInfo.dir == PinDirection.Input)
+                {
+                    if (i == index)
+                    {
+                        return pins[0];
+                    }
+                    i++;
+                }
+
+                Marshal.ReleaseComObject(pins[0]);
+            }
+
+            return null;
         }
 
     }

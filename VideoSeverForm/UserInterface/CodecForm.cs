@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using dshow;
-using dshow.Core;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Collections;
+using AForge.Video.DirectShow;
 
 namespace VideoServer.UserInterface
 {
     public partial class CodecForm : Form
     {
-        FilterCollection filters;
+        FilterInfoCollection filters;
         Hashtable tableVideo = null;
         Hashtable tableAudio = null;
         public CodecForm()
         {
             InitializeComponent();
 
-            filters = new FilterCollection(FilterCategory.VideoCompressorCategory);
+            filters = new FilterInfoCollection(FilterCategory.VideoCompressorCategory);
             tableVideo = new Hashtable();
             tableAudio = new Hashtable();
             if (filters.Count == 0)
@@ -31,7 +30,7 @@ namespace VideoServer.UserInterface
             else
             {
                 // add all devices to combo
-                foreach (Filter filter in filters)
+                foreach (FilterInfo filter in filters)
                 {
                     if (filter.MonikerString[filter.MonikerString.Length-5] == '\\')
                     {
@@ -40,7 +39,7 @@ namespace VideoServer.UserInterface
                     }
                 }
             }
-            filters = new FilterCollection(FilterCategory.AudioCompressorCategory);
+            filters = new FilterInfoCollection(FilterCategory.AudioCompressorCategory);
             if (filters.Count == 0)
             {
                 lbxAudio.Items.Add("No Audio Codec");
@@ -49,7 +48,7 @@ namespace VideoServer.UserInterface
             else
             {
                 // add all devices to combo
-                foreach (Filter filter in filters)
+                foreach (FilterInfo filter in filters)
                 {
                     if (filter.MonikerString[filter.MonikerString.Length - 5] == '\\')
                     {

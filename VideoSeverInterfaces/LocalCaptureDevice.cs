@@ -1,13 +1,22 @@
 ﻿using System;
-using dshow;
-using dshow.Core;
+using DirectShowLib;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Interfaces
 {
+    internal static class Ole32
+    {
+        [DllImport("ole32.dll")]
+        public static extern int CreateBindCtx(int reserved, out IBindCtx ppbc);
+
+        [DllImport("ole32.dll", CharSet = CharSet.Unicode)]
+        public static extern int MkParseDisplayName(IBindCtx pbc, string szUserName, out int pchEaten, out IMoniker ppmk);
+    }
+
     class LocalCaptureDevice : SourceFormater
     {
         public override event CameraEventHandler NewFrame;
@@ -58,35 +67,31 @@ namespace Interfaces
             object grabberObj = null;
 
             // interfaces
-            IGraphBuilder graph = null;
-            IBaseFilter sourceBase = null;
-            IBaseFilter grabberBase = null;
-            ISampleGrabber sg = null;
-            IMediaControl mc = null;
-
+            IGraphBuilder graph;
+            IBaseFilter sourceBase;
+            IBaseFilter grabberBase;
+            ICaptureGraphBuilder2 captureGraph;
+            IMediaControl mediaControl;
+            ISampleGrabber sampleGrabber;
             try
             {
-                // Get type for filter graph
-                Type srvType = Type.GetTypeFromCLSID(Clsid.FilterGraph);
+                Type srvType = Type.GetTypeFromCLSID(typeof(FilterGraph).GUID);
                 if (srvType == null)
                     throw new ApplicationException("Failed creating filter graph");
 
-                // create filter graph
                 graphObj = Activator.CreateInstance(srvType);
                 graph = (IGraphBuilder)graphObj;
+                captureGraph = (ICaptureGraphBuilder2)new CaptureGraphBuilder2();
+                captureGraph.SetFiltergraph(graph);
 
-                // ----
-                UCOMIBindCtx bindCtx = null;
-                UCOMIMoniker moniker = null;
+                IBindCtx bindCtx = null;
+                IMoniker moniker = null;
                 int n = 0;
 
-                // create bind context
-                if (Win32.CreateBindCtx(0, out bindCtx) == 0)
+                if (Ole32.CreateBindCtx(0, out bindCtx) == 0)
                 {
-                    // convert moniker`s string to a moniker
-                    if (Win32.MkParseDisplayName(bindCtx, cameraAdapter.Connection, ref n, out moniker) == 0)
+                    if (Ole32.MkParseDisplayName(bindCtx, cameraAdapter.Connection, out n, out moniker) == 0)
                     {
-                        // get device base filter
                         Guid filterId = typeof(IBaseFilter).GUID;
                         moniker.BindToObject(null, null, ref filterId, out sourceObj);
 
@@ -96,72 +101,64 @@ namespace Interfaces
                     Marshal.ReleaseComObject(bindCtx);
                     bindCtx = null;
                 }
-                // ----
 
                 if (sourceObj == null)
                     throw new ApplicationException("Failed creating device object for moniker");
 
                 sourceBase = (IBaseFilter)sourceObj;
 
-                // Get type for sample grabber
-                srvType = Type.GetTypeFromCLSID(Clsid.SampleGrabber);
+                srvType = Type.GetTypeFromCLSID(typeof(SampleGrabber).GUID);
                 if (srvType == null)
                     throw new ApplicationException("Failed creating sample grabber");
-
-                // create sample grabber
                 grabberObj = Activator.CreateInstance(srvType);
-                sg = (ISampleGrabber)grabberObj;
+
+                sampleGrabber = (ISampleGrabber)grabberObj;
+                AMMediaType mt = new AMMediaType
+                {
+                    majorType = MediaType.Video,
+                    subType = MediaSubType.RGB24,
+                    formatType = FormatType.VideoInfo
+                };
+                sampleGrabber.SetMediaType(mt);
+
                 grabberBase = (IBaseFilter)grabberObj;
 
-                // add source filter to graph
                 graph.AddFilter(sourceBase, "source");
                 graph.AddFilter(grabberBase, "grabber");
 
-                // set media type
-                AMMediaType mt = new AMMediaType();
-                mt.majorType = MediaType.Video;
-                mt.subType = MediaSubType.RGB24;
-                sg.SetMediaType(mt);
+                captureGraph.RenderStream(PinCategory.Capture, MediaType.Video, sourceBase, grabberBase, null);
 
-                // connect pins
-                if (graph.Connect(DSTools.GetOutPin(sourceBase, 0), DSTools.GetInPin(grabberBase, 0)) < 0)
-                    throw new ApplicationException("Failed connecting filters");
-
-                // get media type
-                if (sg.GetConnectedMediaType(mt) == 0)
+                if (sampleGrabber.GetConnectedMediaType(mt) == 0)
                 {
                     VideoInfoHeader vih = (VideoInfoHeader)Marshal.PtrToStructure(mt.formatPtr, typeof(VideoInfoHeader));
-
                     grabber.Width = vih.BmiHeader.Width;
                     grabber.Height = vih.BmiHeader.Height;
-                    mt.Dispose();
+
                 }
 
                 // render
-                graph.Render(DSTools.GetOutPin(grabberBase, 0));
+                graph.Render(GetOutPin(grabberBase, 0));
 
-                //
-                sg.SetBufferSamples(false);
-                sg.SetOneShot(false);
-                sg.SetCallback(grabber, 1);
+                sampleGrabber.SetBufferSamples(false);
+                sampleGrabber.SetOneShot(false);
+                sampleGrabber.SetCallback(grabber, 1);
 
-                // window
                 IVideoWindow win = (IVideoWindow)graphObj;
-                win.put_AutoShow(false);
+                win.put_AutoShow(OABool.False);
                 win = null;
 
 
                 // get media control
-                mc = (IMediaControl)graphObj;
+                mediaControl = (IMediaControl)graphObj;
 
                 // run
-                mc.Run();
+                mediaControl.Run();
 
                 while (!stopEvent.WaitOne(0, true))
                 {
                     Thread.Sleep(100);
                 }
-                mc.StopWhenReady();
+                mediaControl.StopWhenReady();
             }
             // catch any exceptions
             catch (Exception e)
@@ -172,11 +169,11 @@ namespace Interfaces
             finally
             {
                 // release all objects
-                mc = null;
+                mediaControl = null;
                 graph = null;
                 sourceBase = null;
                 grabberBase = null;
-                sg = null;
+                sampleGrabber = null;
 
                 if (graphObj != null)
                 {
@@ -227,7 +224,7 @@ namespace Interfaces
         }
 
         // Grabber
-        private class Grabber : ISampleGrabberCB
+        private class Grabber : DirectShowLib.ISampleGrabberCB
         {
             private LocalCaptureDevice parent;
             private int width, height;
@@ -257,41 +254,45 @@ namespace Interfaces
                 return 0;
             }
 
-            // Callback method that receives a pointer to the sample buffer
             public int BufferCB(double SampleTime, IntPtr pBuffer, int BufferLen)
             {
-                // create new image
-                System.Drawing.Bitmap img = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-
-                // lock bitmap data
-                BitmapData bmData = img.LockBits(
-                    new Rectangle(0, 0, width, height),
-                    ImageLockMode.ReadWrite,
-                    PixelFormat.Format24bppRgb);
-
-                // copy image data
-                int srcStride = bmData.Stride;
-                int dstStride = bmData.Stride;
-
-                int dst = bmData.Scan0.ToInt32() + dstStride * (height - 1);
-                int src = pBuffer.ToInt32();
-
-                for (int y = 0; y < height; y++)
+                using (Bitmap img = new Bitmap(width, height, PixelFormat.Format24bppRgb))
                 {
-                    Win32.memcpy(dst, src, srcStride);
-                    dst -= dstStride;
-                    src += srcStride;
+                    BitmapData bmData = img.LockBits(
+                        new Rectangle(0, 0, width, height),
+                        ImageLockMode.WriteOnly,
+                        PixelFormat.Format24bppRgb);
+
+                    int srcStride = width * 3;
+                    int dstStride = bmData.Stride;
+
+                    unsafe
+                    {
+                        byte* srcBase = (byte*)pBuffer.ToPointer();
+                        byte* dstBase = (byte*)bmData.Scan0.ToPointer();
+
+                        for (int y = 0; y < height; y++)
+                        {
+                            byte* srcRow = srcBase + y * srcStride;
+                            byte* dstRow = dstBase + (height - y - 1) * dstStride;
+                            Buffer.MemoryCopy(srcRow, dstRow, dstStride, srcStride);
+                        }
+                    }
+
+                    img.UnlockBits(bmData);
+
+                    // викликаємо подію
+                    parent.OnNewFrame((Bitmap)img.Clone());
                 }
 
-                // unlock bitmap data
-                img.UnlockBits(bmData);
+                return 0;
+            }
 
-                // notify parent
-                parent.OnNewFrame(img);
-
-                // release the image
-                img.Dispose();
-
+            public int SampleCB(double SampleTime, IMediaSample pSample)
+            {
+                IntPtr buffer;
+                pSample.GetPointer(out buffer);
+                int length = pSample.GetSize();
                 return 0;
             }
         }

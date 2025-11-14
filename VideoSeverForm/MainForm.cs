@@ -178,19 +178,19 @@ namespace VideoServer
         {
             try
             {
-                if ((treeView.SelectedNode.Name != null) && (treeView.SelectedNode.Name == "1"))
+                if ((treeView?.SelectedNode?.Name != null) && (treeView.SelectedNode.Name == "1"))
                 {
                     ShowCamera();
                 }
-                else if ((treeView.SelectedNode.Parent != null) && (treeView.SelectedNode.Parent.Name == "1"))
+                else if ((treeView?.SelectedNode?.Parent != null) && (treeView.SelectedNode.Parent.Name == "1"))
                 {
                     ShowCamera();
                 }
-                else if ((treeView.SelectedNode.Name != null) && (treeView.SelectedNode.Name == "2"))
+                else if ((treeView?.SelectedNode?.Name != null) && (treeView.SelectedNode.Name == "2"))
                 {
                     ShowView();
                 }
-                else if ((treeView.SelectedNode.Parent != null) && (treeView.SelectedNode.Parent.Name == "2"))
+                else if ((treeView?.SelectedNode?.Parent != null) && (treeView.SelectedNode.Parent.Name == "2"))
                 {
                     ShowView();
                 }
@@ -204,19 +204,19 @@ namespace VideoServer
         {
             try
             {
-                if ((treeView.SelectedNode.Name != null) && (treeView.SelectedNode.Name == "1"))
+                if ((treeView?.SelectedNode?.Name != null) && (treeView.SelectedNode.Name == "1"))
                 {
                     AddCamera();
                 }
-                else if ((treeView.SelectedNode.Parent != null) && (treeView.SelectedNode.Parent.Name == "1"))
+                else if ((treeView?.SelectedNode?.Parent != null) && (treeView.SelectedNode.Parent.Name == "1"))
                 {
                     AddCamera();
                 }
-                else if ((treeView.SelectedNode.Name != null) && (treeView.SelectedNode.Name == "2"))
+                else if ((treeView?.SelectedNode?.Name != null) && (treeView.SelectedNode.Name == "2"))
                 {
                     AddView();
                 }
-                else if ((treeView.SelectedNode.Parent != null) && (treeView.SelectedNode.Parent.Name == "2"))
+                else if ((treeView?.SelectedNode?.Parent != null) && (treeView.SelectedNode.Parent.Name == "2"))
                 {
                     AddView();
                 }
@@ -228,23 +228,21 @@ namespace VideoServer
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-
             try
             {
-                if ((treeView.SelectedNode.Name != null) && (treeView.SelectedNode.Name == "1"))
+                if ((treeView?.SelectedNode?.Name != null) && (treeView.SelectedNode.Name == "1"))
                 {
                     DelCamera();
                 }
-                else if ((treeView.SelectedNode.Parent != null) && (treeView.SelectedNode.Parent.Name == "1"))
+                else if ((treeView?.SelectedNode?.Parent != null) && (treeView.SelectedNode.Parent.Name == "1"))
                 {
                     DelCamera();
                 }
-                else if ((treeView.SelectedNode.Name != null) && (treeView.SelectedNode.Name == "2"))
+                else if ((treeView?.SelectedNode?.Name != null) && (treeView.SelectedNode.Name == "2"))
                 {
                     DelView();
                 }
-                else if ((treeView.SelectedNode.Parent != null) && (treeView.SelectedNode.Parent.Name == "2"))
+                else if ((treeView?.SelectedNode?.Parent != null) && (treeView.SelectedNode.Parent.Name == "2"))
                 {
                     DelView();
                 }
@@ -320,9 +318,11 @@ namespace VideoServer
 
                 if (setting == null)
                     return;
+
                 XmlNode node = setting.CreateNode(XmlNodeType.Element, "Camera", "");
                 if (node == null)
                     return;
+
                 if (addCameraForm.ShowDialog() == DialogResult.OK)
                 {
                     addCameraForm.GetCameraConfiguration(ref node);

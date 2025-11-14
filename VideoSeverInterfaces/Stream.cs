@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using dshow;
-using dshow.Core;
+using DirectShowLib;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
 using System.Threading;
 using System.Runtime.InteropServices;
-using System.Net;
-
-
 
 namespace Interfaces
 {
@@ -26,8 +19,6 @@ namespace Interfaces
             reloadEvent = new ManualResetEvent(false);
             thread = new Thread(new ThreadStart(WorkerThread));
             //thread.Name = DateTime.Now.ToString();// cameraAdapter.CameraName;
-
-
             thread.Start();
         }
 
@@ -37,6 +28,7 @@ namespace Interfaces
             reloadEvent.Set();
             thread = null;
         }
+
         public override void WorkerThread()
         {
             bool failed = false;
@@ -58,14 +50,15 @@ namespace Interfaces
             IMediaControl mc = null;
             IMediaEventEx mediaEvent = null;
 
-            int code, param1, param2;
+            DirectShowLib.EventCode code;
+            System.IntPtr param1, param2;
 
             while ((!failed) && (!stopEvent.WaitOne(0, true)))
             {
                 try
                 {
                     // Get type for filter graph
-                    Type srvType = Type.GetTypeFromCLSID(Clsid.FilterGraph);
+                    Type srvType = Type.GetTypeFromCLSID(typeof(FilterGraph).GUID);
                     if (srvType == null)
                         throw new ApplicationException("Failed creating filter graph");
 
@@ -74,7 +67,7 @@ namespace Interfaces
                     graph = (IGraphBuilder)graphObj;
 
                     // Get type for windows media source filter
-                    srvType = Type.GetTypeFromCLSID(Clsid.RtspMediaSource);
+                    srvType = Type.GetTypeFromCLSID(new Guid("B98D13E7-55DB-4385-A33D-09FD1BA26338"));//?
                     if (srvType == null)
                         throw new ApplicationException("Failed creating WM source");
 
@@ -83,7 +76,7 @@ namespace Interfaces
                     sourceBase = (IBaseFilter)sourceObj;
 
                     // Get type for sample grabber
-                    srvType = Type.GetTypeFromCLSID(Clsid.SampleGrabber);
+                    srvType = Type.GetTypeFromCLSID(typeof(SampleGrabber).GUID);
                     if (srvType == null)
                         throw new ApplicationException("Failed creating sample grabber");
 
@@ -107,7 +100,7 @@ namespace Interfaces
                     fileSource.Load(cameraAdapter.Connection, null);
 
                     // connect pins
-                    if (graph.Connect(DSTools.GetOutPin(sourceBase, 0), DSTools.GetInPin(grabberBase, 0)) < 0)
+                    if (graph.Connect(GetOutPin(sourceBase, 0), GetInPin(grabberBase, 0)) < 0)
                         throw new ApplicationException("Failed connecting filters");
 
                     // get media type
@@ -117,11 +110,10 @@ namespace Interfaces
 
                         grabber.Width = vih.BmiHeader.Width;
                         grabber.Height = vih.BmiHeader.Height;
-                        mt.Dispose();
                     }
 
                     // render
-                    graph.Render(DSTools.GetOutPin(grabberBase, 0));
+                    graph.Render(GetOutPin(grabberBase, 0));
 
                     //
                     sg.SetBufferSamples(false);
@@ -130,7 +122,7 @@ namespace Interfaces
 
                     // window
                     IVideoWindow win = (IVideoWindow)graphObj;
-                    win.put_AutoShow(false);
+                    win.put_AutoShow(OABool.False);
                     win = null;
 
                     // get events interface
@@ -153,7 +145,7 @@ namespace Interfaces
                             mediaEvent.FreeEventParams(code, param1, param2);
 
                             //
-                            if (code == (int)EventCode.Complete)
+                            if (code == EventCode.Complete)
                             {
                                 break;
                             }
@@ -199,8 +191,6 @@ namespace Interfaces
             }
         }
 
-        
-
         protected void OnNewFrame(Bitmap image)
         {
             framesReceived++;
@@ -208,8 +198,7 @@ namespace Interfaces
                 NewFrame(this, new CameraEventArgs(image));
         }
 
-        // Grabber
-        private class Grabber : ISampleGrabberCB
+        private class Grabber : DirectShowLib.ISampleGrabberCB
         {
             private CameraStream parent;
             private int width, height;
@@ -242,38 +231,45 @@ namespace Interfaces
             // Callback method that receives a pointer to the sample buffer
             public int BufferCB(double SampleTime, IntPtr pBuffer, int BufferLen)
             {
-                // create new image
-                System.Drawing.Bitmap img = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-
-                // lock bitmap data
-                BitmapData bmData = img.LockBits(
-                    new Rectangle(0, 0, width, height),
-                    ImageLockMode.ReadWrite,
-                    PixelFormat.Format24bppRgb);
-
-                // copy image data
-                int srcStride = bmData.Stride;
-                int dstStride = bmData.Stride;
-
-                int dst = bmData.Scan0.ToInt32() + dstStride * (height - 1);
-                int src = pBuffer.ToInt32();
-
-                for (int y = 0; y < height; y++)
+                // створюємо Bitmap
+                using (Bitmap img = new Bitmap(width, height, PixelFormat.Format24bppRgb))
                 {
-                    Win32.memcpy(dst, src, srcStride);
-                    dst -= dstStride;
-                    src += srcStride;
+                    BitmapData bmData = img.LockBits(
+                        new Rectangle(0, 0, width, height),
+                        ImageLockMode.WriteOnly,
+                        PixelFormat.Format24bppRgb);
+
+                    int srcStride = width * 3;           // stride джерела (RGB24)
+                    int dstStride = bmData.Stride;       // stride Bitmap
+
+                    unsafe
+                    {
+                        byte* srcBase = (byte*)pBuffer.ToPointer();
+                        byte* dstBase = (byte*)bmData.Scan0.ToPointer();
+
+                        // копіюємо построково
+                        for (int y = 0; y < height; y++)
+                        {
+                            byte* srcRow = srcBase + y * srcStride;
+                            byte* dstRow = dstBase + y * dstStride;
+                            Buffer.MemoryCopy(srcRow, dstRow, dstStride, srcStride);
+                        }
+                    }
+
+                    img.UnlockBits(bmData);
+
+                    // викликаємо подію
+                    parent.OnNewFrame((Bitmap)img.Clone());
                 }
 
-                // unlock bitmap data
-                img.UnlockBits(bmData);
+                return 0;
+            }
 
-                // notify parent
-                parent.OnNewFrame(img);
-
-                // release the image
-                img.Dispose();
-
+            public int SampleCB(double SampleTime, IMediaSample pSample)
+            {
+                IntPtr buffer;
+                pSample.GetPointer(out buffer);
+                int length = pSample.GetSize();
                 return 0;
             }
         }

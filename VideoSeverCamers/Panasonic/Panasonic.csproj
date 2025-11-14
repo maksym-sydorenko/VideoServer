@@ -63,13 +63,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Panasonic.cd" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\dshow\dshow.csproj">
-      <Project>{37b08afd-f4bc-4e13-9119-537ba6a12ccb}</Project>
-      <Name>dshow</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\VideoSeverInterfaces\Interfaces.csproj">
       <Project>{78e56702-1926-4f72-938c-935293779aa2}</Project>
       <Name>Interfaces</Name>

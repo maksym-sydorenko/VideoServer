@@ -263,7 +263,7 @@ namespace Interfaces
                     break;
                 case SourceTypes.STREAM:
                     {
-                        sourceFormater = new CameraStream();
+                        //sourceFormater = new CameraStream();
                     }
                     break;
 
