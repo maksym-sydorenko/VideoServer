@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panasonic", "..\VideoSeverCamers\Panasonic\Panasonic.csproj", "{B7ACE875-5238-4734-86E9-200203F26FB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalCapture", "..\VideoSeverCamers\LocalCapture\LocalCapture.csproj", "{83D610D9-FD80-4E91-93F1-775EDB3B9C42}"
+	ProjectSection(ProjectDependencies) = postProject
+		{78E56702-1926-4F72-938C-935293779AA2} = {78E56702-1926-4F72-938C-935293779AA2}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "axis", "..\VideoSeverCamers\Axis\axis\axis.csproj", "{9657A1F4-5512-46EC-8EC0-E5F7D7BA0E77}"
 EndProject
