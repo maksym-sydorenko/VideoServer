@@ -1,4 +1,4 @@
-﻿namespace DLink
+﻿namespace IPCamera
 {
     partial class SetupPage
     {
@@ -48,6 +48,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbUrl = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cbxDetectObjects = new System.Windows.Forms.CheckBox();
+            this.clbxDetectedObjects = new System.Windows.Forms.CheckedListBox();
+            this.mtbServerYOLO = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // label6
@@ -65,7 +68,7 @@
             // btSelectPath
             // 
             this.btSelectPath.Enabled = false;
-            this.btSelectPath.Location = new System.Drawing.Point(444, 276);
+            this.btSelectPath.Location = new System.Drawing.Point(253, 317);
             this.btSelectPath.Margin = new System.Windows.Forms.Padding(4);
             this.btSelectPath.Name = "btSelectPath";
             this.btSelectPath.Size = new System.Drawing.Size(44, 28);
@@ -79,7 +82,7 @@
             this.cbhSave.AutoSize = true;
             this.cbhSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbhSave.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.cbhSave.Location = new System.Drawing.Point(44, 219);
+            this.cbhSave.Location = new System.Drawing.Point(43, 188);
             this.cbhSave.Margin = new System.Windows.Forms.Padding(4);
             this.cbhSave.Name = "cbhSave";
             this.cbhSave.Size = new System.Drawing.Size(186, 21);
@@ -93,7 +96,7 @@
             this.lbInterval.AutoSize = true;
             this.lbInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbInterval.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.lbInterval.Location = new System.Drawing.Point(293, 154);
+            this.lbInterval.Location = new System.Drawing.Point(244, 154);
             this.lbInterval.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbInterval.Name = "lbInterval";
             this.lbInterval.Size = new System.Drawing.Size(53, 17);
@@ -110,10 +113,10 @@
             "20 s",
             "1 min",
             "2 min"});
-            this.cbPeriod.Location = new System.Drawing.Point(361, 146);
+            this.cbPeriod.Location = new System.Drawing.Point(305, 147);
             this.cbPeriod.Margin = new System.Windows.Forms.Padding(4);
             this.cbPeriod.Name = "cbPeriod";
-            this.cbPeriod.Size = new System.Drawing.Size(125, 24);
+            this.cbPeriod.Size = new System.Drawing.Size(47, 24);
             this.cbPeriod.TabIndex = 27;
             this.cbPeriod.SelectedIndexChanged += new System.EventHandler(this.cbPeriod_SelectedIndexChanged);
             // 
@@ -123,7 +126,7 @@
             this.cbhSaveMoving.Enabled = false;
             this.cbhSaveMoving.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbhSaveMoving.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.cbhSaveMoving.Location = new System.Drawing.Point(44, 251);
+            this.cbhSaveMoving.Location = new System.Drawing.Point(43, 217);
             this.cbhSaveMoving.Margin = new System.Windows.Forms.Padding(4);
             this.cbhSaveMoving.Name = "cbhSaveMoving";
             this.cbhSaveMoving.Size = new System.Drawing.Size(168, 21);
@@ -137,7 +140,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label7.Location = new System.Drawing.Point(40, 190);
+            this.label7.Location = new System.Drawing.Point(360, 154);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(63, 17);
@@ -153,10 +156,10 @@
             "2",
             "3",
             "4"});
-            this.cbProfile.Location = new System.Drawing.Point(155, 186);
+            this.cbProfile.Location = new System.Drawing.Point(430, 147);
             this.cbProfile.Margin = new System.Windows.Forms.Padding(4);
             this.cbProfile.Name = "cbProfile";
-            this.cbProfile.Size = new System.Drawing.Size(116, 24);
+            this.cbProfile.Size = new System.Drawing.Size(57, 24);
             this.cbProfile.TabIndex = 26;
             this.cbProfile.SelectedIndexChanged += new System.EventHandler(this.cbResolution_SelectedIndexChanged);
             // 
@@ -168,20 +171,20 @@
             "JPEG",
             "MJPEG",
             "STREAM"});
-            this.cbTypeStream.Location = new System.Drawing.Point(193, 146);
+            this.cbTypeStream.Location = new System.Drawing.Point(159, 146);
             this.cbTypeStream.Margin = new System.Windows.Forms.Padding(4);
             this.cbTypeStream.Name = "cbTypeStream";
-            this.cbTypeStream.Size = new System.Drawing.Size(91, 24);
+            this.cbTypeStream.Size = new System.Drawing.Size(81, 24);
             this.cbTypeStream.TabIndex = 25;
             this.cbTypeStream.SelectedIndexChanged += new System.EventHandler(this.cbTypeStream_SelectedIndexChanged);
             // 
             // tbPath
             // 
             this.tbPath.Enabled = false;
-            this.tbPath.Location = new System.Drawing.Point(248, 279);
+            this.tbPath.Location = new System.Drawing.Point(43, 323);
             this.tbPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbPath.Name = "tbPath";
-            this.tbPath.Size = new System.Drawing.Size(187, 22);
+            this.tbPath.Size = new System.Drawing.Size(197, 22);
             this.tbPath.TabIndex = 28;
             this.tbPath.TextChanged += new System.EventHandler(this.tbPath_TextChanged);
             // 
@@ -191,7 +194,7 @@
             this.lbFilePath.Enabled = false;
             this.lbFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbFilePath.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.lbFilePath.Location = new System.Drawing.Point(40, 283);
+            this.lbFilePath.Location = new System.Drawing.Point(40, 302);
             this.lbFilePath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFilePath.Name = "lbFilePath";
             this.lbFilePath.Size = new System.Drawing.Size(179, 17);
@@ -200,10 +203,10 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(135, 16);
+            this.tbName.Location = new System.Drawing.Point(103, 20);
             this.tbName.Margin = new System.Windows.Forms.Padding(4);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(352, 22);
+            this.tbName.Size = new System.Drawing.Size(433, 22);
             this.tbName.TabIndex = 21;
             this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             // 
@@ -222,10 +225,10 @@
             // tbPassword
             // 
             this.tbPassword.AcceptsReturn = true;
-            this.tbPassword.Location = new System.Drawing.Point(135, 114);
+            this.tbPassword.Location = new System.Drawing.Point(399, 84);
             this.tbPassword.Margin = new System.Windows.Forms.Padding(4);
             this.tbPassword.Name = "tbPassword";
-            this.tbPassword.Size = new System.Drawing.Size(171, 22);
+            this.tbPassword.Size = new System.Drawing.Size(137, 22);
             this.tbPassword.TabIndex = 24;
             this.tbPassword.UseSystemPasswordChar = true;
             this.tbPassword.TextChanged += new System.EventHandler(this.tbPassword_TextChanged);
@@ -235,7 +238,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label3.Location = new System.Drawing.Point(40, 118);
+            this.label3.Location = new System.Drawing.Point(318, 86);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(73, 17);
@@ -244,10 +247,10 @@
             // 
             // tbLogin
             // 
-            this.tbLogin.Location = new System.Drawing.Point(135, 82);
+            this.tbLogin.Location = new System.Drawing.Point(103, 84);
             this.tbLogin.Margin = new System.Windows.Forms.Padding(4);
             this.tbLogin.Name = "tbLogin";
-            this.tbLogin.Size = new System.Drawing.Size(171, 22);
+            this.tbLogin.Size = new System.Drawing.Size(126, 22);
             this.tbLogin.TabIndex = 23;
             this.tbLogin.TextChanged += new System.EventHandler(this.tbLogin_TextChanged);
             // 
@@ -265,10 +268,10 @@
             // 
             // tbUrl
             // 
-            this.tbUrl.Location = new System.Drawing.Point(135, 50);
+            this.tbUrl.Location = new System.Drawing.Point(103, 50);
             this.tbUrl.Margin = new System.Windows.Forms.Padding(4);
             this.tbUrl.Name = "tbUrl";
-            this.tbUrl.Size = new System.Drawing.Size(352, 22);
+            this.tbUrl.Size = new System.Drawing.Size(433, 22);
             this.tbUrl.TabIndex = 22;
             this.tbUrl.TextChanged += new System.EventHandler(this.tbUrl_TextChanged);
             // 
@@ -284,11 +287,48 @@
             this.label1.TabIndex = 31;
             this.label1.Text = "URL:";
             // 
+            // cbxDetectObjects
+            // 
+            this.cbxDetectObjects.AutoSize = true;
+            this.cbxDetectObjects.Enabled = false;
+            this.cbxDetectObjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbxDetectObjects.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.cbxDetectObjects.Location = new System.Drawing.Point(330, 188);
+            this.cbxDetectObjects.Margin = new System.Windows.Forms.Padding(4);
+            this.cbxDetectObjects.Name = "cbxDetectObjects";
+            this.cbxDetectObjects.Size = new System.Drawing.Size(124, 21);
+            this.cbxDetectObjects.TabIndex = 40;
+            this.cbxDetectObjects.Text = "Детектування";
+            this.cbxDetectObjects.UseVisualStyleBackColor = true;
+            this.cbxDetectObjects.CheckedChanged += new System.EventHandler(this.cbxDetectObjects_CheckedChanged);
+            // 
+            // clbxDetectedObjects
+            // 
+            this.clbxDetectedObjects.FormattingEnabled = true;
+            this.clbxDetectedObjects.Location = new System.Drawing.Point(330, 216);
+            this.clbxDetectedObjects.Name = "clbxDetectedObjects";
+            this.clbxDetectedObjects.Size = new System.Drawing.Size(206, 89);
+            this.clbxDetectedObjects.TabIndex = 41;
+            this.clbxDetectedObjects.Visible = false;
+            // 
+            // mtbServerYOLO
+            // 
+            this.mtbServerYOLO.Location = new System.Drawing.Point(330, 324);
+            this.mtbServerYOLO.Mask = "###.###.###.###";
+            this.mtbServerYOLO.Name = "mtbServerYOLO";
+            this.mtbServerYOLO.Size = new System.Drawing.Size(206, 22);
+            this.mtbServerYOLO.TabIndex = 42;
+            this.mtbServerYOLO.Visible = false;
+            // 
             // SetupPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Gray;
+            this.Controls.Add(this.mtbServerYOLO);
+            this.Controls.Add(this.clbxDetectedObjects);
+            this.Controls.Add(this.cbxDetectObjects);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btSelectPath);
             this.Controls.Add(this.cbhSave);
@@ -310,7 +350,7 @@
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SetupPage";
-            this.Size = new System.Drawing.Size(515, 337);
+            this.Size = new System.Drawing.Size(540, 349);
             this.Load += new System.EventHandler(this.SetupPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -339,5 +379,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbUrl;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cbxDetectObjects;
+        private System.Windows.Forms.CheckedListBox clbxDetectedObjects;
+        private System.Windows.Forms.MaskedTextBox mtbServerYOLO;
     }
 }

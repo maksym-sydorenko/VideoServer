@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "axis", "..\VideoSeverCamers
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLink", "..\VideoSeverCamers\DLink\DLink.csproj", "{F52CE7D2-DA3F-4646-B549-CEC971CC69AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPCamera", "..\VideoSeverCamers\IPCamera\IPCamera.csproj", "{4E20321C-9807-49A2-A164-0DD19125AD39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,14 @@ Global
 		{F52CE7D2-DA3F-4646-B549-CEC971CC69AD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F52CE7D2-DA3F-4646-B549-CEC971CC69AD}.Release|x64.ActiveCfg = Release|Any CPU
 		{F52CE7D2-DA3F-4646-B549-CEC971CC69AD}.Release|x64.Build.0 = Release|Any CPU
+		{4E20321C-9807-49A2-A164-0DD19125AD39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E20321C-9807-49A2-A164-0DD19125AD39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E20321C-9807-49A2-A164-0DD19125AD39}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4E20321C-9807-49A2-A164-0DD19125AD39}.Debug|x64.Build.0 = Debug|Any CPU
+		{4E20321C-9807-49A2-A164-0DD19125AD39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E20321C-9807-49A2-A164-0DD19125AD39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E20321C-9807-49A2-A164-0DD19125AD39}.Release|x64.ActiveCfg = Release|Any CPU
+		{4E20321C-9807-49A2-A164-0DD19125AD39}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

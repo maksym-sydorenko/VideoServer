@@ -117,7 +117,7 @@ namespace VideoServer
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(929, 28);
+            this.menuStrip.Size = new System.Drawing.Size(929, 30);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -129,7 +129,7 @@ namespace VideoServer
             this.ShowCameraToolStripMenuItem,
             this.editToolStripMenuItem});
             this.cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
-            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
             this.cameraToolStripMenuItem.Text = "Камера";
             // 
             // addCameraToolStripMenuItem
@@ -167,7 +167,7 @@ namespace VideoServer
             this.delViewToolStripMenuItem1,
             this.showViewToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(61, 26);
             this.viewToolStripMenuItem.Text = "Вікно";
             // 
             // addViewToolStripMenuItem1
@@ -205,7 +205,7 @@ namespace VideoServer
             this.fullToolStripMenuItem,
             this.fitToolStripMenuItem});
             this.previewToolStripMenuItem.Name = "previewToolStripMenuItem";
-            this.previewToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
+            this.previewToolStripMenuItem.Size = new System.Drawing.Size(64, 26);
             this.previewToolStripMenuItem.Text = "Екран";
             // 
             // fullToolStripMenuItem
@@ -230,7 +230,7 @@ namespace VideoServer
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(94, 26);
             this.helpToolStripMenuItem.Text = "Допомога";
             // 
             // aboutToolStripMenuItem
@@ -319,10 +319,10 @@ namespace VideoServer
             this.treeView.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.treeView.ForeColor = System.Drawing.SystemColors.Info;
-            this.treeView.Location = new System.Drawing.Point(0, 28);
+            this.treeView.Location = new System.Drawing.Point(0, 30);
             this.treeView.Margin = new System.Windows.Forms.Padding(4);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(253, 395);
+            this.treeView.Size = new System.Drawing.Size(253, 393);
             this.treeView.TabIndex = 5;
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
             // 
@@ -332,16 +332,15 @@ namespace VideoServer
             this.viewPanel.CellHeight = 480;
             this.viewPanel.CellWidth = 640;
             this.viewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewPanel.Location = new System.Drawing.Point(253, 28);
+            this.viewPanel.Location = new System.Drawing.Point(253, 30);
             this.viewPanel.Margin = new System.Windows.Forms.Padding(4);
             this.viewPanel.Name = "viewPanel";
-            this.viewPanel.Size = new System.Drawing.Size(676, 395);
+            this.viewPanel.Size = new System.Drawing.Size(676, 393);
             this.viewPanel.TabIndex = 6;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.SlateGray;
             this.ClientSize = new System.Drawing.Size(929, 449);
             this.Controls.Add(this.viewPanel);

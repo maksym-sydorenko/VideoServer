@@ -75,7 +75,7 @@
             // 
             this.tbPath.Enabled = false;
             this.tbPath.Location = new System.Drawing.Point(260, 278);
-            this.tbPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbPath.Name = "tbPath";
             this.tbPath.Size = new System.Drawing.Size(175, 22);
             this.tbPath.TabIndex = 7;
@@ -89,7 +89,7 @@
             this.cbhSaveMoving.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbhSaveMoving.ForeColor = System.Drawing.SystemColors.Desktop;
             this.cbhSaveMoving.Location = new System.Drawing.Point(44, 250);
-            this.cbhSaveMoving.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbhSaveMoving.Margin = new System.Windows.Forms.Padding(4);
             this.cbhSaveMoving.Name = "cbhSaveMoving";
             this.cbhSaveMoving.Size = new System.Drawing.Size(168, 21);
             this.cbhSaveMoving.TabIndex = 16;
@@ -103,7 +103,7 @@
             this.cbhSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbhSave.ForeColor = System.Drawing.SystemColors.Desktop;
             this.cbhSave.Location = new System.Drawing.Point(44, 218);
-            this.cbhSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbhSave.Margin = new System.Windows.Forms.Padding(4);
             this.cbhSave.Name = "cbhSave";
             this.cbhSave.Size = new System.Drawing.Size(186, 21);
             this.cbhSave.TabIndex = 15;
@@ -115,7 +115,7 @@
             // 
             this.btSelectPath.Enabled = false;
             this.btSelectPath.Location = new System.Drawing.Point(444, 274);
-            this.btSelectPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btSelectPath.Margin = new System.Windows.Forms.Padding(4);
             this.btSelectPath.Name = "btSelectPath";
             this.btSelectPath.Size = new System.Drawing.Size(44, 28);
             this.btSelectPath.TabIndex = 8;
@@ -128,7 +128,7 @@
             this.cbCaptureDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCaptureDevice.FormattingEnabled = true;
             this.cbCaptureDevice.Location = new System.Drawing.Point(208, 63);
-            this.cbCaptureDevice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCaptureDevice.Margin = new System.Windows.Forms.Padding(4);
             this.cbCaptureDevice.Name = "cbCaptureDevice";
             this.cbCaptureDevice.Size = new System.Drawing.Size(279, 24);
             this.cbCaptureDevice.TabIndex = 21;
@@ -142,14 +142,14 @@
             this.lbName.Location = new System.Drawing.Point(40, 23);
             this.lbName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(100, 17);
+            this.lbName.Size = new System.Drawing.Size(104, 17);
             this.lbName.TabIndex = 22;
-            this.lbName.Text = "Назва камери";
+            this.lbName.Text = "Назва камери:";
             // 
             // tbName
             // 
             this.tbName.Location = new System.Drawing.Point(157, 20);
-            this.tbName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbName.Margin = new System.Windows.Forms.Padding(4);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(329, 22);
             this.tbName.TabIndex = 23;
@@ -179,7 +179,7 @@
             "1 min",
             "2 min"});
             this.cbPeriod.Location = new System.Drawing.Point(116, 155);
-            this.cbPeriod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbPeriod.Margin = new System.Windows.Forms.Padding(4);
             this.cbPeriod.Name = "cbPeriod";
             this.cbPeriod.Size = new System.Drawing.Size(91, 24);
             this.cbPeriod.TabIndex = 25;
@@ -193,7 +193,7 @@
             this.cbTypeStream.Items.AddRange(new object[] {
             "LOCAL"});
             this.cbTypeStream.Location = new System.Drawing.Point(193, 116);
-            this.cbTypeStream.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbTypeStream.Margin = new System.Windows.Forms.Padding(4);
             this.cbTypeStream.Name = "cbTypeStream";
             this.cbTypeStream.Size = new System.Drawing.Size(91, 24);
             this.cbTypeStream.TabIndex = 24;
@@ -215,8 +215,9 @@
             // 
             // SetupPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoSize = true;
+            this.BackColor = System.Drawing.Color.Gray;
             this.Controls.Add(this.lbInterval);
             this.Controls.Add(this.cbPeriod);
             this.Controls.Add(this.cbTypeStream);
@@ -230,7 +231,7 @@
             this.Controls.Add(this.cbhSaveMoving);
             this.Controls.Add(this.tbPath);
             this.Controls.Add(this.lbPath);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SetupPage";
             this.Size = new System.Drawing.Size(515, 337);
             this.Load += new System.EventHandler(this.SetupPage_Load);

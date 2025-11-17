@@ -37,8 +37,8 @@
             this.pnCameraForm = new System.Windows.Forms.Panel();
             this.pnButtons = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pnCameraType = new System.Windows.Forms.Panel();
             this.cameraViwer = new VideoServer.Controls.CameraViwer();
+            this.pnCameraType = new System.Windows.Forms.Panel();
             this.pnButtons.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnCameraType.SuspendLayout();
@@ -114,16 +114,19 @@
             // 
             // pnCameraForm
             // 
-            this.pnCameraForm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnCameraForm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnCameraForm.AutoSize = true;
             this.pnCameraForm.BackColor = System.Drawing.Color.Gray;
             this.pnCameraForm.Location = new System.Drawing.Point(4, 55);
             this.pnCameraForm.Margin = new System.Windows.Forms.Padding(4);
             this.pnCameraForm.Name = "pnCameraForm";
-            this.pnCameraForm.Size = new System.Drawing.Size(539, 370);
+            this.pnCameraForm.Size = new System.Drawing.Size(540, 370);
             this.pnCameraForm.TabIndex = 3;
             // 
             // pnButtons
             // 
+            this.pnButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pnButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnButtons.BackColor = System.Drawing.Color.Gray;
             this.pnButtons.Controls.Add(this.btAdd);
@@ -146,6 +149,17 @@
             this.panel1.Size = new System.Drawing.Size(568, 476);
             this.panel1.TabIndex = 3;
             // 
+            // cameraViwer
+            // 
+            this.cameraViwer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cameraViwer.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.cameraViwer.Location = new System.Drawing.Point(4, 4);
+            this.cameraViwer.Margin = new System.Windows.Forms.Padding(4);
+            this.cameraViwer.Name = "cameraViwer";
+            this.cameraViwer.Size = new System.Drawing.Size(560, 468);
+            this.cameraViwer.TabIndex = 0;
+            // 
             // pnCameraType
             // 
             this.pnCameraType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -157,15 +171,6 @@
             this.pnCameraType.Name = "pnCameraType";
             this.pnCameraType.Size = new System.Drawing.Size(539, 46);
             this.pnCameraType.TabIndex = 6;
-            // 
-            // cameraViwer
-            // 
-            this.cameraViwer.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.cameraViwer.Location = new System.Drawing.Point(4, 4);
-            this.cameraViwer.Margin = new System.Windows.Forms.Padding(4);
-            this.cameraViwer.Name = "cameraViwer";
-            this.cameraViwer.Size = new System.Drawing.Size(560, 468);
-            this.cameraViwer.TabIndex = 0;
             // 
             // AddCameraForm
             // 
@@ -189,6 +194,7 @@
             this.pnCameraType.ResumeLayout(false);
             this.pnCameraType.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

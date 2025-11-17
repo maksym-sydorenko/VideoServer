@@ -15,13 +15,15 @@ namespace VideoServer.UserInterface
         {
             InitializeComponent();
             this.camers = camers;
-            
+
             if (camers==null)
                return;
 
-            foreach(Camera camera in camers)
+
+            foreach (Camera camera in camers)
             {
                 cbCameraType.Items.Add(camera.ISourceAdaptee.CameraType);
+                camera.ISourceAdaptee.ISetupPage.StateChanged += new EventHandler(setupPage_StateChanged);
             }
             if (cbCameraType.Items.Count > 0)
                 cbCameraType.SelectedIndex = 0;
@@ -99,11 +101,10 @@ namespace VideoServer.UserInterface
                 pnCameraForm.Controls.Clear();
                 if (setupPage != null)
                 {
+                    pnCameraForm.Controls.Clear();
                     Control control = (Control)setupPage;
-                    control.Dock = DockStyle.Fill;
                     pnCameraForm.Controls.Add(control);
-                    
-                    setupPage.StateChanged+=new EventHandler(setupPage_StateChanged);
+                    control.Dock = DockStyle.Fill;
                     control.Show();
                 }
             }

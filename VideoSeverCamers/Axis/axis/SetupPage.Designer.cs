@@ -53,10 +53,10 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(119, 15);
-            this.tbName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbName.Location = new System.Drawing.Point(148, 15);
+            this.tbName.Margin = new System.Windows.Forms.Padding(4);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(368, 22);
+            this.tbName.Size = new System.Drawing.Size(339, 22);
             this.tbName.TabIndex = 0;
             this.tbName.Visible = false;
             // 
@@ -84,7 +84,7 @@
             // tbUrl
             // 
             this.tbUrl.Location = new System.Drawing.Point(119, 49);
-            this.tbUrl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbUrl.Margin = new System.Windows.Forms.Padding(4);
             this.tbUrl.Name = "tbUrl";
             this.tbUrl.Size = new System.Drawing.Size(368, 22);
             this.tbUrl.TabIndex = 1;
@@ -103,7 +103,7 @@
             // tbLogin
             // 
             this.tbLogin.Location = new System.Drawing.Point(119, 81);
-            this.tbLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbLogin.Margin = new System.Windows.Forms.Padding(4);
             this.tbLogin.Name = "tbLogin";
             this.tbLogin.Size = new System.Drawing.Size(187, 22);
             this.tbLogin.TabIndex = 2;
@@ -123,7 +123,7 @@
             // 
             this.tbPassword.AcceptsReturn = true;
             this.tbPassword.Location = new System.Drawing.Point(119, 113);
-            this.tbPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPassword.Margin = new System.Windows.Forms.Padding(4);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(187, 22);
             this.tbPassword.TabIndex = 3;
@@ -154,7 +154,7 @@
             // tbPath
             // 
             this.tbPath.Location = new System.Drawing.Point(232, 278);
-            this.tbPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbPath.Name = "tbPath";
             this.tbPath.Size = new System.Drawing.Size(203, 22);
             this.tbPath.TabIndex = 7;
@@ -168,7 +168,7 @@
             this.cbTypeStream.Items.AddRange(new object[] {
             "MJPEG"});
             this.cbTypeStream.Location = new System.Drawing.Point(173, 145);
-            this.cbTypeStream.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbTypeStream.Margin = new System.Windows.Forms.Padding(4);
             this.cbTypeStream.Name = "cbTypeStream";
             this.cbTypeStream.Size = new System.Drawing.Size(111, 24);
             this.cbTypeStream.TabIndex = 4;
@@ -183,7 +183,7 @@
             "320x240",
             "640x480"});
             this.cbResolution.Location = new System.Drawing.Point(141, 185);
-            this.cbResolution.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbResolution.Margin = new System.Windows.Forms.Padding(4);
             this.cbResolution.Name = "cbResolution";
             this.cbResolution.Size = new System.Drawing.Size(111, 24);
             this.cbResolution.TabIndex = 5;
@@ -210,7 +210,7 @@
             "1 min",
             "2 min"});
             this.cbPeriod.Location = new System.Drawing.Point(361, 145);
-            this.cbPeriod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbPeriod.Margin = new System.Windows.Forms.Padding(4);
             this.cbPeriod.Name = "cbPeriod";
             this.cbPeriod.Size = new System.Drawing.Size(125, 24);
             this.cbPeriod.TabIndex = 6;
@@ -232,7 +232,7 @@
             // 
             this.cbhSaveMoving.AutoSize = true;
             this.cbhSaveMoving.Location = new System.Drawing.Point(44, 250);
-            this.cbhSaveMoving.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbhSaveMoving.Margin = new System.Windows.Forms.Padding(4);
             this.cbhSaveMoving.Name = "cbhSaveMoving";
             this.cbhSaveMoving.Size = new System.Drawing.Size(167, 20);
             this.cbhSaveMoving.TabIndex = 16;
@@ -245,7 +245,7 @@
             // 
             this.cbhSave.AutoSize = true;
             this.cbhSave.Location = new System.Drawing.Point(44, 218);
-            this.cbhSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbhSave.Margin = new System.Windows.Forms.Padding(4);
             this.cbhSave.Name = "cbhSave";
             this.cbhSave.Size = new System.Drawing.Size(184, 20);
             this.cbhSave.TabIndex = 15;
@@ -257,7 +257,7 @@
             // btSelectPath
             // 
             this.btSelectPath.Location = new System.Drawing.Point(444, 274);
-            this.btSelectPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btSelectPath.Margin = new System.Windows.Forms.Padding(4);
             this.btSelectPath.Name = "btSelectPath";
             this.btSelectPath.Size = new System.Drawing.Size(44, 28);
             this.btSelectPath.TabIndex = 8;
@@ -268,8 +268,9 @@
             // 
             // SetupPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoSize = true;
+            this.BackColor = System.Drawing.Color.Gray;
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btSelectPath);
             this.Controls.Add(this.cbhSave);
@@ -289,7 +290,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbUrl);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SetupPage";
             this.Size = new System.Drawing.Size(515, 337);
             this.ResumeLayout(false);
