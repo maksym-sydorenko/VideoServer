@@ -32,16 +32,16 @@
             this.btClose = new System.Windows.Forms.Button();
             this.btAdd = new System.Windows.Forms.Button();
             this.cbCameraType = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbCameraType = new System.Windows.Forms.Label();
             this.btCheck = new System.Windows.Forms.Button();
             this.pnCameraForm = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnButtons = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnCameraType = new System.Windows.Forms.Panel();
             this.cameraViwer = new VideoServer.Controls.CameraViwer();
-            this.panel3.SuspendLayout();
+            this.pnButtons.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.pnCameraType.SuspendLayout();
             this.SuspendLayout();
             // 
             // btClose
@@ -85,17 +85,17 @@
             this.cbCameraType.TabIndex = 3;
             this.cbCameraType.SelectedIndexChanged += new System.EventHandler(this.cbCameraType_SelectedIndexChanged);
             // 
-            // label1
+            // lbCameraType
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label1.Location = new System.Drawing.Point(13, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 25);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Тип камери";
+            this.lbCameraType.AutoSize = true;
+            this.lbCameraType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbCameraType.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.lbCameraType.Location = new System.Drawing.Point(13, 9);
+            this.lbCameraType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbCameraType.Name = "lbCameraType";
+            this.lbCameraType.Size = new System.Drawing.Size(139, 25);
+            this.lbCameraType.TabIndex = 4;
+            this.lbCameraType.Text = "Тип камери";
             // 
             // btCheck
             // 
@@ -122,18 +122,18 @@
             this.pnCameraForm.Size = new System.Drawing.Size(539, 370);
             this.pnCameraForm.TabIndex = 3;
             // 
-            // panel3
+            // pnButtons
             // 
-            this.panel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel3.BackColor = System.Drawing.Color.Gray;
-            this.panel3.Controls.Add(this.btAdd);
-            this.panel3.Controls.Add(this.btCheck);
-            this.panel3.Controls.Add(this.btClose);
-            this.panel3.Location = new System.Drawing.Point(4, 433);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(539, 46);
-            this.panel3.TabIndex = 5;
+            this.pnButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnButtons.BackColor = System.Drawing.Color.Gray;
+            this.pnButtons.Controls.Add(this.btAdd);
+            this.pnButtons.Controls.Add(this.btCheck);
+            this.pnButtons.Controls.Add(this.btClose);
+            this.pnButtons.Location = new System.Drawing.Point(4, 433);
+            this.pnButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.pnButtons.Name = "pnButtons";
+            this.pnButtons.Size = new System.Drawing.Size(539, 46);
+            this.pnButtons.TabIndex = 5;
             // 
             // panel1
             // 
@@ -146,17 +146,17 @@
             this.panel1.Size = new System.Drawing.Size(568, 476);
             this.panel1.TabIndex = 3;
             // 
-            // panel2
+            // pnCameraType
             // 
-            this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel2.BackColor = System.Drawing.Color.Gray;
-            this.panel2.Controls.Add(this.cbCameraType);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(4, 2);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(539, 46);
-            this.panel2.TabIndex = 6;
+            this.pnCameraType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnCameraType.BackColor = System.Drawing.Color.Gray;
+            this.pnCameraType.Controls.Add(this.cbCameraType);
+            this.pnCameraType.Controls.Add(this.lbCameraType);
+            this.pnCameraType.Location = new System.Drawing.Point(4, 2);
+            this.pnCameraType.Margin = new System.Windows.Forms.Padding(4);
+            this.pnCameraType.Name = "pnCameraType";
+            this.pnCameraType.Size = new System.Drawing.Size(539, 46);
+            this.pnCameraType.TabIndex = 6;
             // 
             // cameraViwer
             // 
@@ -169,14 +169,12 @@
             // 
             // AddCameraForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.SlateGray;
-            this.ClientSize = new System.Drawing.Size(1120, 511);
-            this.ControlBox = false;
-            this.Controls.Add(this.panel2);
+            this.ClientSize = new System.Drawing.Size(1122, 489);
+            this.Controls.Add(this.pnCameraType);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.pnButtons);
             this.Controls.Add(this.pnCameraForm);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -186,10 +184,10 @@
             this.Name = "AddCameraForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Додати камеру";
-            this.panel3.ResumeLayout(false);
+            this.pnButtons.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.pnCameraType.ResumeLayout(false);
+            this.pnCameraType.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -199,12 +197,12 @@
         private System.Windows.Forms.Button btClose;
         private System.Windows.Forms.Button btAdd;
         private System.Windows.Forms.ComboBox cbCameraType;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbCameraType;
         private System.Windows.Forms.Button btCheck;
         private VideoServer.Controls.CameraViwer cameraViwer;
         private System.Windows.Forms.Panel pnCameraForm;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnButtons;
+        private System.Windows.Forms.Panel pnCameraType;
         private System.Windows.Forms.Panel panel1;
     }
 }

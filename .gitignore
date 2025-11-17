@@ -7,6 +7,8 @@
 node_modules/
 dist/
 
+.vs
+
 # Compiled Java class files
 *.class
 
@@ -51,3 +53,6 @@ Thumbs.db
 # Release/Debug
 Release/
 Debug/
+
+#Packs
+packages/

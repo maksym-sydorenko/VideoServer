@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Interfaces;
 
 namespace axis
@@ -8,7 +6,10 @@ namespace axis
     public class Axis2110Camera : Interfaces.ISourceAdaptee 
     {
         SetupPage setupPage = null;
-
+        bool _saveToFile = false;
+        bool _moviDetect = false;
+        string _cameraName = "";
+        string _fileDirectoryPath = "";
         public Axis2110Camera()
         {
             setupPage = new SetupPage();
@@ -28,16 +29,16 @@ namespace axis
         string resolution = "320x240";
         string sourcePath = "";
         string fullUrl = "";
-
+        string _description = "Axis camera";
         public string CameraDescription
         {
             get
             {
-                throw new NotImplementedException();
+                return _description;
             }
             set
             {
-                throw new NotImplementedException();
+                _description = value;
             }
         }
 
@@ -45,11 +46,11 @@ namespace axis
         {
             get
             {
-                throw new NotImplementedException();
+               return _cameraName;
             }
             set
             {
-                throw new NotImplementedException();
+                _cameraName = value;
             }
         }
 
@@ -57,11 +58,11 @@ namespace axis
         {
             get
             {
-                throw new NotImplementedException();
+               return _moviDetect;
             }
             set
             {
-                throw new NotImplementedException();
+                _moviDetect = value;
             }
         }
 
@@ -69,11 +70,11 @@ namespace axis
         {
             get
             {
-                throw new NotImplementedException();
+                return _saveToFile;
             }
             set
             {
-                throw new NotImplementedException();
+                _saveToFile = value;
             }
         }
 
@@ -198,16 +199,13 @@ namespace axis
         {
             get
             {
-                throw new NotImplementedException();
+                return _fileDirectoryPath;
             }
             set
             {
-                throw new NotImplementedException();
+                _fileDirectoryPath =  value;
             }
         }
-
-       
-
 
         public void SetConfiguration(System.Xml.XmlNode node)
         {

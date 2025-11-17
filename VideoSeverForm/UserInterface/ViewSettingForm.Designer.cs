@@ -87,7 +87,7 @@
             // 
             this.panel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel.BackColor = System.Drawing.Color.Gray;
-            this.panel.Location = new System.Drawing.Point(16, 6);
+            this.panel.Location = new System.Drawing.Point(5, 6);
             this.panel.Margin = new System.Windows.Forms.Padding(4);
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(101, 266);
@@ -197,7 +197,7 @@
             this.panelData.Controls.Add(this.rtbDescription);
             this.panelData.Controls.Add(this.tbHeight);
             this.panelData.Controls.Add(this.tbName);
-            this.panelData.Location = new System.Drawing.Point(125, 6);
+            this.panelData.Location = new System.Drawing.Point(114, 6);
             this.panelData.Margin = new System.Windows.Forms.Padding(4);
             this.panelData.Name = "panelData";
             this.panelData.Size = new System.Drawing.Size(539, 213);
@@ -267,7 +267,7 @@
             this.panel1.BackColor = System.Drawing.Color.Gray;
             this.panel1.Controls.Add(this.btCancel);
             this.panel1.Controls.Add(this.btNext);
-            this.panel1.Location = new System.Drawing.Point(125, 226);
+            this.panel1.Location = new System.Drawing.Point(114, 226);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(539, 46);
@@ -275,11 +275,10 @@
             // 
             // ViewSettingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.SlateGray;
-            this.ClientSize = new System.Drawing.Size(680, 304);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(660, 282);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelData);
             this.Controls.Add(this.panel);

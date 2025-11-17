@@ -1,20 +1,9 @@
-﻿///////////////////////////////////////////////////////////////////
-// Система видео наблюдения "Око"
-// Автор ........................................Сидоренко М.Г.
-// Год создания ...........................................2010
-// 
-//////////////////////////////////////////////////////////////////
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using VideoServer.Tools;
 using System.IO;
-using System.Reflection;
 using System.Collections;
 
 namespace VideoServer
@@ -24,12 +13,12 @@ namespace VideoServer
         CameraCollection camersBaseTypes = null;
         CameraCollection camers = null;
         Camera camera = null;
-        XmlDocument setting = null;
+        XmlDocument _setting = null;
         static string appPath = "";
-        VideoServer.UserInterface.AddCameraForm addCameraForm = null;
-        VideoServer.UserInterface.ViewSettingForm viewSettingForm = null;
-        VideoServer.UserInterface.AddViewForm viewForm = null;
-        VideoServer.UserInterface.SettingForm settingForm = null;
+        UserInterface.AddCameraForm addCameraForm = null;
+        UserInterface.ViewSettingForm viewSettingForm = null;
+        UserInterface.AddViewForm viewForm = null;
+        UserInterface.SettingForm settingForm = null;
         Hashtable tableIAdaptee = null;
         Point mainWindowLocation;
         Size mainWindowSize;
@@ -39,6 +28,31 @@ namespace VideoServer
         {
             InitializeComponent();
             treeView.MouseClick += new MouseEventHandler(MainForm_MouseClick);
+            this.WindowState = FormWindowState.Maximized;
+
+            appPath = Path.GetFullPath("xml");
+            if (!Directory.Exists(appPath))
+            {
+                Directory.CreateDirectory(appPath);
+            }
+
+            string filePath = Path.Combine(appPath, "Setting.xml");
+            if (!File.Exists(filePath))
+            {
+                string defaultXml = @"<?xml version=""1.0"" encoding=""UTF-8""?>
+<ROOT xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:noNamespaceSchemaLocation=""CameraViwer.xsd"">
+	<Cameras/>
+	<CamerasViews/>
+</ROOT>";
+                File.WriteAllText(filePath, defaultXml);
+            }
+
+            _setting = new XmlDocument();
+            _setting.Load(filePath);
+
+            _setting = new XmlDocument();
+
+            _setting.Load(appPath + "\\Setting.xml");
         }
 
         void MainForm_MouseClick(object sender, MouseEventArgs e)
@@ -90,10 +104,7 @@ namespace VideoServer
                 camersBaseTypes.Load(Path.GetDirectoryName(Application.ExecutablePath), ref tableIAdaptee);
                 addCameraForm = new VideoServer.UserInterface.AddCameraForm(camersBaseTypes);
 
-                appPath = System.IO.Path.GetFullPath("xml");
-                this.WindowState = FormWindowState.Maximized;
-                setting = new XmlDocument();
-                setting.Load(appPath + "\\Setting.xml");
+
                 UpdateTree();
                 mainWindowLocation = this.Location;
                 mainWindowSize = this.Size;
@@ -111,13 +122,13 @@ namespace VideoServer
             TreeNode camerasNode = treeView.Nodes.Add("1", "Камери");
             TreeNode camerasViewNode = treeView.Nodes.Add("2", "Вікна нагляду");
             int key = 3;
-            XmlNode appNode = setting.SelectSingleNode("/ROOT/Cameras");
+            XmlNode appNode = _setting.SelectSingleNode("/ROOT/Cameras");
             foreach (XmlNode node in appNode.ChildNodes)
             {
                 camerasNode.Nodes.Add(key.ToString(), node.Attributes["CameraName"].InnerText);
                 key++;
             }
-            appNode = setting.SelectSingleNode("/ROOT/CamerasViews");
+            appNode = _setting.SelectSingleNode("/ROOT/CamerasViews");
             foreach (XmlNode node in appNode.ChildNodes)
             {
                 camerasViewNode.Nodes.Add(key.ToString(), node.Attributes["ViewName"].InnerText);
@@ -316,29 +327,29 @@ namespace VideoServer
             try
             {
 
-                if (setting == null)
+                if (_setting == null)
                     return;
 
-                XmlNode node = setting.CreateNode(XmlNodeType.Element, "Camera", "");
+                XmlNode node = _setting.CreateNode(XmlNodeType.Element, "Camera", "");
                 if (node == null)
                     return;
 
                 if (addCameraForm.ShowDialog() == DialogResult.OK)
                 {
                     addCameraForm.GetCameraConfiguration(ref node);
-                    XmlNode appNode = setting.SelectSingleNode("/ROOT/Cameras/Camera[@CameraName=\"" + node["CameraName"].InnerText + "\"]");
+                    XmlNode appNode = _setting.SelectSingleNode("/ROOT/Cameras/Camera[@CameraName=\"" + node["CameraName"].InnerText + "\"]");
                     if (appNode != null)
                     {
                         MessageBox.Show("Камера с такою назвою існуе");
                         return;
                     }
-                    appNode = setting.SelectSingleNode("/ROOT/Cameras");
+                    appNode = _setting.SelectSingleNode("/ROOT/Cameras");
 
-                    XmlAttribute attribute = setting.CreateAttribute("CameraName");
+                    XmlAttribute attribute = _setting.CreateAttribute("CameraName");
                     node.Attributes.Append(attribute);
                     node.Attributes["CameraName"].InnerText = node["CameraName"].InnerText;
                     appNode.AppendChild(node);
-                    setting.Save(appPath + "\\Setting.xml");
+                    _setting.Save(appPath + "\\Setting.xml");
                     UpdateTree();
                 };
 
@@ -353,16 +364,16 @@ namespace VideoServer
             try
             {
 
-                if ((setting == null) || (treeView.SelectedNode.Name == "1") || (treeView.SelectedNode.Name == "2"))
+                if ((_setting == null) || (treeView?.SelectedNode?.Name == "1") || (treeView?.SelectedNode?.Name == "2"))
                     return;
 
-                XmlNode node = setting.SelectSingleNode("/ROOT/Cameras/Camera[@CameraName=\"" + treeView.SelectedNode.Text + "\"]");
+                XmlNode node = _setting.SelectSingleNode("/ROOT/Cameras/Camera[@CameraName=\"" + treeView?.SelectedNode?.Text + "\"]");
                 if (node == null)
                     return;
 
-                XmlNode appNode = setting.SelectSingleNode("/ROOT/Cameras");
+                XmlNode appNode = _setting.SelectSingleNode("/ROOT/Cameras");
                 appNode.RemoveChild(node);
-                setting.Save(appPath + "\\Setting.xml");
+                _setting.Save(appPath + "\\Setting.xml");
                 UpdateTree();
 
             }
@@ -376,28 +387,28 @@ namespace VideoServer
             try
             {
 
-                if ((setting == null) || (treeView.SelectedNode.Name == "1") || (treeView.SelectedNode.Name == "2"))
+                if ((_setting == null) || (treeView?.SelectedNode?.Name == "1") || (treeView?.SelectedNode?.Name == "2"))
                     return;
 
-                XmlNode node = setting.SelectSingleNode("/ROOT/Cameras/Camera[@CameraName=\"" + treeView.SelectedNode.Text + "\"]");
+                XmlNode node = _setting.SelectSingleNode("/ROOT/Cameras/Camera[@CameraName=\"" + treeView.SelectedNode.Text + "\"]");
                 if (node == null)
                     return;
 
                 addCameraForm.SetCameraConfiguration(node.Clone());
                 if (addCameraForm.ShowDialog() == DialogResult.OK)
                 {
-                    XmlNode appNode = setting.SelectSingleNode("/ROOT/Cameras");
+                    XmlNode appNode = _setting.SelectSingleNode("/ROOT/Cameras");
                     appNode.RemoveChild(node);
 
-                    node = setting.CreateNode(XmlNodeType.Element, "Camera", "");
+                    node = _setting.CreateNode(XmlNodeType.Element, "Camera", "");
                     addCameraForm.GetCameraConfiguration(ref node);
 
-                    XmlAttribute attribute = setting.CreateAttribute("CameraName");
+                    XmlAttribute attribute = _setting.CreateAttribute("CameraName");
                     node.Attributes.Append(attribute);
                     node.Attributes["CameraName"].InnerText = node["CameraName"].InnerText;
 
                     appNode.AppendChild(node);
-                    setting.Save(appPath + "\\Setting.xml");
+                    _setting.Save(appPath + "\\Setting.xml");
                     UpdateTree();
 
                 }
@@ -413,7 +424,7 @@ namespace VideoServer
             try
             {
 
-                if ((setting == null) || (treeView.SelectedNode.Name == "1") || (treeView.SelectedNode.Name == "2"))
+                if ((_setting == null) || (treeView?.SelectedNode?.Name == "1") || (treeView?.SelectedNode?.Name == "2"))
                     return;
 
                 if (camera != null)
@@ -432,7 +443,7 @@ namespace VideoServer
                     camers = null;
                 }
 
-                camera = CreateCamera(treeView.SelectedNode.Text);
+                camera = CreateCamera(treeView?.SelectedNode?.Text);
                 viewPanel.SetCamera(0, 0, camera);
                 viewPanel.Rows = 1;
                 viewPanel.Cols = 1;
@@ -454,10 +465,10 @@ namespace VideoServer
                 XmlNode node = null;
 
                 viewSettingForm = new VideoServer.UserInterface.ViewSettingForm();
-                viewSettingForm.SetDocument(ref setting);
+                viewSettingForm.SetDocument(ref _setting);
 
                 viewForm = new VideoServer.UserInterface.AddViewForm();
-                viewForm.SetDocument(ref setting);
+                viewForm.SetDocument(ref _setting);
 
                 do
                 {
@@ -472,9 +483,9 @@ namespace VideoServer
 
                 if (viewForm.DialogResult == DialogResult.OK)
                 {
-                    XmlNode addNode = setting.SelectSingleNode("/ROOT/CamerasViews");
+                    XmlNode addNode = _setting?.SelectSingleNode("/ROOT/CamerasViews");
                     addNode.AppendChild(node);
-                    setting.Save(appPath + "\\Setting.xml");
+                    _setting.Save(appPath + "\\Setting.xml");
                     UpdateTree();
                 }
             }
@@ -487,15 +498,15 @@ namespace VideoServer
         {
             try
             {
-                if ((setting == null) || (treeView.SelectedNode.Name == "1") || (treeView.SelectedNode.Name == "2"))
+                if ((_setting == null) || (treeView?.SelectedNode == null) || (treeView?.SelectedNode?.Name == "1") || (treeView?.SelectedNode?.Name == "2"))
                     return;
 
-                XmlNode node = setting.SelectSingleNode("/ROOT/CamerasViews/CamerasView[@ViewName=\"" + treeView.SelectedNode.Text + "\"]");
+                XmlNode node = _setting?.SelectSingleNode("/ROOT/CamerasViews/CamerasView[@ViewName=\"" + treeView.SelectedNode.Text + "\"]");
                 if (node != null)
                 {
-                    XmlNode appNode = setting.SelectSingleNode("/ROOT/CamerasViews");
+                    XmlNode appNode = _setting.SelectSingleNode("/ROOT/CamerasViews");
                     appNode.RemoveChild(node);
-                    setting.Save(appPath + "\\Setting.xml");
+                    _setting.Save(appPath + "\\Setting.xml");
                     treeView.Nodes.Remove(treeView.SelectedNode);
                     //UpdateTree();
                 }
@@ -512,9 +523,9 @@ namespace VideoServer
         {
             try
             {
-                if ((setting == null) || (treeView.SelectedNode.Name == "1") || (treeView.SelectedNode.Name == "2"))
+                if ((_setting == null) || (treeView?.SelectedNode == null) || (treeView?.SelectedNode?.Name == "1") || (treeView?.SelectedNode?.Name == "2"))
                     return;
-                XmlNode node = setting.SelectSingleNode("/ROOT/CamerasViews/CamerasView[@ViewName=\"" + treeView.SelectedNode.Text + "\"]");
+                XmlNode node = _setting?.SelectSingleNode("/ROOT/CamerasViews/CamerasView[@ViewName=\"" + treeView.SelectedNode.Text + "\"]");
                 if (node != null)
                 {
                     if (this.camera != null)
@@ -571,8 +582,6 @@ namespace VideoServer
                     {
                         camera?.Start();
                     }
-
-
                 }
             }
             catch (Exception ex)
@@ -580,10 +589,11 @@ namespace VideoServer
                 MessageBox.Show(ex.Message);
             }
         }
+
         Camera CreateCamera(string cameraName)
         {
             Camera camera = null;
-            XmlNode node = setting.SelectSingleNode("/ROOT/Cameras/Camera[@CameraName=\"" + cameraName + "\"]");
+            XmlNode node = _setting.SelectSingleNode("/ROOT/Cameras/Camera[@CameraName=\"" + cameraName + "\"]");
             if (node == null)
                 return null;
 

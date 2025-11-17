@@ -42,7 +42,7 @@
             this.tpbSettings.Controls.Add(this.tpCodecs);
             this.tpbSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tpbSettings.Location = new System.Drawing.Point(0, 0);
-            this.tpbSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpbSettings.Margin = new System.Windows.Forms.Padding(4);
             this.tpbSettings.Name = "tpbSettings";
             this.tpbSettings.SelectedIndex = 0;
             this.tpbSettings.Size = new System.Drawing.Size(616, 343);
@@ -50,23 +50,22 @@
             // 
             // tpEmailes
             // 
-            this.tpEmailes.BackColor = System.Drawing.Color.Transparent;
+            this.tpEmailes.BackColor = System.Drawing.Color.SlateGray;
             this.tpEmailes.Location = new System.Drawing.Point(4, 25);
-            this.tpEmailes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpEmailes.Margin = new System.Windows.Forms.Padding(4);
             this.tpEmailes.Name = "tpEmailes";
-            this.tpEmailes.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpEmailes.Padding = new System.Windows.Forms.Padding(4);
             this.tpEmailes.Size = new System.Drawing.Size(608, 314);
             this.tpEmailes.TabIndex = 0;
             this.tpEmailes.Text = "Почта";
-            this.tpEmailes.UseVisualStyleBackColor = true;
             // 
             // tpCodecs
             // 
-            this.tpCodecs.BackColor = System.Drawing.Color.Transparent;
+            this.tpCodecs.BackColor = System.Drawing.Color.SlateGray;
             this.tpCodecs.Location = new System.Drawing.Point(4, 25);
-            this.tpCodecs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpCodecs.Margin = new System.Windows.Forms.Padding(4);
             this.tpCodecs.Name = "tpCodecs";
-            this.tpCodecs.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpCodecs.Padding = new System.Windows.Forms.Padding(4);
             this.tpCodecs.Size = new System.Drawing.Size(608, 314);
             this.tpCodecs.TabIndex = 1;
             this.tpCodecs.Text = "Кодаки";
@@ -75,11 +74,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SlateGray;
             this.ClientSize = new System.Drawing.Size(616, 343);
             this.Controls.Add(this.tpbSettings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingForm";

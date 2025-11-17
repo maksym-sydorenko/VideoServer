@@ -313,7 +313,6 @@ namespace Interfaces
                         sourceFormater = new LocalCaptureDevice();
                     }
                     break;
-
             }
 
             if (sourceFormater != null)

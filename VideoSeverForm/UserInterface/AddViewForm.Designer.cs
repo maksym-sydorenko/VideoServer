@@ -34,13 +34,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbxCameras = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.viewGrid = new VideoServer.Controls.ViewGrid();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btBack = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
             this.btFinish = new System.Windows.Forms.Button();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.setTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewGrid = new VideoServer.Controls.ViewGrid();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -91,6 +91,19 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(392, 217);
             this.panel2.TabIndex = 3;
+            // 
+            // viewGrid
+            // 
+            this.viewGrid.AllowDrop = true;
+            this.viewGrid.Cols = ((short)(2));
+            this.viewGrid.Location = new System.Drawing.Point(4, 4);
+            this.viewGrid.Margin = new System.Windows.Forms.Padding(4);
+            this.viewGrid.Name = "viewGrid";
+            this.viewGrid.Rows = ((short)(2));
+            this.viewGrid.Size = new System.Drawing.Size(384, 209);
+            this.viewGrid.TabIndex = 0;
+            this.viewGrid.Text = "viewGrid1";
+            this.viewGrid.Click += new System.EventHandler(this.viewGrid_Click);
             // 
             // panel3
             // 
@@ -164,26 +177,11 @@
             this.setTimeToolStripMenuItem.Size = new System.Drawing.Size(266, 24);
             this.setTimeToolStripMenuItem.Text = "Установить график работы";
             // 
-            // viewGrid
-            // 
-            this.viewGrid.AllowDrop = true;
-            this.viewGrid.Cols = ((short)(2));
-            this.viewGrid.Location = new System.Drawing.Point(4, 4);
-            this.viewGrid.Margin = new System.Windows.Forms.Padding(4);
-            this.viewGrid.Name = "viewGrid";
-            this.viewGrid.Rows = ((short)(2));
-            this.viewGrid.Size = new System.Drawing.Size(384, 209);
-            this.viewGrid.TabIndex = 0;
-            this.viewGrid.Text = "viewGrid1";
-            this.viewGrid.Click += new System.EventHandler(this.viewGrid_Click);
-            // 
             // AddViewForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.SlateGray;
-            this.ClientSize = new System.Drawing.Size(680, 296);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(680, 278);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -191,6 +189,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AddViewForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Позначити камери";
