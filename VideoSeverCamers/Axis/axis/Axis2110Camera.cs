@@ -10,6 +10,8 @@ namespace axis
         bool _moviDetect = false;
         string _cameraName = "";
         string _fileDirectoryPath = "";
+        SourceTypes sourceType = SourceTypes.MJPEG;
+
         public Axis2110Camera()
         {
             setupPage = new SetupPage();
@@ -29,16 +31,17 @@ namespace axis
         string resolution = "320x240";
         string sourcePath = "";
         string fullUrl = "";
-        string _description = "Axis camera";
+        string _cameraDescription = "Axis camera";
+
         public string CameraDescription
         {
             get
             {
-                return _description;
+                return _cameraDescription;
             }
             set
             {
-                _description = value;
+                _cameraDescription = value;
             }
         }
 
@@ -148,7 +151,7 @@ namespace axis
             set { password = value; }
         }
 
-        SourceTypes sourceType = SourceTypes.MJPEG;
+
         public SourceTypes SourceType
         {
             get
@@ -163,18 +166,22 @@ namespace axis
 
         public string UpdateSource()
         {
-
-            if (sourceType != SourceTypes.MJPEG)
+            switch (sourceType)
             {
-                //fullUrl = "http://" + sourcePath + "/SnapshotJPEG?Resolution=" + resolution + "&Quality=" + quality; ;
-                fullUrl = "http://" + sourcePath + "/axis-cgi/mjpg/video.cgi?resolution=" + resolution;
-            }
-            else
-            {
-                fullUrl = "http://" + sourcePath + "/axis-cgi/jpg/image.cgi?resolution=" + resolution;
+                case SourceTypes.MJPEG:
+                    {
+                        fullUrl = string.Format("http://{0}/axis-cgi/mjpg/video.cgi?resolution={1}", sourcePath, resolution);
+                    }
+                    break;
+                default:
+                    {
+                        fullUrl = "";
+                    }
+                    break;
             }
             return fullUrl;
         }
+
         public ISetupPage ISetupPage
         {
             get
@@ -209,7 +216,34 @@ namespace axis
 
         public void SetConfiguration(System.Xml.XmlNode node)
         {
-            throw new NotImplementedException();
+            if (node.SelectSingleNode("CameraName") != null)
+                _cameraName = node.SelectSingleNode("CameraName").InnerText;
+
+            if (node.SelectSingleNode("CameraDescription") != null)
+                _cameraDescription = node.SelectSingleNode("CameraDescription").InnerText;
+
+            if (node.SelectSingleNode("Url") != null)
+                sourcePath = node.SelectSingleNode("Url").InnerText;
+
+            if (node.SelectSingleNode("Login") != null)
+                login = node.SelectSingleNode("Login").InnerText;
+
+            if (node.SelectSingleNode("Password") != null)
+                password = node.SelectSingleNode("Password").InnerText;
+
+            if (node.SelectSingleNode("SaveToFile") != null)
+                _saveToFile = bool.Parse(node.SelectSingleNode("SaveToFile").InnerText);
+
+            if (node.SelectSingleNode("MoviDetect") != null)
+                _moviDetect = bool.Parse(node.SelectSingleNode("MoviDetect").InnerText);
+
+            if (node.SelectSingleNode("FileDirectoryPath") != null)
+                _fileDirectoryPath = node.SelectSingleNode("FileDirectoryPath").InnerText;
+
+            if (node.SelectSingleNode("Resolution") != null)
+                resolution = node.SelectSingleNode("Resolution").InnerText;
+
+            sourceType = SourceTypes.MJPEG;
         }
 
         #endregion

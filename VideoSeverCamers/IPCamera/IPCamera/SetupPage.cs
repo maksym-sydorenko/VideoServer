@@ -31,7 +31,7 @@ namespace IPCamera
 
             this.node = node;
             this.node.InnerXml = "<CameraName>" + tbName.Text + "</CameraName>" +
-               "<CameraType>D-Link DCS-2102 web camera</CameraType>" +
+               "<CameraType>IP camera</CameraType>" +
                "<CameraDescription>" + " " + "</CameraDescription>" +
                "<SaveToFile>" + cbhSave.Checked + "</SaveToFile>" +
                "<MoviDetect>" + cbhSaveMoving.Checked + "</MoviDetect>" +
@@ -39,11 +39,7 @@ namespace IPCamera
                "<Url>" + tbUrl.Text + "</Url>" +
                "<Login>" + tbLogin.Text + "</Login>" +
                "<Password>" + tbPassword.Text + "</Password>" +
-               "<SourceType>" + cbTypeStream.Text + "</SourceType>" +
-               "<Resolution>" + cbProfile.Text + "</Resolution>" +
-               "<FrameFrequncy>" + cbPeriod.Text + "</FrameFrequncy>";
-
-
+               "<SourceType>" + cbTypeStream.Text + "</SourceType>";
         }
 
         public void SetConfiguration(XmlNode node)
@@ -64,12 +60,6 @@ namespace IPCamera
             if (node.SelectSingleNode("Password") != null)
                 tbPassword.Text = node.SelectSingleNode("Password").InnerText;
 
-            if (node.SelectSingleNode("Resolution") != null)
-                cbProfile.SelectedItem = node.SelectSingleNode("Resolution").InnerText;
-
-            //if (node.SelectSingleNode("Quality") != null)
-            //    _quality = node.SelectSingleNode("Quality").InnerText;
-
             if (node.SelectSingleNode("SaveToFile") != null)
                 cbhSave.Checked = bool.Parse(node.SelectSingleNode("SaveToFile").InnerText);
 
@@ -78,9 +68,6 @@ namespace IPCamera
 
             if (node.SelectSingleNode("FileDirectoryPath") != null)
                 tbPath.Text = node.SelectSingleNode("FileDirectoryPath").InnerText;
-
-            if (node.SelectSingleNode("FrameFrequncy") != null)
-                cbPeriod.SelectedItem = node.SelectSingleNode("FrameFrequncy").InnerText;
 
             if (node.SelectSingleNode("SourceType") != null)
             {
@@ -109,31 +96,44 @@ namespace IPCamera
         }
         #endregion
 
-        internal void Update(ISourceAdaptee dlinkCamera)
+        internal void Update(ISourceAdaptee ip_camera)
         {
 
             {
-                dlinkCamera.CameraName = tbName.Text;
-                dlinkCamera.Resolution = cbProfile.Text;
-                dlinkCamera.SourcePath = tbUrl.Text;
-                dlinkCamera.Login = tbLogin.Text;
-                dlinkCamera.Password = tbPassword.Text;
-                dlinkCamera.SaveToFile = cbhSave.Checked;
-                dlinkCamera.MoviDetect = cbhSaveMoving.Checked;
-                dlinkCamera.FileDirectoryPath = tbPath.Text;
-                dlinkCamera.FrameFrequncy = cbPeriod.Text;
-                dlinkCamera.CameraDescription = "";
+                ip_camera.CameraName = tbName.Text;
 
+                ip_camera.SourcePath = tbUrl.Text;
+                ip_camera.Login = tbLogin.Text;
+                ip_camera.Password = tbPassword.Text;
+                ip_camera.SaveToFile = cbhSave.Checked;
+                ip_camera.MoviDetect = cbhSaveMoving.Checked;
+                ip_camera.FileDirectoryPath = tbPath.Text;
+                ip_camera.CameraDescription = "";
                 sourcePath = tbPath.Text;
-                cbTypeStream.SelectedIndex = 0;
-                if (cbTypeStream.SelectedItem.ToString() == SourceTypes.JPEG.ToString())
+
+                string typeStream = cbTypeStream.SelectedItem.ToString();
+                switch (typeStream)
                 {
-                    dlinkCamera.SourceType = SourceTypes.JPEG;
-                    frameFrequncy = cbPeriod.SelectedText;
-                }
-                else
-                {
-                    dlinkCamera.SourceType = SourceTypes.MJPEG;
+                    case "JPEG":
+                        {
+                            ip_camera.SourceType = SourceTypes.JPEG;
+                        }
+                        break;
+                    case "MJPEG":
+                        {
+                            ip_camera.SourceType = SourceTypes.MJPEG;
+                        }
+                        break;
+                    case "STREAM":
+                        {
+                            ip_camera.SourceType = SourceTypes.STREAM;
+                        }
+                        break;
+                    case "M3U8":
+                        {
+                            ip_camera.SourceType = SourceTypes.M3U8;
+                        }
+                        break;
                 }
             }
 
@@ -197,34 +197,6 @@ namespace IPCamera
 
         private void cbTypeStream_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (cbTypeStream.SelectedIndex) 
-            {
-                case 0: 
-                    {
-                        cbhSaveMoving.Visible = false;
-                        cbhSaveMoving.Checked = false;
-                        cbPeriod.Visible = true;
-                        lbInterval.Visible = true;
-                    }
-                    break;
-                case 1:
-                    {
-                        cbhSaveMoving.Visible = true;
-                        cbhSaveMoving.Checked = false;
-                        cbPeriod.Visible = false;
-                        lbInterval.Visible = false;
-                    }
-                    break;
-                case 2:
-                    {
-                        cbhSaveMoving.Visible = true;
-                        cbhSaveMoving.Checked = false;
-                        cbPeriod.Visible = false;
-                        lbInterval.Visible = false;
-                    }
-                    break;
-
-            }
             if (StateChanged != null)
                 StateChanged(this, new EventArgs());
         }
@@ -256,10 +228,7 @@ namespace IPCamera
 
         private void SetupPage_Load(object sender, EventArgs e)
         {
-            cbProfile.SelectedIndex = 1;
             cbTypeStream.SelectedIndex = 1;
-            cbPeriod.SelectedIndex = 0;
-    
         }
 
         private void cbxDetectObjects_CheckedChanged(object sender, EventArgs e)

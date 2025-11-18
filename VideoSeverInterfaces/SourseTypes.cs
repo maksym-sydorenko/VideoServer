@@ -62,6 +62,7 @@
         MJPEG,
         MPEG,
         STREAM,
-        LOCAL
+        LOCAL,
+        M3U8
     }
 }

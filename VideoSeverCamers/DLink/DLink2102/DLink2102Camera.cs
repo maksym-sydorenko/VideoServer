@@ -30,8 +30,7 @@ namespace DLink
         string password = "";
         string resolution = "320x240";
         string sourcePath = "";
-        
-        
+
         public string CameraType
         {
             get 

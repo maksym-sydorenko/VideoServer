@@ -17,7 +17,6 @@ namespace Interfaces
             {
                 return sourceFormater;
             }
-
         }
 
         public event CameraEventHandler NewFrame;
@@ -323,6 +322,7 @@ namespace Interfaces
             }
 
         }
+
         public void Stop()
         {
 
@@ -342,7 +342,6 @@ namespace Interfaces
                 NewFrame(sender, e);
             }
         }
-
 
     }
 }

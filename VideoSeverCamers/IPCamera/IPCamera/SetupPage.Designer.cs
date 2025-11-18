@@ -31,17 +31,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btSelectPath = new System.Windows.Forms.Button();
             this.cbhSave = new System.Windows.Forms.CheckBox();
-            this.lbInterval = new System.Windows.Forms.Label();
-            this.cbPeriod = new System.Windows.Forms.ComboBox();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.cbhSaveMoving = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbProfile = new System.Windows.Forms.ComboBox();
-            this.cbTypeStream = new System.Windows.Forms.ComboBox();
             this.tbPath = new System.Windows.Forms.TextBox();
             this.lbFilePath = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbLogin = new System.Windows.Forms.TextBox();
@@ -51,6 +45,9 @@
             this.cbxDetectObjects = new System.Windows.Forms.CheckBox();
             this.clbxDetectedObjects = new System.Windows.Forms.CheckedListBox();
             this.mtbServerYOLO = new System.Windows.Forms.MaskedTextBox();
+            this.cbTypeStream = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lbServerYOLO = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label6
@@ -68,7 +65,7 @@
             // btSelectPath
             // 
             this.btSelectPath.Enabled = false;
-            this.btSelectPath.Location = new System.Drawing.Point(253, 317);
+            this.btSelectPath.Location = new System.Drawing.Point(492, 171);
             this.btSelectPath.Margin = new System.Windows.Forms.Padding(4);
             this.btSelectPath.Name = "btSelectPath";
             this.btSelectPath.Size = new System.Drawing.Size(44, 28);
@@ -82,7 +79,7 @@
             this.cbhSave.AutoSize = true;
             this.cbhSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbhSave.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.cbhSave.Location = new System.Drawing.Point(43, 188);
+            this.cbhSave.Location = new System.Drawing.Point(43, 146);
             this.cbhSave.Margin = new System.Windows.Forms.Padding(4);
             this.cbhSave.Name = "cbhSave";
             this.cbhSave.Size = new System.Drawing.Size(186, 21);
@@ -91,42 +88,13 @@
             this.cbhSave.UseVisualStyleBackColor = true;
             this.cbhSave.CheckedChanged += new System.EventHandler(this.cbhSave_CheckedChanged);
             // 
-            // lbInterval
-            // 
-            this.lbInterval.AutoSize = true;
-            this.lbInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbInterval.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.lbInterval.Location = new System.Drawing.Point(244, 154);
-            this.lbInterval.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbInterval.Name = "lbInterval";
-            this.lbInterval.Size = new System.Drawing.Size(53, 17);
-            this.lbInterval.TabIndex = 39;
-            this.lbInterval.Text = "Період";
-            // 
-            // cbPeriod
-            // 
-            this.cbPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPeriod.FormattingEnabled = true;
-            this.cbPeriod.Items.AddRange(new object[] {
-            "3 s",
-            "10 s",
-            "20 s",
-            "1 min",
-            "2 min"});
-            this.cbPeriod.Location = new System.Drawing.Point(305, 147);
-            this.cbPeriod.Margin = new System.Windows.Forms.Padding(4);
-            this.cbPeriod.Name = "cbPeriod";
-            this.cbPeriod.Size = new System.Drawing.Size(47, 24);
-            this.cbPeriod.TabIndex = 27;
-            this.cbPeriod.SelectedIndexChanged += new System.EventHandler(this.cbPeriod_SelectedIndexChanged);
-            // 
             // cbhSaveMoving
             // 
             this.cbhSaveMoving.AutoSize = true;
             this.cbhSaveMoving.Enabled = false;
             this.cbhSaveMoving.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbhSaveMoving.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.cbhSaveMoving.Location = new System.Drawing.Point(43, 217);
+            this.cbhSaveMoving.Location = new System.Drawing.Point(263, 146);
             this.cbhSaveMoving.Margin = new System.Windows.Forms.Padding(4);
             this.cbhSaveMoving.Name = "cbhSaveMoving";
             this.cbhSaveMoving.Size = new System.Drawing.Size(168, 21);
@@ -135,53 +103,10 @@
             this.cbhSaveMoving.UseVisualStyleBackColor = true;
             this.cbhSaveMoving.CheckedChanged += new System.EventHandler(this.cbhSaveMoving_CheckedChanged);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label7.Location = new System.Drawing.Point(360, 154);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 17);
-            this.label7.TabIndex = 35;
-            this.label7.Text = "Профіль";
-            // 
-            // cbProfile
-            // 
-            this.cbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbProfile.FormattingEnabled = true;
-            this.cbProfile.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4"});
-            this.cbProfile.Location = new System.Drawing.Point(430, 147);
-            this.cbProfile.Margin = new System.Windows.Forms.Padding(4);
-            this.cbProfile.Name = "cbProfile";
-            this.cbProfile.Size = new System.Drawing.Size(57, 24);
-            this.cbProfile.TabIndex = 26;
-            this.cbProfile.SelectedIndexChanged += new System.EventHandler(this.cbResolution_SelectedIndexChanged);
-            // 
-            // cbTypeStream
-            // 
-            this.cbTypeStream.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTypeStream.FormattingEnabled = true;
-            this.cbTypeStream.Items.AddRange(new object[] {
-            "JPEG",
-            "MJPEG",
-            "STREAM"});
-            this.cbTypeStream.Location = new System.Drawing.Point(159, 146);
-            this.cbTypeStream.Margin = new System.Windows.Forms.Padding(4);
-            this.cbTypeStream.Name = "cbTypeStream";
-            this.cbTypeStream.Size = new System.Drawing.Size(81, 24);
-            this.cbTypeStream.TabIndex = 25;
-            this.cbTypeStream.SelectedIndexChanged += new System.EventHandler(this.cbTypeStream_SelectedIndexChanged);
-            // 
             // tbPath
             // 
             this.tbPath.Enabled = false;
-            this.tbPath.Location = new System.Drawing.Point(43, 323);
+            this.tbPath.Location = new System.Drawing.Point(263, 175);
             this.tbPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbPath.Name = "tbPath";
             this.tbPath.Size = new System.Drawing.Size(197, 22);
@@ -194,7 +119,7 @@
             this.lbFilePath.Enabled = false;
             this.lbFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbFilePath.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.lbFilePath.Location = new System.Drawing.Point(40, 302);
+            this.lbFilePath.Location = new System.Drawing.Point(40, 176);
             this.lbFilePath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFilePath.Name = "lbFilePath";
             this.lbFilePath.Size = new System.Drawing.Size(179, 17);
@@ -209,18 +134,6 @@
             this.tbName.Size = new System.Drawing.Size(433, 22);
             this.tbName.TabIndex = 21;
             this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label4.Location = new System.Drawing.Point(40, 154);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 17);
-            this.label4.TabIndex = 34;
-            this.label4.Text = "Тип відеопотоку";
             // 
             // tbPassword
             // 
@@ -293,7 +206,7 @@
             this.cbxDetectObjects.Enabled = false;
             this.cbxDetectObjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbxDetectObjects.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.cbxDetectObjects.Location = new System.Drawing.Point(330, 188);
+            this.cbxDetectObjects.Location = new System.Drawing.Point(43, 216);
             this.cbxDetectObjects.Margin = new System.Windows.Forms.Padding(4);
             this.cbxDetectObjects.Name = "cbxDetectObjects";
             this.cbxDetectObjects.Size = new System.Drawing.Size(124, 21);
@@ -305,20 +218,60 @@
             // clbxDetectedObjects
             // 
             this.clbxDetectedObjects.FormattingEnabled = true;
-            this.clbxDetectedObjects.Location = new System.Drawing.Point(330, 216);
+            this.clbxDetectedObjects.Location = new System.Drawing.Point(255, 216);
             this.clbxDetectedObjects.Name = "clbxDetectedObjects";
-            this.clbxDetectedObjects.Size = new System.Drawing.Size(206, 89);
+            this.clbxDetectedObjects.Size = new System.Drawing.Size(281, 89);
             this.clbxDetectedObjects.TabIndex = 41;
             this.clbxDetectedObjects.Visible = false;
             // 
             // mtbServerYOLO
             // 
-            this.mtbServerYOLO.Location = new System.Drawing.Point(330, 324);
+            this.mtbServerYOLO.Location = new System.Drawing.Point(43, 283);
             this.mtbServerYOLO.Mask = "###.###.###.###";
             this.mtbServerYOLO.Name = "mtbServerYOLO";
             this.mtbServerYOLO.Size = new System.Drawing.Size(206, 22);
             this.mtbServerYOLO.TabIndex = 42;
             this.mtbServerYOLO.Visible = false;
+            // 
+            // cbTypeStream
+            // 
+            this.cbTypeStream.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTypeStream.FormattingEnabled = true;
+            this.cbTypeStream.Items.AddRange(new object[] {
+            "JPEG",
+            "MJPEG",
+            "STREAM"});
+            this.cbTypeStream.Location = new System.Drawing.Point(159, 114);
+            this.cbTypeStream.Margin = new System.Windows.Forms.Padding(4);
+            this.cbTypeStream.Name = "cbTypeStream";
+            this.cbTypeStream.Size = new System.Drawing.Size(81, 24);
+            this.cbTypeStream.TabIndex = 25;
+            this.cbTypeStream.SelectedIndexChanged += new System.EventHandler(this.cbTypeStream_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label4.Location = new System.Drawing.Point(40, 122);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(116, 17);
+            this.label4.TabIndex = 34;
+            this.label4.Text = "Тип відеопотоку";
+            // 
+            // lbServerYOLO
+            // 
+            this.lbServerYOLO.AutoSize = true;
+            this.lbServerYOLO.Enabled = false;
+            this.lbServerYOLO.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbServerYOLO.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.lbServerYOLO.Location = new System.Drawing.Point(40, 263);
+            this.lbServerYOLO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbServerYOLO.Name = "lbServerYOLO";
+            this.lbServerYOLO.Size = new System.Drawing.Size(166, 17);
+            this.lbServerYOLO.TabIndex = 43;
+            this.lbServerYOLO.Text = "Шлях до  сервера YOLO";
             // 
             // SetupPage
             // 
@@ -326,17 +279,14 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Gray;
+            this.Controls.Add(this.lbServerYOLO);
             this.Controls.Add(this.mtbServerYOLO);
             this.Controls.Add(this.clbxDetectedObjects);
             this.Controls.Add(this.cbxDetectObjects);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btSelectPath);
             this.Controls.Add(this.cbhSave);
-            this.Controls.Add(this.lbInterval);
-            this.Controls.Add(this.cbPeriod);
             this.Controls.Add(this.cbhSaveMoving);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.cbProfile);
             this.Controls.Add(this.cbTypeStream);
             this.Controls.Add(this.tbPath);
             this.Controls.Add(this.lbFilePath);
@@ -350,7 +300,7 @@
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SetupPage";
-            this.Size = new System.Drawing.Size(540, 349);
+            this.Size = new System.Drawing.Size(540, 308);
             this.Load += new System.EventHandler(this.SetupPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -362,17 +312,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btSelectPath;
         private System.Windows.Forms.CheckBox cbhSave;
-        private System.Windows.Forms.Label lbInterval;
-        private System.Windows.Forms.ComboBox cbPeriod;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.CheckBox cbhSaveMoving;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cbProfile;
-        private System.Windows.Forms.ComboBox cbTypeStream;
         private System.Windows.Forms.TextBox tbPath;
         private System.Windows.Forms.Label lbFilePath;
         private System.Windows.Forms.TextBox tbName;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbLogin;
@@ -382,5 +326,8 @@
         private System.Windows.Forms.CheckBox cbxDetectObjects;
         private System.Windows.Forms.CheckedListBox clbxDetectedObjects;
         private System.Windows.Forms.MaskedTextBox mtbServerYOLO;
+        private System.Windows.Forms.ComboBox cbTypeStream;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbServerYOLO;
     }
 }

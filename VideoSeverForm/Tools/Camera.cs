@@ -103,7 +103,7 @@ namespace VideoServer.Tools
         }
         public void Stop()
         {
-            adapter.Stop();           
+            adapter.Stop();
         }
 
         public void SetConfiguration(XmlNode node) 

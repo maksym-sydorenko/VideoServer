@@ -16,9 +16,10 @@ namespace DLink
         {
             InitializeComponent();
         }
+
         #region ISetupPage Members
         public event EventHandler StateChanged;
-        
+
         public void Display()
         {
             tbUrl.Focus();
@@ -42,12 +43,11 @@ namespace DLink
                "<Resolution>" + cbProfile.Text + "</Resolution>" +
                "<FrameFrequncy>" + cbPeriod.Text + "</FrameFrequncy>";
 
-
         }
 
         public void SetConfiguration(XmlNode node)
         {
-           
+
             if (node.SelectSingleNode("CameraName") != null)
                 tbName.Text = node.SelectSingleNode("CameraName").InnerText;
 
@@ -104,7 +104,6 @@ namespace DLink
 
             }
 
-            
         }
         #endregion
 

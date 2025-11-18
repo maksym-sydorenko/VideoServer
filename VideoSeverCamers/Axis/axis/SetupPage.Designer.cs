@@ -41,14 +41,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tbPath = new System.Windows.Forms.TextBox();
             this.cbTypeStream = new System.Windows.Forms.ComboBox();
-            this.cbResolution = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbPeriod = new System.Windows.Forms.ComboBox();
-            this.lbInterval = new System.Windows.Forms.Label();
             this.cbhSaveMoving = new System.Windows.Forms.CheckBox();
             this.cbhSave = new System.Windows.Forms.CheckBox();
             this.btSelectPath = new System.Windows.Forms.Button();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbResolution = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // tbName
@@ -58,7 +56,7 @@
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(339, 22);
             this.tbName.TabIndex = 0;
-            this.tbName.Visible = false;
+            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             // 
             // label6
             // 
@@ -69,7 +67,6 @@
             this.label6.Size = new System.Drawing.Size(100, 16);
             this.label6.TabIndex = 9;
             this.label6.Text = "Назва камери";
-            this.label6.Visible = false;
             // 
             // label1
             // 
@@ -149,7 +146,6 @@
             this.label5.Size = new System.Drawing.Size(174, 16);
             this.label5.TabIndex = 17;
             this.label5.Text = "Шлях збереження данних:";
-            this.label5.Visible = false;
             // 
             // tbPath
             // 
@@ -158,7 +154,6 @@
             this.tbPath.Name = "tbPath";
             this.tbPath.Size = new System.Drawing.Size(203, 22);
             this.tbPath.TabIndex = 7;
-            this.tbPath.Visible = false;
             this.tbPath.TextChanged += new System.EventHandler(this.tbPath_TextChanged);
             // 
             // cbTypeStream
@@ -174,60 +169,6 @@
             this.cbTypeStream.TabIndex = 4;
             this.cbTypeStream.SelectedIndexChanged += new System.EventHandler(this.cbTypeStream_SelectedIndexChanged);
             // 
-            // cbResolution
-            // 
-            this.cbResolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbResolution.FormattingEnabled = true;
-            this.cbResolution.Items.AddRange(new object[] {
-            "160x120",
-            "320x240",
-            "640x480"});
-            this.cbResolution.Location = new System.Drawing.Point(141, 185);
-            this.cbResolution.Margin = new System.Windows.Forms.Padding(4);
-            this.cbResolution.Name = "cbResolution";
-            this.cbResolution.Size = new System.Drawing.Size(111, 24);
-            this.cbResolution.TabIndex = 5;
-            this.cbResolution.SelectedIndexChanged += new System.EventHandler(this.cbResolution_SelectedIndexChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(40, 188);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 16);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Розмір";
-            // 
-            // cbPeriod
-            // 
-            this.cbPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPeriod.FormattingEnabled = true;
-            this.cbPeriod.Items.AddRange(new object[] {
-            "3 s",
-            "10 s",
-            "20 s",
-            "1 min",
-            "2 min"});
-            this.cbPeriod.Location = new System.Drawing.Point(361, 145);
-            this.cbPeriod.Margin = new System.Windows.Forms.Padding(4);
-            this.cbPeriod.Name = "cbPeriod";
-            this.cbPeriod.Size = new System.Drawing.Size(125, 24);
-            this.cbPeriod.TabIndex = 6;
-            this.cbPeriod.Visible = false;
-            this.cbPeriod.SelectedIndexChanged += new System.EventHandler(this.cbPeriod_SelectedIndexChanged);
-            // 
-            // lbInterval
-            // 
-            this.lbInterval.AutoSize = true;
-            this.lbInterval.Location = new System.Drawing.Point(293, 153);
-            this.lbInterval.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbInterval.Name = "lbInterval";
-            this.lbInterval.Size = new System.Drawing.Size(52, 16);
-            this.lbInterval.TabIndex = 18;
-            this.lbInterval.Text = "Період";
-            this.lbInterval.Visible = false;
-            // 
             // cbhSaveMoving
             // 
             this.cbhSaveMoving.AutoSize = true;
@@ -238,7 +179,6 @@
             this.cbhSaveMoving.TabIndex = 16;
             this.cbhSaveMoving.Text = "Зберегати тільки рух";
             this.cbhSaveMoving.UseVisualStyleBackColor = true;
-            this.cbhSaveMoving.Visible = false;
             this.cbhSaveMoving.CheckedChanged += new System.EventHandler(this.cbhSaveMoving_CheckedChanged);
             // 
             // cbhSave
@@ -251,7 +191,6 @@
             this.cbhSave.TabIndex = 15;
             this.cbhSave.Text = "Зберегати потік в файл";
             this.cbhSave.UseVisualStyleBackColor = true;
-            this.cbhSave.Visible = false;
             this.cbhSave.CheckedChanged += new System.EventHandler(this.cbhSave_CheckedChanged);
             // 
             // btSelectPath
@@ -263,8 +202,32 @@
             this.btSelectPath.TabIndex = 8;
             this.btSelectPath.Text = "...";
             this.btSelectPath.UseVisualStyleBackColor = true;
-            this.btSelectPath.Visible = false;
             this.btSelectPath.Click += new System.EventHandler(this.btSelectPath_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(317, 153);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 16);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Розмір";
+            // 
+            // cbResolution
+            // 
+            this.cbResolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbResolution.FormattingEnabled = true;
+            this.cbResolution.Items.AddRange(new object[] {
+            "160x120",
+            "320x240",
+            "640x480"});
+            this.cbResolution.Location = new System.Drawing.Point(376, 145);
+            this.cbResolution.Margin = new System.Windows.Forms.Padding(4);
+            this.cbResolution.Name = "cbResolution";
+            this.cbResolution.Size = new System.Drawing.Size(111, 24);
+            this.cbResolution.TabIndex = 5;
+            this.cbResolution.SelectedIndexChanged += new System.EventHandler(this.cbResolution_SelectedIndexChanged);
             // 
             // SetupPage
             // 
@@ -275,8 +238,6 @@
             this.Controls.Add(this.btSelectPath);
             this.Controls.Add(this.cbhSave);
             this.Controls.Add(this.cbhSaveMoving);
-            this.Controls.Add(this.lbInterval);
-            this.Controls.Add(this.cbPeriod);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cbResolution);
             this.Controls.Add(this.cbTypeStream);
@@ -312,14 +273,11 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbPath;
         private System.Windows.Forms.ComboBox cbTypeStream;
-        private System.Windows.Forms.ComboBox cbResolution;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cbPeriod;
-        private System.Windows.Forms.Label lbInterval;
         private System.Windows.Forms.CheckBox cbhSaveMoving;
         private System.Windows.Forms.CheckBox cbhSave;
         private System.Windows.Forms.Button btSelectPath;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
-
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbResolution;
     }
 }

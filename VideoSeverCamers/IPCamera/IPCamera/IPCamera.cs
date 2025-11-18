@@ -20,25 +20,26 @@ namespace IPCamera
         ~IPCamera()
         {
         }
-        
+
         #region ISourceAdaptee Members
-        string _frameFrequncy = "";
-        string _quality = "Standard";
         string _login = "";
         string _password = "";
-        string _resolution = "320x240";
         string _sourcePath = "";
-        
-        
+        string _IPCameraDescription = "";
+        string _IPCameraName = "";
+        bool _moviDetect = false;
+        bool _saveToFile = false;
+        string _fileDirectoryPath = "D:\\";
+        SourceTypes _sourceType = SourceTypes.MJPEG;
+
         public string CameraType
         {
-            get 
+            get
             {
                 return "IP camera";
             }
         }
-        
-        string _IPCameraDescription = "";
+
         public string CameraDescription
         {
             get
@@ -51,7 +52,6 @@ namespace IPCamera
             }
         }
 
-        string _IPCameraName = "";
         public string CameraName
         {
             get
@@ -64,7 +64,6 @@ namespace IPCamera
             }
         }
 
-        bool _moviDetect = false;
         public bool MoviDetect
         {
             get
@@ -77,7 +76,6 @@ namespace IPCamera
             }
         }
 
-        bool _saveToFile = false;
         public bool SaveToFile
         {
             get
@@ -89,7 +87,7 @@ namespace IPCamera
                 _saveToFile = value;
             }
         }
-        string _fileDirectoryPath = "D:\\";
+
         public string FileDirectoryPath
         {
             get
@@ -106,11 +104,10 @@ namespace IPCamera
         {
             get
             {
-                return _frameFrequncy;
+                return "";
             }
             set
             {
-                _frameFrequncy = value;
             }
         }
 
@@ -118,26 +115,24 @@ namespace IPCamera
         {
             get
             {
-                return _quality;
+                return "";
             }
             set
             {
-                _quality = value;
             }
         }
-        
+
         public string Resolution
         {
             get
             {
-                return _resolution;
+                return "";
             }
             set
             {
-                _resolution = value;
             }
         }
-        
+
         public string SourcePath
         {
             get
@@ -146,23 +141,34 @@ namespace IPCamera
             }
             set
             {
-                _sourcePath = value;;
+                _sourcePath = value; ;
             }
         }
 
-        public string Login 
+        public string Login
         {
-            get { return _login; }
-            set { _login = value; }
+            get
+            {
+                return _login;
+            }
+            set
+            {
+                _login = value;
+            }
         }
 
-        public string Password 
+        public string Password
         {
-            get { return _password; }
-            set { _password = value; }
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                _password = value;
+            }
         }
 
-        SourceTypes _sourceType = SourceTypes.MJPEG;
         public SourceTypes SourceType
         {
             get
@@ -178,29 +184,15 @@ namespace IPCamera
         public string UpdateSource()
         {
 
-            if (_sourceType == SourceTypes.JPEG)
-            {
-                return "http://" + _sourcePath + "/image/jpeg.cgi";// +_resolution + "&Quality=" + _quality; ;
-            }
-            else if (_sourceType == SourceTypes.MJPEG)
-            {
-                return "http://" + _sourcePath + "/video/mjpg.cgi?profileid=" + _resolution; //+"&Quality=" + _quality; 
-            }
-            else if (_sourceType == SourceTypes.STREAM)
-            {
-               return "rtsp://" + _sourcePath + "/play" + _resolution + ".sdp"; //+"&Quality=" + _quality; 
-              //return "rtsp://admin:123456@" + _sourcePath + "/play" + _resolution + ".sdp"; //+"&Quality=" + _quality; 
-              //return "http:admin:123456@//" + _sourcePath + "/video/mjpg.cgi?profileid=" + _resolution;
-            }
-            return "http://" + _sourcePath + "/image/jpeg.cgi";// +_resolution + "&Quality=" + _quality; ;
+            return _sourcePath;
         }
+
         public ISetupPage ISetupPage
         {
             get
             {
                 return (ISetupPage)setupPage;
             }
-         
         }
 
         public void SetConfiguration(System.Xml.XmlNode node)
@@ -229,31 +221,38 @@ namespace IPCamera
             if (node.SelectSingleNode("FileDirectoryPath") != null)
                 _fileDirectoryPath = node.SelectSingleNode("FileDirectoryPath").InnerText;
 
-            if (node.SelectSingleNode("Resolution") != null)
-                _resolution = node.SelectSingleNode("Resolution").InnerText;
-
-
             if (node.SelectSingleNode("SourceType") != null)
             {
                 string str = node.SelectSingleNode("SourceType").InnerText;
 
-                if (str == SourceTypes.LOCAL.ToString())
+                switch (str)
                 {
-                    _sourceType = SourceTypes.LOCAL;
+                    case "LOCAL":
+                        {
+                            _sourceType = SourceTypes.LOCAL;
+                        }
+                        break;
+                    case "M3U8":
+                        {
+                            _sourceType = SourceTypes.M3U8;
+                        }
+                        break;
+                    case "MJPEG":
+                        {
+                            _sourceType = SourceTypes.MJPEG;
+                        }
+                        break;
+                    case "JPEG":
+                        {
+                            _sourceType = SourceTypes.JPEG;
+                        }
+                        break;
+                    case "STREAM":
+                        {
+                            _sourceType = SourceTypes.STREAM;
+                        }
+                        break;
                 }
-                else if (str == SourceTypes.MJPEG.ToString())
-                {
-                    _sourceType = SourceTypes.MJPEG;
-                }
-                else if (str == SourceTypes.JPEG.ToString())
-                {
-                    _sourceType = SourceTypes.JPEG;
-                }
-                else if (str == SourceTypes.STREAM.ToString())
-                {
-                    _sourceType = SourceTypes.STREAM;
-                }
-
             }
         }
 
