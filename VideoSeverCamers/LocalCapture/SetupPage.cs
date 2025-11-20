@@ -132,8 +132,6 @@ namespace LocalCaptureDevice
                 localCamera.MoviDetect = cbhSaveMoving.Checked;
                 localCamera.FileDirectoryPath = tbPath.Text;
                 localCamera.SourceType = SourceTypes.LOCAL;
-                
-                
             }
 
         }

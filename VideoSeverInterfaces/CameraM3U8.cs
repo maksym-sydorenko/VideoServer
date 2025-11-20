@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows.Forms;
 using LibVLCSharp.Shared;
 
 namespace Interfaces
@@ -11,11 +12,11 @@ namespace Interfaces
     {
 
         private IntPtr videoBuffer;
-        private uint width = 800;
-        private uint height = 600;
-        private uint pitch = 800 * 4;
-        private int bufferSize = (int) (800 * 600 * 4);
-        private byte[] managedBuffer = new byte[800 * 600 * 4];
+        private const uint width = 640;
+        private const uint height = 480;
+        private const uint pitch = width * 4;
+        private int bufferSize = (int) (width * height * 4);
+        private byte[] managedBuffer = new byte[width * height * 4];
 
         public override event CameraEventHandler NewFrame;
 
@@ -45,11 +46,11 @@ namespace Interfaces
             try
             {
                 Core.Initialize();
-                using (var libVLC = new LibVLC())
+                using (LibVLC libVLC = new LibVLC())
                 {
-                    using (var mediaPlayer = new MediaPlayer(libVLC))
+                    using (MediaPlayer mediaPlayer = new MediaPlayer(libVLC))
                     {
-                        libVLC.Log += (sender, e) => Console.WriteLine($"[{e.Level}] {e.Module}:{e.Message}");
+                        //libVLC.Log += (sender, e) => Console.WriteLine($"[{e.Level}] {e.Module}:{e.Message}");
 
                         mediaPlayer.SetVideoFormat("RV32", width, height, pitch);
                         mediaPlayer.SetVideoCallbacks(OnLock, OnUnlock, OnDisplay);
@@ -58,7 +59,7 @@ namespace Interfaces
                         var media = new Media(libVLC, playlistUrl, FromType.FromLocation);
                         mediaPlayer.Play(media);
 
-                        while (!stopEvent.WaitOne(100))
+                        while (!stopEvent.WaitOne())
                         {
                             // health-check / reconnect
                         }
@@ -89,14 +90,12 @@ namespace Interfaces
 
         private void OnDisplay(IntPtr opaque, IntPtr picture)
         {
-            Marshal.Copy(videoBuffer, managedBuffer, 0, bufferSize);
-
-            var bmp = new Bitmap((int)width, (int)height, (int)pitch,
-                PixelFormat.Format32bppRgb, videoBuffer);
-
-            NewFrame?.Invoke(this, new CameraEventArgs((Bitmap)bmp.Clone()));
-
-            bmp.Dispose();
+            using (var bmp = new Bitmap((int)width, (int)height, (int)pitch,
+                PixelFormat.Format32bppRgb, picture))
+            {
+                var safeCopy = (Bitmap)bmp.Clone();
+                NewFrame?.Invoke(this, new CameraEventArgs(safeCopy));
+            }
         }
     }
 }
