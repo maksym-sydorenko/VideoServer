@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Interfaces;
-using System.IO;
-using System.Net;
-using System.Reflection;
-using System.Net.Configuration;
-using System.Threading;
 using System.Xml;
-using System.Drawing;
 
 namespace VideoServer.Tools
 {
+    /// <summary>
+    /// Camera Event Handler
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public delegate void CameraEventHandler(object sender, Interfaces.CameraEventArgs e);
 
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -70,52 +67,73 @@ namespace VideoServer.Tools
             return -1;
         }
     }
+
+
     /// <summary>
-    /// 
+    /// Camera
     /// </summary>
     internal class Camera
     {
         Interfaces.CameraAdapter adapter = null;
         public event CameraEventHandler NewFrame;
 
+        /// <summary>
+        /// ctor
+        /// </summary>
         public Camera()
         {
             adapter = new CameraAdapter();
             adapter.NewFrame += new Interfaces.CameraEventHandler(adapter_NewFrame);
         }
 
-        void adapter_NewFrame(object sender, Interfaces.CameraEventArgs e)
+        private void adapter_NewFrame(object sender, Interfaces.CameraEventArgs e)
         {
-            if (NewFrame != null) 
+            if (NewFrame != null)
             {
                 NewFrame(sender, e);
             }
         }
 
+        /// <summary>
+        /// Start
+        /// </summary>
         public void Start()
         {
             adapter.Start();
         }
 
-        public void StartPreview() 
+        /// <summary>
+        /// Start Preview
+        /// </summary>
+        public void StartPreview()
         {
             adapter.StartPreview();
         }
+
+        /// <summary>
+        /// Stop
+        /// </summary>
         public void Stop()
         {
             adapter.Stop();
         }
 
-        public void SetConfiguration(XmlNode node) 
+        /// <summary>
+        /// Set Configuration
+        /// </summary>
+        /// <param name="node">configuration</param>
+        public void SetConfiguration(XmlNode node)
         {
             if (adapter == null)
                 return;
             adapter.SetConfiguration(node);
         }
-        
-        Interfaces.ISourceAdaptee iSourceAdaptee = null;
 
-        public Interfaces.ISourceAdaptee ISourceAdaptee
+        private ISourceAdaptee iSourceAdaptee = null;
+        /// <summary>
+        /// ISourceAdaptee
+        /// </summary>
+        public ISourceAdaptee ISourceAdaptee
         {
             get
             {

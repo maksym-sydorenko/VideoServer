@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Interfaces
 {
-    class CameraStream : SourceFormater
+    class CameraRTSP : SourceFormater
     {
 
         public override event CameraEventHandler NewFrame;
@@ -200,7 +200,7 @@ namespace Interfaces
 
         private class Grabber : DirectShowLib.ISampleGrabberCB
         {
-            private CameraStream parent;
+            private CameraRTSP parent;
             private int width, height;
 
             // Width property
@@ -216,13 +216,12 @@ namespace Interfaces
                 set { height = value; }
             }
 
-            // Constructor
-            public Grabber(CameraStream parent)
+            public Grabber(CameraRTSP parent)
             {
                 this.parent = parent;
             }
 
-            //
+
             public int SampleCB(double SampleTime, IntPtr pSample)
             {
                 return 0;

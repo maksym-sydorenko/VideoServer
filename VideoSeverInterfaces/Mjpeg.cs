@@ -13,7 +13,6 @@ namespace Interfaces
 
         public override event CameraEventHandler NewFrame;
 
-
         public override void Start()
         {
             // create events

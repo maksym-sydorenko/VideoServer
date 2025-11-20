@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Interfaces.avi
+﻿namespace Interfaces.avi
 {
     using System;
     using System.Runtime.InteropServices;

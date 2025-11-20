@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Net;
 using System.Reflection;
-using System.Net.Configuration;
 using System.Threading;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -33,17 +28,21 @@ namespace Interfaces
         protected ManualResetEvent reloadEvent = null;
         protected Bitmap lastFrame = null;
 
+        /// <summary>
+        /// ctor
+        /// </summary>
         public SourceFormater()
         {
 
         }
 
+        /// <summary>
+        /// ~ctor
+        /// </summary>
         ~SourceFormater()
         {
 
         }
-       
-      
 
         protected CameraAdapter cameraAdapter = null;
         public CameraAdapter CameraAdapter
@@ -53,7 +52,11 @@ namespace Interfaces
                 cameraAdapter = value;
             }
         }
-        
+
+        /// <summary>
+        /// Set AllowUnsafeHeaderParsing20
+        /// </summary>
+        /// <returns></returns>
         protected static bool SetAllowUnsafeHeaderParsing20()
         {
             //Get the assembly that contains the internal class
@@ -87,9 +90,8 @@ namespace Interfaces
         #region Abstract
         public abstract void Start();
 
-        public abstract void Stop() ;
-       
-      
+        public abstract void Stop();
+
         public abstract void WorkerThread();
 
         #endregion
@@ -111,10 +113,9 @@ namespace Interfaces
                 return true;
             }
 
-
             return false;
         }
-        protected void SaveToFile(Bitmap lastFrame) 
+        protected void SaveToFile(Bitmap lastFrame)
         {
             if (writer == null)
             {
@@ -142,8 +143,8 @@ namespace Interfaces
                         writer.CodecAudio = "";
                     }
                     // open AVI file
-                    
-                    writer.Open(cameraAdapter.FileDirectoryPath+"\\"+fileName, lastFrame.Width, lastFrame.Height);
+
+                    writer.Open(cameraAdapter.FileDirectoryPath + "\\" + fileName, lastFrame.Width, lastFrame.Height);
                 }
                 catch (ApplicationException)
                 {
@@ -155,15 +156,13 @@ namespace Interfaces
                 }
             }
 
-            // save the frame
-            
-           
             writer.AddFrame(lastFrame);
-           
+
         }
-        protected void SaveToFileJpeg(Bitmap lastFrame) 
+        protected void SaveToFileJpeg(Bitmap lastFrame)
         {
-            try {
+            try
+            {
                 DateTime date = DateTime.Now;
                 String fileName = String.Format("{0}-{1}-{2} {3}-{4}-{5}.jpeg",
                     date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second);

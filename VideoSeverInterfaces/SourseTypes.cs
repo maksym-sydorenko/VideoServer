@@ -56,13 +56,35 @@
             return -1;
         }
     }
+
+    /// <summary>
+    /// SourceTypes
+    /// </summary>
     public enum SourceTypes
     {
+        /// <summary>
+        /// JPEG
+        /// </summary>
         JPEG,
+
+        /// <summary>
+        /// MJPEG
+        /// </summary>
         MJPEG,
-        MPEG,
-        STREAM,
+
+        /// <summary>
+        /// LOCAL
+        /// </summary>
         LOCAL,
+
+        /// <summary>
+        /// RTSP RTSP
+        /// </summary>
+        RTSP,
+
+        /// <summary>
+        /// CameraM3U8 - base
+        /// </summary>
         M3U8
     }
 }

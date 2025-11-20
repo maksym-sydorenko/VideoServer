@@ -224,11 +224,34 @@ namespace Interfaces
                 {
                     sourceType = SourceTypes.JPEG;
                 }
-                else if (str == SourceTypes.STREAM.ToString())
+                switch (str)
                 {
-                    sourceType = SourceTypes.STREAM;
+                    case "JPEG":
+                        {
+                            sourceType = SourceTypes.JPEG;
+                        }
+                        break;
+                    case "MJPEG":
+                        {
+                            sourceType = SourceTypes.MJPEG;
+                        }
+                        break;
+                    case "LOCAL":
+                        {
+                            sourceType = SourceTypes.LOCAL;
+                        }
+                        break;
+                    case "RTSP":
+                        {
+                            sourceType = SourceTypes.RTSP;
+                        }
+                        break;
+                    case "M3U8":
+                        {
+                            sourceType = SourceTypes.M3U8;
+                        }
+                        break;
                 }
-
             }
 
             iSourceAdaptee.SetConfiguration(node);
@@ -260,12 +283,16 @@ namespace Interfaces
                         sourceFormater = new LocalCaptureDevice();
                     }
                     break;
-                case SourceTypes.STREAM:
+                case SourceTypes.RTSP:
                     {
-                        //sourceFormater = new CameraStream();
+                        sourceFormater = new CameraRTSP();
                     }
                     break;
-
+                case SourceTypes.M3U8:
+                    {
+                        sourceFormater = new CameraM3U8();
+                    }
+                    break;
             }
 
             if (sourceFormater != null)
@@ -310,6 +337,16 @@ namespace Interfaces
                 case SourceTypes.LOCAL:
                     {
                         sourceFormater = new LocalCaptureDevice();
+                    }
+                    break;
+                case SourceTypes.RTSP:
+                    {
+                        sourceFormater = new CameraRTSP();
+                    }
+                    break;
+                case SourceTypes.M3U8:
+                    {
+                        sourceFormater = new CameraM3U8();
                     }
                     break;
             }
