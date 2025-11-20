@@ -227,14 +227,9 @@ namespace IPCamera
 
                 switch (str)
                 {
-                    case "LOCAL":
+                    case "JPEG":
                         {
-                            _sourceType = SourceTypes.LOCAL;
-                        }
-                        break;
-                    case "M3U8":
-                        {
-                            _sourceType = SourceTypes.M3U8;
+                            _sourceType = SourceTypes.JPEG;
                         }
                         break;
                     case "MJPEG":
@@ -242,14 +237,9 @@ namespace IPCamera
                             _sourceType = SourceTypes.MJPEG;
                         }
                         break;
-                    case "JPEG":
+                    case "M3U8":
                         {
-                            _sourceType = SourceTypes.JPEG;
-                        }
-                        break;
-                    case "STREAM":
-                        {
-                            _sourceType = SourceTypes.STREAM;
+                            _sourceType = SourceTypes.M3U8;
                         }
                         break;
                 }

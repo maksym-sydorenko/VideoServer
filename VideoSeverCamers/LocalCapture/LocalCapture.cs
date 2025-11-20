@@ -208,25 +208,7 @@ namespace LocalCaptureDevice
 
             if (node.SelectSingleNode("SourceType") != null)
             {
-                string str = node.SelectSingleNode("SourceType").InnerText;
-
-                if (str == SourceTypes.LOCAL.ToString())
-                {
-                    sourceType = SourceTypes.LOCAL;
-                }
-                else if (str == SourceTypes.MJPEG.ToString())
-                {
-                    sourceType = SourceTypes.MJPEG;
-                }
-                else if (str == SourceTypes.JPEG.ToString())
-                {
-                    sourceType = SourceTypes.JPEG; 
-                }
-                else if (str == SourceTypes.STREAM.ToString())
-                {
-                    sourceType = SourceTypes.STREAM; 
-                }
-                 
+                sourceType = SourceTypes.LOCAL;
             }
         }
 

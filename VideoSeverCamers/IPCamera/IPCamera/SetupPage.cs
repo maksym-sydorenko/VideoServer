@@ -44,7 +44,7 @@ namespace IPCamera
 
         public void SetConfiguration(XmlNode node)
         {
-           
+
             if (node.SelectSingleNode("CameraName") != null)
                 tbName.Text = node.SelectSingleNode("CameraName").InnerText;
 
@@ -81,18 +81,11 @@ namespace IPCamera
                 {
                     cbTypeStream.SelectedItem = SourceTypes.JPEG;
                 }
-                else if (str == SourceTypes.STREAM.ToString())
-                {
-                    cbTypeStream.SelectedItem = SourceTypes.STREAM;
-                }
-                else 
+                else
                 {
                     cbTypeStream.SelectedItem = SourceTypes.JPEG;
                 }
-
             }
-
-            
         }
         #endregion
 
@@ -111,7 +104,7 @@ namespace IPCamera
                 ip_camera.CameraDescription = "";
                 sourcePath = tbPath.Text;
 
-                string typeStream = cbTypeStream.SelectedItem.ToString();
+                string typeStream = cbTypeStream?.SelectedItem?.ToString();
                 switch (typeStream)
                 {
                     case "JPEG":
@@ -122,11 +115,6 @@ namespace IPCamera
                     case "MJPEG":
                         {
                             ip_camera.SourceType = SourceTypes.MJPEG;
-                        }
-                        break;
-                    case "STREAM":
-                        {
-                            ip_camera.SourceType = SourceTypes.STREAM;
                         }
                         break;
                     case "M3U8":

@@ -167,7 +167,7 @@
             this.cbTypeStream.Items.AddRange(new object[] {
             "JPEG",
             "MJPEG",
-            "STREAM"});
+            "RTSP"});
             this.cbTypeStream.Location = new System.Drawing.Point(193, 146);
             this.cbTypeStream.Margin = new System.Windows.Forms.Padding(4);
             this.cbTypeStream.Name = "cbTypeStream";

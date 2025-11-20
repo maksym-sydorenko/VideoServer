@@ -187,7 +187,7 @@ namespace DLink
             {
                 return "http://" + sourcePath + "/video/mjpg.cgi?profileid=" + resolution; //+"&Quality=" + quality; 
             }
-            else if (sourceType == SourceTypes.STREAM)
+            else if (sourceType == SourceTypes.RTSP)
             {
                return "rtsp://" + sourcePath + "/play" + resolution + ".sdp"; //+"&Quality=" + quality; 
               //return "rtsp://admin:123456@" + sourcePath + "/play" + resolution + ".sdp"; //+"&Quality=" + quality; 
@@ -252,9 +252,9 @@ namespace DLink
                 {
                     sourceType = SourceTypes.JPEG;
                 }
-                else if (str == SourceTypes.STREAM.ToString())
+                else if (str == SourceTypes.RTSP.ToString())
                 {
-                    sourceType = SourceTypes.STREAM;
+                    sourceType = SourceTypes.RTSP;
                 }
 
             }

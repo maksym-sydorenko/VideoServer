@@ -240,7 +240,7 @@
             this.cbTypeStream.Items.AddRange(new object[] {
             "JPEG",
             "MJPEG",
-            "STREAM"});
+            "M3U8"});
             this.cbTypeStream.Location = new System.Drawing.Point(159, 114);
             this.cbTypeStream.Margin = new System.Windows.Forms.Padding(4);
             this.cbTypeStream.Name = "cbTypeStream";
