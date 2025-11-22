@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Windows.Forms;
 using LibVLCSharp.Shared;
 
 namespace Interfaces
@@ -16,15 +15,18 @@ namespace Interfaces
         private const uint height = 480;
         private const uint pitch = width * 4;
         private int bufferSize = (int) (width * height * 4);
-        private byte[] managedBuffer = new byte[width * height * 4];
 
         public override event CameraEventHandler NewFrame;
+        Bitmap safeCopy;
 
         public override void Start()
         {
             stopEvent = new ManualResetEvent(false);
 
             videoBuffer = Marshal.AllocHGlobal(bufferSize);
+
+            safeCopy = new Bitmap((int)width, (int)height, (int)pitch,
+            PixelFormat.Format32bppRgb, videoBuffer);
 
             thread = new Thread(new ThreadStart(WorkerThread));
             thread.Name = "HLS fMP4";
@@ -90,12 +92,38 @@ namespace Interfaces
 
         private void OnDisplay(IntPtr opaque, IntPtr picture)
         {
-            using (var bmp = new Bitmap((int)width, (int)height, (int)pitch,
-                PixelFormat.Format32bppRgb, picture))
+
+            BitmapData bmpData = safeCopy.LockBits(
+                new Rectangle(0, 0, safeCopy.Width, safeCopy.Height),
+                ImageLockMode.ReadOnly,
+                safeCopy.PixelFormat);
+
+            int bytesPerPixel = Image.GetPixelFormatSize(safeCopy.PixelFormat) / 8;
+            int stride = bmpData.Stride;
+
+            unsafe
             {
-                var safeCopy = (Bitmap)bmp.Clone();
-                NewFrame?.Invoke(this, new CameraEventArgs(safeCopy));
+                byte* ptr = (byte*)bmpData.Scan0;
+
+                for (int y = 0; y < safeCopy.Height; y++)
+                {
+                    for (int x = 0; x < safeCopy.Width; x++)
+                    {
+                        byte blue = ptr[0];
+                        byte green = ptr[1];
+                        byte red = ptr[2];
+                        byte alpha = ptr[3];
+
+                        ptr += bytesPerPixel;
+                    }
+                    ptr += stride - (safeCopy.Width * bytesPerPixel);
+                }
             }
+
+            safeCopy.UnlockBits(bmpData);
+
+            NewFrame?.Invoke(this, new CameraEventArgs(safeCopy));
+
         }
     }
 }

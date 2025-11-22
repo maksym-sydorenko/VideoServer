@@ -192,10 +192,7 @@ namespace Interfaces
                                         {
                                             if (MotionDetect(ref bmp))
                                             {
-
-
                                                 SaveToFile(bmp);
-
                                             }
                                             else
                                             {
