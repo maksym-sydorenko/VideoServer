@@ -48,8 +48,8 @@ namespace IPCamera
             if (node.SelectSingleNode("CameraName") != null)
                 tbName.Text = node.SelectSingleNode("CameraName").InnerText;
 
-            //if (node.SelectSingleNode("CameraDescription") != null)
-            //    description = node.SelectSingleNode("CameraDescription").InnerText;
+            if (node.SelectSingleNode("CameraDescription") != null)
+                description = node.SelectSingleNode("CameraDescription").InnerText;
 
             if (node.SelectSingleNode("Url") != null)
                 tbUrl.Text = node.SelectSingleNode("Url").InnerText;

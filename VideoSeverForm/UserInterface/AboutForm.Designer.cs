@@ -55,7 +55,7 @@
             this.btOk.Name = "btOk";
             this.btOk.Size = new System.Drawing.Size(127, 28);
             this.btOk.TabIndex = 1;
-            this.btOk.Text = "<Закрити>";
+            this.btOk.Text = "Закрити";
             this.btOk.UseVisualStyleBackColor = false;
             this.btOk.Click += new System.EventHandler(this.btOk_Click);
             // 

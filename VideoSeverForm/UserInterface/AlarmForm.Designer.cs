@@ -63,9 +63,9 @@
             this.gbDiskSpace.Controls.Add(this.tbWhenFreeSize);
             this.gbDiskSpace.Controls.Add(this.tbrDiskSpace);
             this.gbDiskSpace.Location = new System.Drawing.Point(16, 15);
-            this.gbDiskSpace.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbDiskSpace.Margin = new System.Windows.Forms.Padding(4);
             this.gbDiskSpace.Name = "gbDiskSpace";
-            this.gbDiskSpace.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbDiskSpace.Padding = new System.Windows.Forms.Padding(4);
             this.gbDiskSpace.Size = new System.Drawing.Size(284, 266);
             this.gbDiskSpace.TabIndex = 0;
             this.gbDiskSpace.TabStop = false;
@@ -86,7 +86,7 @@
             this.cbDisk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDisk.FormattingEnabled = true;
             this.cbDisk.Location = new System.Drawing.Point(17, 47);
-            this.cbDisk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbDisk.Margin = new System.Windows.Forms.Padding(4);
             this.cbDisk.Name = "cbDisk";
             this.cbDisk.Size = new System.Drawing.Size(87, 24);
             this.cbDisk.TabIndex = 12;
@@ -97,7 +97,7 @@
             this.tbDiskAll.Enabled = false;
             this.tbDiskAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbDiskAll.Location = new System.Drawing.Point(117, 47);
-            this.tbDiskAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbDiskAll.Margin = new System.Windows.Forms.Padding(4);
             this.tbDiskAll.Name = "tbDiskAll";
             this.tbDiskAll.Size = new System.Drawing.Size(157, 27);
             this.tbDiskAll.TabIndex = 11;
@@ -107,7 +107,7 @@
             this.tbDiskFree.Enabled = false;
             this.tbDiskFree.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbDiskFree.Location = new System.Drawing.Point(117, 101);
-            this.tbDiskFree.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbDiskFree.Margin = new System.Windows.Forms.Padding(4);
             this.tbDiskFree.Name = "tbDiskFree";
             this.tbDiskFree.Size = new System.Drawing.Size(157, 27);
             this.tbDiskFree.TabIndex = 10;
@@ -156,7 +156,7 @@
             // 
             this.tbWhenFreeSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbWhenFreeSize.Location = new System.Drawing.Point(117, 158);
-            this.tbWhenFreeSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbWhenFreeSize.Margin = new System.Windows.Forms.Padding(4);
             this.tbWhenFreeSize.Name = "tbWhenFreeSize";
             this.tbWhenFreeSize.Size = new System.Drawing.Size(157, 27);
             this.tbWhenFreeSize.TabIndex = 5;
@@ -164,7 +164,7 @@
             // tbrDiskSpace
             // 
             this.tbrDiskSpace.Location = new System.Drawing.Point(8, 201);
-            this.tbrDiskSpace.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbrDiskSpace.Margin = new System.Windows.Forms.Padding(4);
             this.tbrDiskSpace.Name = "tbrDiskSpace";
             this.tbrDiskSpace.Size = new System.Drawing.Size(268, 56);
             this.tbrDiskSpace.TabIndex = 0;
@@ -178,9 +178,9 @@
             this.gbMeil.Controls.Add(this.tbEmail1);
             this.gbMeil.Controls.Add(this.btAccept);
             this.gbMeil.Location = new System.Drawing.Point(313, 15);
-            this.gbMeil.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbMeil.Margin = new System.Windows.Forms.Padding(4);
             this.gbMeil.Name = "gbMeil";
-            this.gbMeil.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbMeil.Padding = new System.Windows.Forms.Padding(4);
             this.gbMeil.Size = new System.Drawing.Size(284, 266);
             this.gbMeil.TabIndex = 1;
             this.gbMeil.TabStop = false;
@@ -190,7 +190,7 @@
             // 
             this.tbEmail4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbEmail4.Location = new System.Drawing.Point(8, 139);
-            this.tbEmail4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbEmail4.Margin = new System.Windows.Forms.Padding(4);
             this.tbEmail4.Name = "tbEmail4";
             this.tbEmail4.Size = new System.Drawing.Size(265, 27);
             this.tbEmail4.TabIndex = 4;
@@ -199,7 +199,7 @@
             // 
             this.tbEmail2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbEmail2.Location = new System.Drawing.Point(8, 68);
-            this.tbEmail2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbEmail2.Margin = new System.Windows.Forms.Padding(4);
             this.tbEmail2.Name = "tbEmail2";
             this.tbEmail2.Size = new System.Drawing.Size(265, 27);
             this.tbEmail2.TabIndex = 3;
@@ -208,7 +208,7 @@
             // 
             this.tbEmail3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbEmail3.Location = new System.Drawing.Point(9, 103);
-            this.tbEmail3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbEmail3.Margin = new System.Windows.Forms.Padding(4);
             this.tbEmail3.Name = "tbEmail3";
             this.tbEmail3.Size = new System.Drawing.Size(265, 27);
             this.tbEmail3.TabIndex = 2;
@@ -217,7 +217,7 @@
             // 
             this.tbEmail1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbEmail1.Location = new System.Drawing.Point(9, 32);
-            this.tbEmail1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbEmail1.Margin = new System.Windows.Forms.Padding(4);
             this.tbEmail1.Name = "tbEmail1";
             this.tbEmail1.Size = new System.Drawing.Size(265, 27);
             this.tbEmail1.TabIndex = 1;
@@ -228,7 +228,7 @@
             this.btAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btAccept.ForeColor = System.Drawing.SystemColors.Desktop;
             this.btAccept.Location = new System.Drawing.Point(8, 224);
-            this.btAccept.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btAccept.Margin = new System.Windows.Forms.Padding(4);
             this.btAccept.Name = "btAccept";
             this.btAccept.Size = new System.Drawing.Size(268, 28);
             this.btAccept.TabIndex = 0;
@@ -240,11 +240,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SlateGray;
             this.ClientSize = new System.Drawing.Size(613, 295);
             this.Controls.Add(this.gbMeil);
             this.Controls.Add(this.gbDiskSpace);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AlarmForm";
             this.Text = "AlarmForm";
             this.Load += new System.EventHandler(this.AlarmForm_Load);

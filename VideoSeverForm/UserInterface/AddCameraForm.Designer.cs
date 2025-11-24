@@ -55,7 +55,7 @@
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(172, 38);
             this.btClose.TabIndex = 0;
-            this.btClose.Text = "<Закрити>";
+            this.btClose.Text = "Закрити";
             this.btClose.UseVisualStyleBackColor = false;
             this.btClose.Click += new System.EventHandler(this.btClose_Click);
             // 
@@ -70,7 +70,7 @@
             this.btAdd.Name = "btAdd";
             this.btAdd.Size = new System.Drawing.Size(175, 38);
             this.btAdd.TabIndex = 1;
-            this.btAdd.Text = "<Додати>";
+            this.btAdd.Text = "Додати";
             this.btAdd.UseVisualStyleBackColor = false;
             this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
             // 
@@ -108,7 +108,7 @@
             this.btCheck.Name = "btCheck";
             this.btCheck.Size = new System.Drawing.Size(168, 38);
             this.btCheck.TabIndex = 5;
-            this.btCheck.Text = "<Перевірити>";
+            this.btCheck.Text = "Перевірити";
             this.btCheck.UseVisualStyleBackColor = false;
             this.btCheck.Click += new System.EventHandler(this.btCheck_Click);
             // 

@@ -129,7 +129,7 @@
             this.btBack.Name = "btBack";
             this.btBack.Size = new System.Drawing.Size(147, 38);
             this.btBack.TabIndex = 7;
-            this.btBack.Text = "<Назад>";
+            this.btBack.Text = "Назад";
             this.btBack.UseVisualStyleBackColor = false;
             this.btBack.Click += new System.EventHandler(this.btBack_Click);
             // 
@@ -144,7 +144,7 @@
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(128, 38);
             this.btCancel.TabIndex = 6;
-            this.btCancel.Text = "<Вихід>";
+            this.btCancel.Text = "Вихід";
             this.btCancel.UseVisualStyleBackColor = false;
             this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
             // 
@@ -159,7 +159,7 @@
             this.btFinish.Name = "btFinish";
             this.btFinish.Size = new System.Drawing.Size(147, 38);
             this.btFinish.TabIndex = 5;
-            this.btFinish.Text = "<Прийняти>";
+            this.btFinish.Text = "Зберегти";
             this.btFinish.UseVisualStyleBackColor = false;
             this.btFinish.Click += new System.EventHandler(this.btFinish_Click);
             // 

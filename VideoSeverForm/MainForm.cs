@@ -140,10 +140,6 @@ namespace VideoServer
         // Full screen
         private void FullScreen(bool full)
         {
-
-
-
-
             if (full)
             {
                 mainWindowLocation = this.Location;
@@ -176,8 +172,6 @@ namespace VideoServer
             this.treeView.Visible = !full;
             this.menuStrip.Visible = !full;
             this.statusStrip.Visible = !full;
-
-
         }
 
         private void FitToScreen(bool fit)

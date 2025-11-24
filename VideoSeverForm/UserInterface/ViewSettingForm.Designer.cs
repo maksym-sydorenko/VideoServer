@@ -104,7 +104,7 @@
             this.btNext.Name = "btNext";
             this.btNext.Size = new System.Drawing.Size(128, 38);
             this.btNext.TabIndex = 5;
-            this.btNext.Text = "<Далі>";
+            this.btNext.Text = "Далі";
             this.btNext.UseVisualStyleBackColor = false;
             this.btNext.Click += new System.EventHandler(this.btNext_Click);
             // 
@@ -119,7 +119,7 @@
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(128, 38);
             this.btCancel.TabIndex = 6;
-            this.btCancel.Text = "<Вихід>";
+            this.btCancel.Text = "Вихід";
             this.btCancel.UseVisualStyleBackColor = false;
             this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
             // 

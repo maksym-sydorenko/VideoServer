@@ -3,7 +3,7 @@ using System;
 
 namespace IPCamera
 {
-    class IPCamera : Interfaces.ISourceAdaptee
+    class IPCamera : ISourceAdaptee
     {
         SetupPage setupPage = null;
         public IPCamera()
@@ -30,7 +30,7 @@ namespace IPCamera
         bool _moviDetect = false;
         bool _saveToFile = false;
         string _fileDirectoryPath = "D:\\";
-        SourceTypes _sourceType = SourceTypes.MJPEG;
+        SourceTypes _sourceType = SourceTypes.M3U8;
 
         public string CameraType
         {

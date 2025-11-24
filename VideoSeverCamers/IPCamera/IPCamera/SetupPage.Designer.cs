@@ -138,7 +138,7 @@
             // tbPassword
             // 
             this.tbPassword.AcceptsReturn = true;
-            this.tbPassword.Location = new System.Drawing.Point(399, 84);
+            this.tbPassword.Location = new System.Drawing.Point(112, 116);
             this.tbPassword.Margin = new System.Windows.Forms.Padding(4);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(137, 22);
@@ -151,7 +151,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label3.Location = new System.Drawing.Point(318, 86);
+            this.label3.Location = new System.Drawing.Point(40, 120);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(73, 17);
@@ -160,7 +160,7 @@
             // 
             // tbLogin
             // 
-            this.tbLogin.Location = new System.Drawing.Point(103, 84);
+            this.tbLogin.Location = new System.Drawing.Point(112, 84);
             this.tbLogin.Margin = new System.Windows.Forms.Padding(4);
             this.tbLogin.Name = "tbLogin";
             this.tbLogin.Size = new System.Drawing.Size(126, 22);
@@ -227,7 +227,7 @@
             // mtbServerYOLO
             // 
             this.mtbServerYOLO.Location = new System.Drawing.Point(43, 283);
-            this.mtbServerYOLO.Mask = "###.###.###.###";
+            this.mtbServerYOLO.Mask = "###.###.###.###:####";
             this.mtbServerYOLO.Name = "mtbServerYOLO";
             this.mtbServerYOLO.Size = new System.Drawing.Size(206, 22);
             this.mtbServerYOLO.TabIndex = 42;
@@ -241,7 +241,7 @@
             "JPEG",
             "MJPEG",
             "M3U8"});
-            this.cbTypeStream.Location = new System.Drawing.Point(159, 114);
+            this.cbTypeStream.Location = new System.Drawing.Point(455, 80);
             this.cbTypeStream.Margin = new System.Windows.Forms.Padding(4);
             this.cbTypeStream.Name = "cbTypeStream";
             this.cbTypeStream.Size = new System.Drawing.Size(81, 24);
@@ -253,7 +253,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label4.Location = new System.Drawing.Point(40, 122);
+            this.label4.Location = new System.Drawing.Point(331, 82);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(116, 17);

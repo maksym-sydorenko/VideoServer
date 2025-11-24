@@ -7,6 +7,7 @@ using Interfaces.avi;
 using Microsoft.Win32;
 using DirectShowLib;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace Interfaces
 {
@@ -50,6 +51,13 @@ namespace Interfaces
             set
             {
                 cameraAdapter = value;
+                if (cameraAdapter.SaveToFile)
+                {
+                    if (!Directory.Exists(cameraAdapter.FileDirectoryPath))
+                    {
+                        Directory.CreateDirectory(cameraAdapter.FileDirectoryPath);
+                    }
+                }
             }
         }
 
@@ -115,6 +123,7 @@ namespace Interfaces
 
             return false;
         }
+
         protected void SaveToFile(Bitmap lastFrame)
         {
             if (writer == null)
@@ -159,6 +168,7 @@ namespace Interfaces
             writer.AddFrame(lastFrame);
 
         }
+
         protected void SaveToFileJpeg(Bitmap lastFrame)
         {
             try
@@ -166,10 +176,16 @@ namespace Interfaces
                 DateTime date = DateTime.Now;
                 String fileName = String.Format("{0}-{1}-{2} {3}-{4}-{5}.jpeg",
                     date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second);
-                lastFrame.Save(cameraAdapter.FileDirectoryPath + "\\" + fileName, ImageFormat.Jpeg);
+                if (!File.Exists(fileName))
+                {
+                    lastFrame.Save(cameraAdapter.FileDirectoryPath + "\\" + fileName, ImageFormat.Jpeg);
+                }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
+
         protected void CloseFile()
         {
             if (writer != null)

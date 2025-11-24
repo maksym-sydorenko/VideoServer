@@ -22,6 +22,7 @@ namespace Interfaces
         public event CameraEventHandler NewFrame;
 
         #region Camera configuration
+
         string cameraType;
         public string CameraType
         {

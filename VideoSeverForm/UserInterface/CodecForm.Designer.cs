@@ -46,9 +46,9 @@
             this.gbVideo.Controls.Add(this.btSelectVideo);
             this.gbVideo.Controls.Add(this.lbxVideo);
             this.gbVideo.Location = new System.Drawing.Point(17, 16);
-            this.gbVideo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbVideo.Margin = new System.Windows.Forms.Padding(4);
             this.gbVideo.Name = "gbVideo";
-            this.gbVideo.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbVideo.Padding = new System.Windows.Forms.Padding(4);
             this.gbVideo.Size = new System.Drawing.Size(280, 249);
             this.gbVideo.TabIndex = 0;
             this.gbVideo.TabStop = false;
@@ -71,7 +71,7 @@
             this.btSelectVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btSelectVideo.ForeColor = System.Drawing.Color.Black;
             this.btSelectVideo.Location = new System.Drawing.Point(8, 213);
-            this.btSelectVideo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btSelectVideo.Margin = new System.Windows.Forms.Padding(4);
             this.btSelectVideo.Name = "btSelectVideo";
             this.btSelectVideo.Size = new System.Drawing.Size(263, 28);
             this.btSelectVideo.TabIndex = 3;
@@ -84,7 +84,7 @@
             this.lbxVideo.FormattingEnabled = true;
             this.lbxVideo.ItemHeight = 16;
             this.lbxVideo.Location = new System.Drawing.Point(9, 50);
-            this.lbxVideo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbxVideo.Margin = new System.Windows.Forms.Padding(4);
             this.lbxVideo.Name = "lbxVideo";
             this.lbxVideo.Size = new System.Drawing.Size(261, 148);
             this.lbxVideo.TabIndex = 0;
@@ -95,9 +95,9 @@
             this.gbAudio.Controls.Add(this.btSelectAudio);
             this.gbAudio.Controls.Add(this.lbxAudio);
             this.gbAudio.Location = new System.Drawing.Point(315, 16);
-            this.gbAudio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbAudio.Margin = new System.Windows.Forms.Padding(4);
             this.gbAudio.Name = "gbAudio";
-            this.gbAudio.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbAudio.Padding = new System.Windows.Forms.Padding(4);
             this.gbAudio.Size = new System.Drawing.Size(281, 250);
             this.gbAudio.TabIndex = 1;
             this.gbAudio.TabStop = false;
@@ -120,7 +120,7 @@
             this.btSelectAudio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btSelectAudio.ForeColor = System.Drawing.SystemColors.Desktop;
             this.btSelectAudio.Location = new System.Drawing.Point(9, 213);
-            this.btSelectAudio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btSelectAudio.Margin = new System.Windows.Forms.Padding(4);
             this.btSelectAudio.Name = "btSelectAudio";
             this.btSelectAudio.Size = new System.Drawing.Size(263, 28);
             this.btSelectAudio.TabIndex = 2;
@@ -133,7 +133,7 @@
             this.lbxAudio.FormattingEnabled = true;
             this.lbxAudio.ItemHeight = 16;
             this.lbxAudio.Location = new System.Drawing.Point(9, 50);
-            this.lbxAudio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbxAudio.Margin = new System.Windows.Forms.Padding(4);
             this.lbxAudio.Name = "lbxAudio";
             this.lbxAudio.Size = new System.Drawing.Size(261, 148);
             this.lbxAudio.TabIndex = 1;
@@ -142,11 +142,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SlateGray;
             this.ClientSize = new System.Drawing.Size(613, 295);
             this.Controls.Add(this.gbAudio);
             this.Controls.Add(this.gbVideo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CodecForm";
             this.Text = "CodecForm";
             this.Load += new System.EventHandler(this.CodecForm_Load);

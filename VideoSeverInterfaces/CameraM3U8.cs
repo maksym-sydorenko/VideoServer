@@ -9,6 +9,12 @@ namespace Interfaces
 {
     internal class CameraM3U8 : SourceFormater
     {
+        private static readonly LibVLC SharedLibVLC;
+        static CameraM3U8()
+        {
+            Core.Initialize();
+            SharedLibVLC = new LibVLC();
+        }
 
         private IntPtr videoBuffer;
         private const uint width = 640;
@@ -47,10 +53,10 @@ namespace Interfaces
         {
             try
             {
-                Core.Initialize();
-                using (LibVLC libVLC = new LibVLC())
+                //Core.Initialize();
+                //using (LibVLC libVLC = new LibVLC())
                 {
-                    using (MediaPlayer mediaPlayer = new MediaPlayer(libVLC))
+                    using (MediaPlayer mediaPlayer = new MediaPlayer(SharedLibVLC))
                     {
                         //libVLC.Log += (sender, e) => Console.WriteLine($"[{e.Level}] {e.Module}:{e.Message}");
 
@@ -58,7 +64,7 @@ namespace Interfaces
                         mediaPlayer.SetVideoCallbacks(OnLock, OnUnlock, OnDisplay);
 
                         string playlistUrl = cameraAdapter.SourcePath;
-                        var media = new Media(libVLC, playlistUrl, FromType.FromLocation);
+                        var media = new Media(SharedLibVLC, playlistUrl, FromType.FromLocation);
                         mediaPlayer.Play(media);
 
                         while (!stopEvent.WaitOne())
@@ -123,6 +129,11 @@ namespace Interfaces
             safeCopy.UnlockBits(bmpData);
 
             NewFrame?.Invoke(this, new CameraEventArgs(safeCopy));
+
+            if (cameraAdapter.SaveToFile)
+            {
+                SaveToFileJpeg(safeCopy);
+            }
 
         }
     }
