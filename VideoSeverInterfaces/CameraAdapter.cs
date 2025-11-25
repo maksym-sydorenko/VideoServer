@@ -322,6 +322,7 @@ namespace Interfaces
             name = iSourceAdaptee.CameraName;
             description = iSourceAdaptee.CameraDescription;
             sourceType = iSourceAdaptee.SourceType;
+            sourcePath = iSourceAdaptee.SourcePath;
 
             switch (sourceType)
             {
@@ -374,7 +375,6 @@ namespace Interfaces
 
         void sourceFormat_NewFrame(object sender, CameraEventArgs e)
         {
-
             if (NewFrame != null)
             {
                 NewFrame(sender, e);

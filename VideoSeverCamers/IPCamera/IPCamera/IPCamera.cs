@@ -141,7 +141,7 @@ namespace IPCamera
             }
             set
             {
-                _sourcePath = value; ;
+                _sourcePath = value;
             }
         }
 
@@ -183,7 +183,6 @@ namespace IPCamera
 
         public string UpdateSource()
         {
-
             return _sourcePath;
         }
 

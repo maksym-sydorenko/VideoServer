@@ -36,10 +36,6 @@
             this.tbPath = new System.Windows.Forms.TextBox();
             this.lbFilePath = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
-            this.tbPassword = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbLogin = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.tbUrl = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbxDetectObjects = new System.Windows.Forms.CheckBox();
@@ -48,6 +44,8 @@
             this.cbTypeStream = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lbServerYOLO = new System.Windows.Forms.Label();
+            this.lbDescription = new System.Windows.Forms.Label();
+            this.rtbDescription = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label6
@@ -106,10 +104,10 @@
             // tbPath
             // 
             this.tbPath.Enabled = false;
-            this.tbPath.Location = new System.Drawing.Point(263, 175);
+            this.tbPath.Location = new System.Drawing.Point(255, 175);
             this.tbPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbPath.Name = "tbPath";
-            this.tbPath.Size = new System.Drawing.Size(197, 22);
+            this.tbPath.Size = new System.Drawing.Size(229, 22);
             this.tbPath.TabIndex = 28;
             this.tbPath.TextChanged += new System.EventHandler(this.tbPath_TextChanged);
             // 
@@ -134,50 +132,6 @@
             this.tbName.Size = new System.Drawing.Size(433, 22);
             this.tbName.TabIndex = 21;
             this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
-            // 
-            // tbPassword
-            // 
-            this.tbPassword.AcceptsReturn = true;
-            this.tbPassword.Location = new System.Drawing.Point(112, 116);
-            this.tbPassword.Margin = new System.Windows.Forms.Padding(4);
-            this.tbPassword.Name = "tbPassword";
-            this.tbPassword.Size = new System.Drawing.Size(137, 22);
-            this.tbPassword.TabIndex = 24;
-            this.tbPassword.UseSystemPasswordChar = true;
-            this.tbPassword.TextChanged += new System.EventHandler(this.tbPassword_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label3.Location = new System.Drawing.Point(40, 120);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 17);
-            this.label3.TabIndex = 33;
-            this.label3.Text = "Password:";
-            // 
-            // tbLogin
-            // 
-            this.tbLogin.Location = new System.Drawing.Point(112, 84);
-            this.tbLogin.Margin = new System.Windows.Forms.Padding(4);
-            this.tbLogin.Name = "tbLogin";
-            this.tbLogin.Size = new System.Drawing.Size(126, 22);
-            this.tbLogin.TabIndex = 23;
-            this.tbLogin.TextChanged += new System.EventHandler(this.tbLogin_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label2.Location = new System.Drawing.Point(40, 86);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 17);
-            this.label2.TabIndex = 32;
-            this.label2.Text = "Login:";
             // 
             // tbUrl
             // 
@@ -241,10 +195,10 @@
             "JPEG",
             "MJPEG",
             "M3U8"});
-            this.cbTypeStream.Location = new System.Drawing.Point(455, 80);
+            this.cbTypeStream.Location = new System.Drawing.Point(429, 115);
             this.cbTypeStream.Margin = new System.Windows.Forms.Padding(4);
             this.cbTypeStream.Name = "cbTypeStream";
-            this.cbTypeStream.Size = new System.Drawing.Size(81, 24);
+            this.cbTypeStream.Size = new System.Drawing.Size(107, 24);
             this.cbTypeStream.TabIndex = 25;
             this.cbTypeStream.SelectedIndexChanged += new System.EventHandler(this.cbTypeStream_SelectedIndexChanged);
             // 
@@ -253,7 +207,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label4.Location = new System.Drawing.Point(331, 82);
+            this.label4.Location = new System.Drawing.Point(424, 86);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(116, 17);
@@ -273,12 +227,33 @@
             this.lbServerYOLO.TabIndex = 43;
             this.lbServerYOLO.Text = "Шлях до  сервера YOLO";
             // 
+            // lbDescription
+            // 
+            this.lbDescription.AutoSize = true;
+            this.lbDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbDescription.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.lbDescription.Location = new System.Drawing.Point(40, 86);
+            this.lbDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbDescription.Name = "lbDescription";
+            this.lbDescription.Size = new System.Drawing.Size(83, 17);
+            this.lbDescription.TabIndex = 32;
+            this.lbDescription.Text = "Description:";
+            // 
+            // rtbDescription
+            // 
+            this.rtbDescription.Location = new System.Drawing.Point(131, 86);
+            this.rtbDescription.Name = "rtbDescription";
+            this.rtbDescription.Size = new System.Drawing.Size(291, 53);
+            this.rtbDescription.TabIndex = 44;
+            this.rtbDescription.Text = "";
+            // 
             // SetupPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Gray;
+            this.Controls.Add(this.rtbDescription);
             this.Controls.Add(this.lbServerYOLO);
             this.Controls.Add(this.mtbServerYOLO);
             this.Controls.Add(this.clbxDetectedObjects);
@@ -292,15 +267,12 @@
             this.Controls.Add(this.lbFilePath);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.tbPassword);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.tbLogin);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbDescription);
             this.Controls.Add(this.tbUrl);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SetupPage";
-            this.Size = new System.Drawing.Size(540, 308);
+            this.Size = new System.Drawing.Size(544, 308);
             this.Load += new System.EventHandler(this.SetupPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -317,10 +289,6 @@
         private System.Windows.Forms.TextBox tbPath;
         private System.Windows.Forms.Label lbFilePath;
         private System.Windows.Forms.TextBox tbName;
-        private System.Windows.Forms.TextBox tbPassword;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbLogin;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbUrl;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cbxDetectObjects;
@@ -329,5 +297,7 @@
         private System.Windows.Forms.ComboBox cbTypeStream;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbServerYOLO;
+        private System.Windows.Forms.Label lbDescription;
+        private System.Windows.Forms.RichTextBox rtbDescription;
     }
 }

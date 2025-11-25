@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.AccessControl;
 using System.Windows.Forms;
 using System.Xml;
 using Interfaces;
@@ -32,13 +33,11 @@ namespace IPCamera
             this.node = node;
             this.node.InnerXml = "<CameraName>" + tbName.Text + "</CameraName>" +
                "<CameraType>IP camera</CameraType>" +
-               "<CameraDescription>" + " " + "</CameraDescription>" +
+               "<CameraDescription>" + rtbDescription.Text + "</CameraDescription>" +
                "<SaveToFile>" + cbhSave.Checked + "</SaveToFile>" +
                "<MoviDetect>" + cbhSaveMoving.Checked + "</MoviDetect>" +
                "<FileDirectoryPath>" + tbPath.Text + "</FileDirectoryPath>" +
                "<Url>" + tbUrl.Text + "</Url>" +
-               "<Login>" + tbLogin.Text + "</Login>" +
-               "<Password>" + tbPassword.Text + "</Password>" +
                "<SourceType>" + cbTypeStream.Text + "</SourceType>";
         }
 
@@ -49,16 +48,10 @@ namespace IPCamera
                 tbName.Text = node.SelectSingleNode("CameraName").InnerText;
 
             if (node.SelectSingleNode("CameraDescription") != null)
-                description = node.SelectSingleNode("CameraDescription").InnerText;
+                rtbDescription.Text = node.SelectSingleNode("CameraDescription").InnerText;
 
             if (node.SelectSingleNode("Url") != null)
                 tbUrl.Text = node.SelectSingleNode("Url").InnerText;
-
-            if (node.SelectSingleNode("Login") != null)
-                tbLogin.Text = node.SelectSingleNode("Login").InnerText;
-
-            if (node.SelectSingleNode("Password") != null)
-                tbPassword.Text = node.SelectSingleNode("Password").InnerText;
 
             if (node.SelectSingleNode("SaveToFile") != null)
                 cbhSave.Checked = bool.Parse(node.SelectSingleNode("SaveToFile").InnerText);
@@ -72,18 +65,23 @@ namespace IPCamera
             if (node.SelectSingleNode("SourceType") != null)
             {
                 string str = node.SelectSingleNode("SourceType").InnerText;
-
-                if (str == SourceTypes.MJPEG.ToString())
+                switch (str)
                 {
-                    cbTypeStream.SelectedItem = SourceTypes.MJPEG;
-                }
-                else if (str == SourceTypes.JPEG.ToString())
-                {
-                    cbTypeStream.SelectedItem = SourceTypes.JPEG;
-                }
-                else
-                {
-                    cbTypeStream.SelectedItem = SourceTypes.JPEG;
+                    case "JPEG":
+                        {
+                            cbTypeStream.SelectedItem = "JPEG";
+                        }
+                        break;
+                    case "MJPEG":
+                        {
+                            cbTypeStream.SelectedItem = "MJPEG";
+                        }
+                        break;
+                    case "M3U8":
+                        {
+                            cbTypeStream.SelectedItem = "M3U8";
+                        }
+                        break;
                 }
             }
         }
@@ -91,40 +89,34 @@ namespace IPCamera
 
         internal void Update(ISourceAdaptee ip_camera)
         {
+            ip_camera.CameraName = tbName.Text;
 
+            ip_camera.SourcePath = tbUrl.Text;
+            ip_camera.SaveToFile = cbhSave.Checked;
+            ip_camera.MoviDetect = cbhSaveMoving.Checked;
+            ip_camera.FileDirectoryPath = tbPath.Text;
+            ip_camera.CameraDescription = rtbDescription.Text;
+            sourcePath = tbPath.Text;
+
+            string typeStream = cbTypeStream?.SelectedItem?.ToString();
+            switch (typeStream)
             {
-                ip_camera.CameraName = tbName.Text;
-
-                ip_camera.SourcePath = tbUrl.Text;
-                ip_camera.Login = tbLogin.Text;
-                ip_camera.Password = tbPassword.Text;
-                ip_camera.SaveToFile = cbhSave.Checked;
-                ip_camera.MoviDetect = cbhSaveMoving.Checked;
-                ip_camera.FileDirectoryPath = tbPath.Text;
-                ip_camera.CameraDescription = "";
-                sourcePath = tbPath.Text;
-
-                string typeStream = cbTypeStream?.SelectedItem?.ToString();
-                switch (typeStream)
-                {
-                    case "JPEG":
-                        {
-                            ip_camera.SourceType = SourceTypes.JPEG;
-                        }
-                        break;
-                    case "MJPEG":
-                        {
-                            ip_camera.SourceType = SourceTypes.MJPEG;
-                        }
-                        break;
-                    case "M3U8":
-                        {
-                            ip_camera.SourceType = SourceTypes.M3U8;
-                        }
-                        break;
-                }
+                case "JPEG":
+                    {
+                        ip_camera.SourceType = SourceTypes.JPEG;
+                    }
+                    break;
+                case "MJPEG":
+                    {
+                        ip_camera.SourceType = SourceTypes.MJPEG;
+                    }
+                    break;
+                case "M3U8":
+                    {
+                        ip_camera.SourceType = SourceTypes.M3U8;
+                    }
+                    break;
             }
-
         }
 
         #region Controls
@@ -216,7 +208,8 @@ namespace IPCamera
 
         private void SetupPage_Load(object sender, EventArgs e)
         {
-            cbTypeStream.SelectedIndex = 1;
+            if(cbTypeStream.SelectedIndex == -1)
+                cbTypeStream.SelectedIndex = 1;
         }
 
         private void cbxDetectObjects_CheckedChanged(object sender, EventArgs e)

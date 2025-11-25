@@ -189,7 +189,7 @@ namespace VideoServer.Controls
             get { return lastClicked; }
         }
 
-        // Set camera to the specified position of the multiplexer
+        // Set _camera to the specified position of the multiplexer
         internal void SetCamera(int row, int col, Camera camera)
         {
             if ((row >= 0) && (col >= 0) && (row < MaxRows) && (col < MaxCols))
@@ -266,7 +266,7 @@ namespace VideoServer.Controls
             UpdateSize();
         }
 
-        // On mouse down in camera window
+        // On mouse down in _camera window
 
         private void cameraWindow_MouseDown(object sender, EventArgs e)
         {

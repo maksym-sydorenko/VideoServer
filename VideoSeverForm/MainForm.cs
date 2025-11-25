@@ -11,8 +11,8 @@ namespace VideoServer
     public partial class MainForm : Form
     {
         CameraCollection camersBaseTypes = null;
-        CameraCollection camers = null;
-        Camera camera = null;
+        CameraCollection _camers = null;
+        Camera _camera = null;
         XmlDocument _setting = null;
         static string appPath = "";
         UserInterface.AddCameraForm addCameraForm = null;
@@ -176,7 +176,7 @@ namespace VideoServer
 
         private void FitToScreen(bool fit)
         {
-            viewPanel.FitToWindow = fit;
+            _viewPanel.FitToWindow = fit;
         }
 
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -421,31 +421,32 @@ namespace VideoServer
                 if ((_setting == null) || (treeView?.SelectedNode?.Name == "1") || (treeView?.SelectedNode?.Name == "2"))
                     return;
 
-                if (camera != null)
+                if (_camera != null)
                 {
-                    camera.Stop();
-                    camera = null;
+                    _camera.Stop();
+                    _camera = null;
                 }
-                if (camers != null)
+
+                if (_camers != null)
                 {
-                    foreach (Camera cam in camers)
+                    foreach (Camera cam in _camers)
                     {
                         if (cam != null)
                             cam.Stop();
                     }
-                    camers.Clear();
-                    camers = null;
+                    _camers.Clear();
+                    _camers = null;
                 }
 
-                camera = CreateCamera(treeView?.SelectedNode?.Text);
-                viewPanel.SetCamera(0, 0, camera);
-                viewPanel.Rows = 1;
-                viewPanel.Cols = 1;
-                viewPanel.SingleCameraMode = true;
-                viewPanel.CamerasVisible = true;
-                viewPanel.FitToWindow = true;
+                _camera = CreateCamera(treeView?.SelectedNode?.Text);
+                _viewPanel.SetCamera(0, 0, _camera);
+                _viewPanel.Rows = 1;
+                _viewPanel.Cols = 1;
+                _viewPanel.SingleCameraMode = true;
+                _viewPanel.CamerasVisible = true;
+                _viewPanel.FitToWindow = true;
 
-                camera.Start();
+                _camera.Start();
             }
             catch (Exception ex)
             {
@@ -511,46 +512,50 @@ namespace VideoServer
                 MessageBox.Show(ex.Message);
             }
         }
-        void EditView()
-        { }
         void ShowView()
         {
             try
             {
                 if ((_setting == null) || (treeView?.SelectedNode == null) || (treeView?.SelectedNode?.Name == "1") || (treeView?.SelectedNode?.Name == "2"))
                     return;
+
                 XmlNode node = _setting?.SelectSingleNode("/ROOT/CamerasViews/CamerasView[@ViewName=\"" + treeView.SelectedNode.Text + "\"]");
                 if (node != null)
                 {
-                    if (this.camera != null)
+                    if (_camera != null)
                     {
-                        this.camera.Stop();
-                        this.camera = null;
+                        _camera.Stop();
+                        _camera = null;
                     }
-                    if (camers != null)
+                    if (_camers != null)
                     {
-                        foreach (Camera cam in camers)
+                        foreach (Camera cam in _camers)
                         {
                             cam?.Stop();
                         }
-                        camers.Clear();
-                        camers = null;
+                        _camers.Clear();
+                        _camers = null;
                     }
-                    //viewPanel = new VideoServer.Controls.ViewPanel();
+                    //_viewPanel = new VideoServer.Controls.ViewPanel();
 
-                    camers = new CameraCollection();
+                    _camers = new CameraCollection();
+
                     if (node.SelectSingleNode("row") != null)
-                        viewPanel.Rows = int.Parse(node.SelectSingleNode("row").InnerText);
+                        _viewPanel.Rows = int.Parse(node.SelectSingleNode("row").InnerText);
+
                     if (node.SelectSingleNode("col") != null)
-                        viewPanel.Cols = int.Parse(node.SelectSingleNode("col").InnerText);
+                        _viewPanel.Cols = int.Parse(node.SelectSingleNode("col").InnerText);
 
                     if (node.SelectSingleNode("width") != null)
-                        viewPanel.Width = int.Parse(node.SelectSingleNode("width").InnerText);
+                        _viewPanel.Width = int.Parse(node.SelectSingleNode("width").InnerText);
+
                     if (node.SelectSingleNode("height") != null)
-                        viewPanel.Height = int.Parse(node.SelectSingleNode("height").InnerText);
-                    viewPanel.SingleCameraMode = false;
-                    viewPanel.CamerasVisible = true;
-                    viewPanel.FitToWindow = true;
+                        _viewPanel.Height = int.Parse(node.SelectSingleNode("height").InnerText);
+
+                    _viewPanel.SingleCameraMode = false;
+                    _viewPanel.CamerasVisible = true;
+                    _viewPanel.FitToWindow = true;
+
                     XmlNodeList nodesCameras = node.SelectNodes("SelectedCamera");
 
                     foreach (XmlNode nodeCamera in nodesCameras)
@@ -559,9 +564,11 @@ namespace VideoServer
                         string cameraName = "";
                         int row = 0;
                         int col = 0;
+
                         cameraName = nodeCamera.Attributes["CameraName"].Value;
                         camera = CreateCamera(cameraName);
-                        camers.Add(camera);
+
+                        _camers.Add(camera);
 
                         if (nodeCamera.SelectSingleNode("row") != null)
                             row = int.Parse(nodeCamera.SelectSingleNode("row").InnerText);
@@ -570,9 +577,10 @@ namespace VideoServer
                             col = int.Parse(nodeCamera.SelectSingleNode("col").InnerText);
 
                         if(camera != null)
-                            viewPanel.SetCamera(row, col, camera);
+                            _viewPanel.SetCamera(row, col, camera);
                     }
-                    foreach (Camera camera in camers)
+
+                    foreach (Camera camera in _camers)
                     {
                         camera?.Start();
                     }
@@ -588,6 +596,7 @@ namespace VideoServer
         {
             Camera camera = null;
             XmlNode node = _setting.SelectSingleNode("/ROOT/Cameras/Camera[@CameraName=\"" + cameraName + "\"]");
+
             if (node == null)
                 return null;
 

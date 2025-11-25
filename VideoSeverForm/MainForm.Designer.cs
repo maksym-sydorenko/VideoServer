@@ -18,13 +18,13 @@ namespace VideoServer
             {
                 components.Dispose();
             }
-            if (camera != null)
+            if (_camera != null)
             {
-                camera.Stop();
+                _camera.Stop();
             }
-            if (camers != null)
+            if (_camers != null)
             {
-                foreach (Camera cam in camers)
+                foreach (Camera cam in _camers)
                 {
                     cam?.Stop();
                 }
@@ -73,7 +73,7 @@ namespace VideoServer
             this.menuItem7 = new System.Windows.Forms.MenuItem();
             this.cameraInfoItem = new System.Windows.Forms.MenuItem();
             this.treeView = new System.Windows.Forms.TreeView();
-            this.viewPanel = new VideoServer.Controls.ViewPanel();
+            this._viewPanel = new VideoServer.Controls.ViewPanel();
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.cmenuStrip.SuspendLayout();
@@ -90,7 +90,7 @@ namespace VideoServer
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
             this.statusStrip.Size = new System.Drawing.Size(929, 26);
-            this.statusStrip.TabIndex = 0;
+            this.statusStrip.TabIndex = 3;
             // 
             // toolStripStatusLabel
             // 
@@ -117,8 +117,8 @@ namespace VideoServer
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(929, 30);
-            this.menuStrip.TabIndex = 1;
+            this.menuStrip.Size = new System.Drawing.Size(929, 28);
+            this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
             // cameraToolStripMenuItem
@@ -129,7 +129,7 @@ namespace VideoServer
             this.ShowCameraToolStripMenuItem,
             this.editToolStripMenuItem});
             this.cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
-            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
+            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
             this.cameraToolStripMenuItem.Text = "Камера";
             // 
             // addCameraToolStripMenuItem
@@ -167,7 +167,7 @@ namespace VideoServer
             this.delViewToolStripMenuItem1,
             this.showViewToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(61, 26);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
             this.viewToolStripMenuItem.Text = "Вікно";
             // 
             // addViewToolStripMenuItem1
@@ -205,7 +205,7 @@ namespace VideoServer
             this.fullToolStripMenuItem,
             this.fitToolStripMenuItem});
             this.previewToolStripMenuItem.Name = "previewToolStripMenuItem";
-            this.previewToolStripMenuItem.Size = new System.Drawing.Size(64, 26);
+            this.previewToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.previewToolStripMenuItem.Text = "Екран";
             // 
             // fullToolStripMenuItem
@@ -230,7 +230,7 @@ namespace VideoServer
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(94, 26);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
             this.helpToolStripMenuItem.Text = "Допомога";
             // 
             // aboutToolStripMenuItem
@@ -319,31 +319,31 @@ namespace VideoServer
             this.treeView.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.treeView.ForeColor = System.Drawing.SystemColors.Info;
-            this.treeView.Location = new System.Drawing.Point(0, 30);
+            this.treeView.Location = new System.Drawing.Point(0, 28);
             this.treeView.Margin = new System.Windows.Forms.Padding(4);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(253, 393);
-            this.treeView.TabIndex = 5;
+            this.treeView.Size = new System.Drawing.Size(253, 395);
+            this.treeView.TabIndex = 1;
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
             // 
-            // viewPanel
+            // _viewPanel
             // 
-            this.viewPanel.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.viewPanel.CellHeight = 480;
-            this.viewPanel.CellWidth = 640;
-            this.viewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewPanel.Location = new System.Drawing.Point(253, 30);
-            this.viewPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.viewPanel.Name = "viewPanel";
-            this.viewPanel.Size = new System.Drawing.Size(676, 393);
-            this.viewPanel.TabIndex = 6;
+            this._viewPanel.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this._viewPanel.CellHeight = 480;
+            this._viewPanel.CellWidth = 640;
+            this._viewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._viewPanel.Location = new System.Drawing.Point(253, 28);
+            this._viewPanel.Margin = new System.Windows.Forms.Padding(4);
+            this._viewPanel.Name = "_viewPanel";
+            this._viewPanel.Size = new System.Drawing.Size(676, 395);
+            this._viewPanel.TabIndex = 2;
             // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.SlateGray;
             this.ClientSize = new System.Drawing.Size(929, 449);
-            this.Controls.Add(this.viewPanel);
+            this.Controls.Add(this._viewPanel);
             this.Controls.Add(this.treeView);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
@@ -394,7 +394,7 @@ namespace VideoServer
         private System.Windows.Forms.MenuItem menuItem7;
         private System.Windows.Forms.MenuItem cameraInfoItem;
         private System.Windows.Forms.TreeView treeView;
-        private VideoServer.Controls.ViewPanel viewPanel;
+        private VideoServer.Controls.ViewPanel _viewPanel;
         private System.Windows.Forms.ToolStripMenuItem previewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fullToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fitToolStripMenuItem;

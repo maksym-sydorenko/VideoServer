@@ -11,26 +11,26 @@ namespace VideoServer.Tools
     {
         Hashtable tableIAdaptee = null;
 
-        // Add new camera to the collection
+        // Add new _camera to the collection
         public void Add(Camera camera)
         {
             InnerList.Add(camera);
         }
 
-        // Remove camera from the collection
+        // Remove _camera from the collection
         public void Remove(Camera camera)
         {
             InnerList.Remove(camera);
         }
 
-        // Get camera with specified name
+        // Get _camera with specified name
         public Camera GetCamera(string name)
         {
-            // find the camera
+            // find the _camera
             foreach (Camera camera in InnerList)
             {
-                //if (camera.Name == name) 
-                //    return camera;
+                //if (_camera.Name == name) 
+                //    return _camera;
             }
             return null;
         }

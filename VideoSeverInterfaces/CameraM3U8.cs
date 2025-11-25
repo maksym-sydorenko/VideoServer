@@ -53,28 +53,25 @@ namespace Interfaces
         {
             try
             {
-                //Core.Initialize();
-                //using (LibVLC libVLC = new LibVLC())
+                using (MediaPlayer mediaPlayer = new MediaPlayer(SharedLibVLC))
                 {
-                    using (MediaPlayer mediaPlayer = new MediaPlayer(SharedLibVLC))
+                    //libVLC.Log += (sender, e) => Console.WriteLine($"[{e.Level}] {e.Module}:{e.Message}");
+
+                    mediaPlayer.SetVideoFormat("RV32", width, height, pitch);
+                    mediaPlayer.SetVideoCallbacks(OnLock, OnUnlock, OnDisplay);
+
+                    string playlistUrl = cameraAdapter.SourcePath;
+                    var media = new Media(SharedLibVLC, playlistUrl, FromType.FromLocation);
+                    mediaPlayer.Play(media);
+
+                    while (!stopEvent.WaitOne())
                     {
-                        //libVLC.Log += (sender, e) => Console.WriteLine($"[{e.Level}] {e.Module}:{e.Message}");
-
-                        mediaPlayer.SetVideoFormat("RV32", width, height, pitch);
-                        mediaPlayer.SetVideoCallbacks(OnLock, OnUnlock, OnDisplay);
-
-                        string playlistUrl = cameraAdapter.SourcePath;
-                        var media = new Media(SharedLibVLC, playlistUrl, FromType.FromLocation);
-                        mediaPlayer.Play(media);
-
-                        while (!stopEvent.WaitOne())
-                        {
-                            // health-check / reconnect
-                        }
-
-                        mediaPlayer.Stop();
+                        // health-check / reconnect
                     }
+
+                    mediaPlayer.Stop();
                 }
+
             }
             catch (Exception ex)
             {
