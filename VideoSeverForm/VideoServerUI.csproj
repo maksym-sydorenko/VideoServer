@@ -43,15 +43,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
-      <HintPath>..\VideoServer\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
-      <HintPath>..\VideoServer\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
-      <HintPath>..\VideoServer\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Management" />
@@ -143,10 +134,6 @@
       <DependentUpon>AlarmForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\CodecForm.resx">
-      <DependentUpon>CodecForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -188,12 +175,6 @@
     </Compile>
     <Compile Include="UserInterface\AlarmForm.Designer.cs">
       <DependentUpon>AlarmForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserInterface\CodecForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UserInterface\CodecForm.Designer.cs">
-      <DependentUpon>CodecForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\SettingForm.cs">
       <SubType>Form</SubType>

@@ -204,7 +204,7 @@ namespace Interfaces
             {
                 if (cameraAdapter.ISourceAdaptee.MoviDetect)
                 {
-                    if (MotionDetect(ref image))
+                    if (DetectMotion(ref image))
                     {
                         //SaveToFile(image);
                     }

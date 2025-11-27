@@ -64,18 +64,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AForge, Version=1.2.0.0, Culture=neutral, PublicKeyToken=75f8e82c5042a70f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>references\AForge.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Imaging, Version=1.2.0.0, Culture=neutral, PublicKeyToken=38eb47741dd0492e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>references\AForge.Imaging.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Math, Version=1.2.0.0, Culture=neutral, PublicKeyToken=e12ceb15b47eb5cc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>references\AForge.Math.dll</HintPath>
-    </Reference>
     <Reference Include="DirectShowLib, Version=2.1.0.1599, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\VideoServer\packages\DirectShowLib.1.0.0\lib\DirectShowLib.dll</HintPath>
     </Reference>
@@ -186,14 +174,14 @@
     <Compile Include="avi\Win32.cs" />
     <Compile Include="CameraAdapter.cs" />
     <Compile Include="CameraM3U8.cs" />
+    <Compile Include="DetectorYOLO.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="ISetupPage.cs" />
     <Compile Include="ISourceAdaptee.cs" />
     <Compile Include="Jpeg.cs" />
     <Compile Include="LocalCaptureDevice.cs" />
     <Compile Include="Mjpeg.cs" />
-    <Compile Include="MotionDetector.cs" />
-    <Compile Include="MotionDetector2.cs" />
+    <Compile Include="DetectorMotion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceFormater.cs" />
     <Compile Include="SourseTypes.cs" />

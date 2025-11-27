@@ -15,7 +15,7 @@ namespace Interfaces
     /// <summary>
     /// MotionDetector3Optimized
     /// </summary>
-    public class MotionDetector
+    public class DetectorMotion
     {
         private byte[] backgroundFrame = null;
         private byte[] currentFrame = null;
@@ -42,7 +42,7 @@ namespace Interfaces
         }
 
         // Constructor
-        public MotionDetector()
+        public DetectorMotion()
         {
         }
 

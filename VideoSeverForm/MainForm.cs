@@ -353,6 +353,7 @@ namespace VideoServer
                 MessageBox.Show(ex.Message);
             }
         }
+
         void DelCamera()
         {
             try
@@ -376,6 +377,7 @@ namespace VideoServer
                 MessageBox.Show(ex.Message);
             }
         }
+
         void EditCamera()
         {
             try
@@ -413,6 +415,7 @@ namespace VideoServer
                 MessageBox.Show(ex.Message);
             }
         }
+
         void ShowCamera()
         {
             try

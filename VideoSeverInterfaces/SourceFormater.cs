@@ -20,8 +20,8 @@ namespace Interfaces
         protected int bytesReceived;
         protected bool useSeparateConnectionGroup = true;
         protected object userData = null;
-        private MotionDetector2 motionDetecotor = null;
-        protected avi.AVIWriter writer = null;
+        private DetectorMotion motionDetecotor = null;
+        protected AVIWriter writer = null;
         // alarm level
         private double alarmLevel = 0.03;
         protected Thread thread = null;
@@ -104,11 +104,11 @@ namespace Interfaces
 
         #endregion
 
-        protected bool MotionDetect(ref Bitmap lastFrame)
+        protected bool DetectMotion(ref Bitmap lastFrame)
         {
             if (motionDetecotor == null)
             {
-                motionDetecotor = new MotionDetector2();
+                motionDetecotor = new DetectorMotion();
                 motionDetecotor.MotionLevelCalculation = true;
             }
 

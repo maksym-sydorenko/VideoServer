@@ -190,7 +190,7 @@ namespace Interfaces
                                     {
                                         if (cameraAdapter.MoviDetect)
                                         {
-                                            if (MotionDetect(ref bmp))
+                                            if (DetectMotion(ref bmp))
                                             {
                                                 SaveToFile(bmp);
                                             }
@@ -203,7 +203,6 @@ namespace Interfaces
                                         {
                                             SaveToFile(bmp);
                                         }
-
                                     }
                                     g.DrawString(DateTime.Now.ToString(), drawFont, drawBrush, new PointF(5, bmp.Height - 20));
                                     NewFrame(this, new CameraEventArgs(bmp));

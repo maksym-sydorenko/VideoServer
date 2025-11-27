@@ -125,13 +125,21 @@ namespace Interfaces
 
             safeCopy.UnlockBits(bmpData);
 
-            NewFrame?.Invoke(this, new CameraEventArgs(safeCopy));
-
-            if (cameraAdapter.SaveToFile)
+            if ((cameraAdapter.SaveToFile) && (!stopEvent.WaitOne(0, true)))
             {
-                SaveToFileJpeg(safeCopy);
+                if (cameraAdapter.MoviDetect)
+                {
+                    if (DetectMotion(ref safeCopy))
+                    {
+                        SaveToFileJpeg(safeCopy);
+                    }
+                }
+                else
+                {
+                    SaveToFileJpeg(safeCopy);
+                }
             }
-
+            NewFrame?.Invoke(this, new CameraEventArgs(safeCopy));
         }
     }
 }

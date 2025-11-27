@@ -11,14 +11,14 @@ namespace LocalCaptureDevice
     {
         FilterInfoCollection filters;
         //private bool completed = false;
-        
-        
+
+
         XmlNode node = null;
-       
+
         public SetupPage()
         {
             InitializeComponent();
-          //cbCaptureDevice.
+            //cbCaptureDevice.
             filters = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
             if (filters.Count == 0)
@@ -33,7 +33,7 @@ namespace LocalCaptureDevice
                 {
                     cbCaptureDevice.Items.Add(filter.Name);
                 }
-               // completed = true;
+                // completed = true;
             }
             cbCaptureDevice.SelectedIndex = 0;
             cbTypeStream.SelectedIndex = 0;
@@ -41,23 +41,23 @@ namespace LocalCaptureDevice
             cbPeriod.Visible = false;
             lbInterval.Visible = false;
         }
-             
+
         private void btSelectPath_Click(object sender, EventArgs e)
         {
 
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK) 
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-               tbPath.Text = folderBrowserDialog.SelectedPath;
+                tbPath.Text = folderBrowserDialog.SelectedPath;
             }
         }
 
         #region ISetupPage Members
         public event EventHandler StateChanged;
-      
+
         public void Display()
         {
             cbCaptureDevice.Focus();
-            
+
         }
         public void GetConfiguration(ref XmlNode node)
         {
@@ -121,9 +121,9 @@ namespace LocalCaptureDevice
         }
         #endregion
 
-        internal void Update(ISourceAdaptee localCamera) 
+        internal void Update(ISourceAdaptee localCamera)
         {
-            
+
             {
                 localCamera.CameraName = tbName.Text;
                 localCamera.CameraDescription = "";
@@ -146,7 +146,7 @@ namespace LocalCaptureDevice
                 btSelectPath.Enabled = true;
                 lbPath.Enabled = true;
             }
-            else 
+            else
             {
                 cbhSaveMoving.Enabled = false;
                 cbhSaveMoving.Checked = false;
@@ -154,7 +154,7 @@ namespace LocalCaptureDevice
                 tbPath.Text = "";
                 btSelectPath.Enabled = false;
                 lbPath.Enabled = false;
-                
+
             }
             if (StateChanged != null)
                 StateChanged(this, new EventArgs());
@@ -162,14 +162,14 @@ namespace LocalCaptureDevice
 
         private void cbhSaveMoving_CheckedChanged(object sender, EventArgs e)
         {
-          
+
             if (StateChanged != null)
                 StateChanged(this, new EventArgs());
         }
 
         private void tbPath_TextChanged(object sender, EventArgs e)
         {
-           
+
             if (StateChanged != null)
                 StateChanged(this, new EventArgs());
         }

@@ -146,10 +146,13 @@ namespace VideoServer.Controls
                 }
 
                 CopyBitmap(e.Bitmap, lastFrame);
+
+
             }
 
             Invalidate();
         }
+
 
     }
 }
