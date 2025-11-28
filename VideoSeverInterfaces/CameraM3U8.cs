@@ -14,13 +14,16 @@ namespace Interfaces
         {
             Core.Initialize();
             SharedLibVLC = new LibVLC();
+#if DEBUG
+            SharedLibVLC.Log += (sender, e) => Console.WriteLine($"[{e.Level}] {e.Module}:{e.Message}");
+#endif
         }
 
         private IntPtr videoBuffer;
         private const uint width = 640;
         private const uint height = 480;
         private const uint pitch = width * 4;
-        private int bufferSize = (int) (width * height * 4);
+        private int bufferSize = (int)(width * height * 4);
 
         public override event CameraEventHandler NewFrame;
         Bitmap safeCopy;
@@ -35,7 +38,7 @@ namespace Interfaces
             PixelFormat.Format32bppRgb, videoBuffer);
 
             thread = new Thread(new ThreadStart(WorkerThread));
-            thread.Name = "HLS fMP4";
+            thread.Name = String.Format("M3U8[{0}]", cameraAdapter.CameraName);
             thread.Start();
         }
 
@@ -55,7 +58,6 @@ namespace Interfaces
             {
                 using (MediaPlayer mediaPlayer = new MediaPlayer(SharedLibVLC))
                 {
-                    //libVLC.Log += (sender, e) => Console.WriteLine($"[{e.Level}] {e.Module}:{e.Message}");
 
                     mediaPlayer.SetVideoFormat("RV32", width, height, pitch);
                     mediaPlayer.SetVideoCallbacks(OnLock, OnUnlock, OnDisplay);
@@ -95,51 +97,57 @@ namespace Interfaces
 
         private void OnDisplay(IntPtr opaque, IntPtr picture)
         {
-
-            BitmapData bmpData = safeCopy.LockBits(
+            try
+            {
+                BitmapData bmpData = safeCopy.LockBits(
                 new Rectangle(0, 0, safeCopy.Width, safeCopy.Height),
                 ImageLockMode.ReadOnly,
                 safeCopy.PixelFormat);
 
-            int bytesPerPixel = Image.GetPixelFormatSize(safeCopy.PixelFormat) / 8;
-            int stride = bmpData.Stride;
+                int bytesPerPixel = Image.GetPixelFormatSize(safeCopy.PixelFormat) / 8;
+                int stride = bmpData.Stride;
 
-            unsafe
-            {
-                byte* ptr = (byte*)bmpData.Scan0;
-
-                for (int y = 0; y < safeCopy.Height; y++)
+                unsafe
                 {
-                    for (int x = 0; x < safeCopy.Width; x++)
+                    byte* ptr = (byte*)bmpData.Scan0;
+
+                    for (int y = 0; y < safeCopy.Height; y++)
                     {
-                        byte blue = ptr[0];
-                        byte green = ptr[1];
-                        byte red = ptr[2];
-                        byte alpha = ptr[3];
+                        for (int x = 0; x < safeCopy.Width; x++)
+                        {
+                            byte blue = ptr[0];
+                            byte green = ptr[1];
+                            byte red = ptr[2];
+                            byte alpha = ptr[3];
 
-                        ptr += bytesPerPixel;
+                            ptr += bytesPerPixel;
+                        }
+                        ptr += stride - (safeCopy.Width * bytesPerPixel);
                     }
-                    ptr += stride - (safeCopy.Width * bytesPerPixel);
                 }
-            }
 
-            safeCopy.UnlockBits(bmpData);
+                safeCopy.UnlockBits(bmpData);
 
-            if ((cameraAdapter.SaveToFile) && (!stopEvent.WaitOne(0, true)))
-            {
-                if (cameraAdapter.MoviDetect)
+                if ((cameraAdapter.SaveToFile) && (!stopEvent.WaitOne(0, true)))
                 {
-                    if (DetectMotion(ref safeCopy))
+                    if (cameraAdapter.MoviDetect)
+                    {
+                        if (DetectMotion(ref safeCopy))
+                        {
+                            SaveToFileJpeg(safeCopy);
+                        }
+                    }
+                    else
                     {
                         SaveToFileJpeg(safeCopy);
                     }
                 }
-                else
-                {
-                    SaveToFileJpeg(safeCopy);
-                }
+                NewFrame?.Invoke(this, new CameraEventArgs(safeCopy));
             }
-            NewFrame?.Invoke(this, new CameraEventArgs(safeCopy));
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }

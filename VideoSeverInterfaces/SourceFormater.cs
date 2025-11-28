@@ -28,7 +28,7 @@ namespace Interfaces
         protected ManualResetEvent stopEvent = null;
         protected ManualResetEvent reloadEvent = null;
         protected Bitmap lastFrame = null;
-
+        protected string subPath = DateTime.Now.ToString("yyyyMMdd");
         /// <summary>
         /// ctor
         /// </summary>
@@ -53,9 +53,10 @@ namespace Interfaces
                 cameraAdapter = value;
                 if (cameraAdapter.SaveToFile)
                 {
-                    if (!Directory.Exists(cameraAdapter.FileDirectoryPath))
+                    subPath = Path.Combine(cameraAdapter.FileDirectoryPath, DateTime.Now.ToString("yyyyMMdd"));
+                    if (!Directory.Exists(subPath))
                     {
-                        Directory.CreateDirectory(cameraAdapter.FileDirectoryPath);
+                        Directory.CreateDirectory(subPath);
                     }
                 }
             }
@@ -153,7 +154,7 @@ namespace Interfaces
                     }
                     // open AVI file
 
-                    writer.Open(cameraAdapter.FileDirectoryPath + "\\" + fileName, lastFrame.Width, lastFrame.Height);
+                    writer.Open(subPath + "\\" + fileName, lastFrame.Width, lastFrame.Height);
                 }
                 catch (ApplicationException)
                 {
@@ -178,7 +179,7 @@ namespace Interfaces
                     date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second);
                 if (!File.Exists(fileName))
                 {
-                    lastFrame.Save(cameraAdapter.FileDirectoryPath + "\\" + fileName, ImageFormat.Jpeg);
+                    lastFrame.Save(subPath + "\\" + fileName, ImageFormat.Jpeg);
                 }
             }
             catch (Exception)
