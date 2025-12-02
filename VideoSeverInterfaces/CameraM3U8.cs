@@ -66,14 +66,13 @@ namespace Interfaces
                     var media = new Media(SharedLibVLC, playlistUrl, FromType.FromLocation);
                     mediaPlayer.Play(media);
 
-                    while (!stopEvent.WaitOne())
+                    while (!stopEvent.WaitOne(2000)) // перевірка кожні 2 секунди
                     {
-                        if (!mediaPlayer.IsPlaying)
+                        if (mediaPlayer.State == VLCState.Ended ||
+                            mediaPlayer.State == VLCState.Error ||
+                            !mediaPlayer.IsPlaying)
                         {
-                            Console.WriteLine("Restarting stream...");
-                            mediaPlayer.Stop();
-                            media = new Media(SharedLibVLC, playlistUrl, FromType.FromLocation);
-                            mediaPlayer.Play(media);
+                            RestartStream(mediaPlayer, playlistUrl);
                         }
                     }
 
@@ -88,6 +87,24 @@ namespace Interfaces
             finally
             {
                 Marshal.FreeHGlobal(videoBuffer);
+            }
+        }
+        private void RestartStream(MediaPlayer mediaPlayer, string playlistUrl)
+        {
+            try
+            {
+                Console.WriteLine("Restarting stream...");
+
+                mediaPlayer.Stop();
+
+                using (var media = new Media(SharedLibVLC, playlistUrl, FromType.FromLocation))
+                {
+                    mediaPlayer.Play(media);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Restart failed: " + ex.Message);
             }
         }
 
