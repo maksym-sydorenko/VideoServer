@@ -68,7 +68,13 @@ namespace Interfaces
 
                     while (!stopEvent.WaitOne())
                     {
-                        // health-check / reconnect
+                        if (!mediaPlayer.IsPlaying)
+                        {
+                            Console.WriteLine("Restarting stream...");
+                            mediaPlayer.Stop();
+                            media = new Media(SharedLibVLC, playlistUrl, FromType.FromLocation);
+                            mediaPlayer.Play(media);
+                        }
                     }
 
                     mediaPlayer.Stop();
