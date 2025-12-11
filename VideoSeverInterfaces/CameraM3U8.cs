@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows.Forms;
 using LibVLCSharp.Shared;
 
 namespace Interfaces
@@ -10,6 +12,8 @@ namespace Interfaces
     internal class CameraM3U8 : SourceFormater
     {
         private static readonly LibVLC SharedLibVLC;
+        private int _restart_time = 5000;
+        private int try_cnt = 0;
         static CameraM3U8()
         {
             Core.Initialize();
@@ -64,16 +68,30 @@ namespace Interfaces
 
                     string playlistUrl = cameraAdapter.SourcePath;
                     var media = new Media(SharedLibVLC, playlistUrl, FromType.FromLocation);
-                    mediaPlayer.Play(media);
+                    if (!mediaPlayer.Play(media))
+                    {
+                        MessageBox.Show("Failed to start playback.");
+                        stopEvent.Set();
+                    }
 
-                    while (!stopEvent.WaitOne(2000)) // перевірка кожні 2 секунди
+                    mediaPlayer.EncounteredError += (sender, e) =>
+                    {
+                        MessageBox.Show("Failed to start playback.");
+                        stopEvent.Set();
+                    };
+
+                    while (!stopEvent.WaitOne(_restart_time))
                     {
                         if (mediaPlayer.State == VLCState.Ended ||
                             mediaPlayer.State == VLCState.Error ||
-                            !mediaPlayer.IsPlaying)
+                            !mediaPlayer.IsPlaying ||
+                            try_cnt == 5)
                         {
                             RestartStream(mediaPlayer, playlistUrl);
+                            try_cnt = 0;
                         }
+                        try_cnt++;
+
                     }
 
                     mediaPlayer.Stop();
@@ -122,6 +140,7 @@ namespace Interfaces
         {
             try
             {
+                try_cnt = 0;
                 BitmapData bmpData = safeCopy.LockBits(
                 new Rectangle(0, 0, safeCopy.Width, safeCopy.Height),
                 ImageLockMode.ReadOnly,

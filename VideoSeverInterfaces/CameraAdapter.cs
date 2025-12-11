@@ -242,11 +242,6 @@ namespace Interfaces
                             sourceType = SourceTypes.LOCAL;
                         }
                         break;
-                    case "RTSP":
-                        {
-                            sourceType = SourceTypes.RTSP;
-                        }
-                        break;
                     case "M3U8":
                         {
                             sourceType = SourceTypes.M3U8;
@@ -264,7 +259,6 @@ namespace Interfaces
         public void Start()
         {
 
-            //iSourceAdaptee.ISetupPage.Update();
             connection = iSourceAdaptee.UpdateSource();
 
             switch (sourceType)
@@ -282,11 +276,6 @@ namespace Interfaces
                 case SourceTypes.LOCAL:
                     {
                         sourceFormater = new LocalCaptureDevice();
-                    }
-                    break;
-                case SourceTypes.RTSP:
-                    {
-                        sourceFormater = new CameraRTSP();
                     }
                     break;
                 case SourceTypes.M3U8:
@@ -307,8 +296,6 @@ namespace Interfaces
 
         public void StartPreview()
         {
-
-            //iSourceAdaptee.ISetupPage.Update();
             connection = iSourceAdaptee.UpdateSource();
             login = iSourceAdaptee.Login;
             password = iSourceAdaptee.Password;
@@ -339,11 +326,6 @@ namespace Interfaces
                 case SourceTypes.LOCAL:
                     {
                         sourceFormater = new LocalCaptureDevice();
-                    }
-                    break;
-                case SourceTypes.RTSP:
-                    {
-                        sourceFormater = new CameraRTSP();
                     }
                     break;
                 case SourceTypes.M3U8:

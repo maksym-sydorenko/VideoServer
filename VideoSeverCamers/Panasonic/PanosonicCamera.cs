@@ -243,9 +243,9 @@ namespace Panasonic
                 {
                     sourceType = SourceTypes.JPEG;
                 }
-                else if (str == SourceTypes.RTSP.ToString())
+                else if (str == SourceTypes.M3U8.ToString())
                 {
-                    sourceType = SourceTypes.RTSP;
+                    sourceType = SourceTypes.M3U8;
                 }
 
             }

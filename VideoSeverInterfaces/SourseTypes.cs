@@ -1,6 +1,8 @@
 ﻿namespace Interfaces
 {
     using System;
+    using System.IO;
+
     /// <summary>
     /// Some array utilities
     /// </summary>
@@ -78,13 +80,9 @@
         LOCAL,
 
         /// <summary>
-        /// RTSP RTSP
-        /// </summary>
-        RTSP,
-
-        /// <summary>
         /// CameraM3U8 - base
         /// </summary>
-        M3U8
+        M3U8,
+
     }
 }

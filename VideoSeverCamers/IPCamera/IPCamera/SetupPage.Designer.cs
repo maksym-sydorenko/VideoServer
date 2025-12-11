@@ -176,7 +176,6 @@
             this.clbxDetectedObjects.Name = "clbxDetectedObjects";
             this.clbxDetectedObjects.Size = new System.Drawing.Size(281, 89);
             this.clbxDetectedObjects.TabIndex = 41;
-            this.clbxDetectedObjects.Visible = false;
             // 
             // mtbServerYOLO
             // 
@@ -185,7 +184,6 @@
             this.mtbServerYOLO.Name = "mtbServerYOLO";
             this.mtbServerYOLO.Size = new System.Drawing.Size(206, 22);
             this.mtbServerYOLO.TabIndex = 42;
-            this.mtbServerYOLO.Visible = false;
             // 
             // cbTypeStream
             // 
@@ -194,7 +192,8 @@
             this.cbTypeStream.Items.AddRange(new object[] {
             "JPEG",
             "MJPEG",
-            "M3U8"});
+            "M3U8",
+            "MP4"});
             this.cbTypeStream.Location = new System.Drawing.Point(429, 115);
             this.cbTypeStream.Margin = new System.Windows.Forms.Padding(4);
             this.cbTypeStream.Name = "cbTypeStream";

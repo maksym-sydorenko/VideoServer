@@ -141,9 +141,9 @@ namespace Panasonic
                 {
                     cbTypeStream.SelectedItem = Interfaces.SourceTypes.JPEG;
                 }
-                else if (str == Interfaces.SourceTypes.RTSP.ToString())
+                else if (str == Interfaces.SourceTypes.M3U8.ToString())
                 {
-                    cbTypeStream.SelectedItem = Interfaces.SourceTypes.RTSP;
+                    cbTypeStream.SelectedItem = Interfaces.SourceTypes.M3U8;
                 }
                 else
                 {

@@ -82,6 +82,11 @@ namespace IPCamera
                             cbTypeStream.SelectedItem = "M3U8";
                         }
                         break;
+                    case "MP4":
+                        {
+                            cbTypeStream.SelectedItem = "MP4";
+                        }
+                        break;
                 }
             }
         }

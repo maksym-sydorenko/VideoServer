@@ -86,6 +86,9 @@
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=9.0.0.10, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\VideoServer\packages\Microsoft.Extensions.Logging.Abstractions.9.0.10\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Mpv.NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\VideoServer\packages\Mpv.NET.1.2.0\lib\netstandard2.0\Mpv.NET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\VideoServer\packages\System.Buffers.4.6.0\lib\net462\System.Buffers.dll</HintPath>
@@ -185,7 +188,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceFormater.cs" />
     <Compile Include="SourseTypes.cs" />
-    <Compile Include="CameraRTSP.cs" />
     <Compile Include="ThreadPool.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -93,9 +93,9 @@ namespace DLink
                 {
                     cbTypeStream.SelectedItem = SourceTypes.JPEG;
                 }
-                else if (str == SourceTypes.RTSP.ToString())
+                else if (str == SourceTypes.M3U8.ToString())
                 {
-                    cbTypeStream.SelectedItem = SourceTypes.RTSP;
+                    cbTypeStream.SelectedItem = SourceTypes.M3U8;
                 }
                 else 
                 {
