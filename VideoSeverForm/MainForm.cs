@@ -456,6 +456,7 @@ namespace VideoServer
                 MessageBox.Show(ex.Message);
             }
         }
+
         void AddView()
         {
             try
@@ -492,6 +493,7 @@ namespace VideoServer
                 MessageBox.Show(ex.Message);
             }
         }
+
         void DelView()
         {
             try
@@ -515,6 +517,7 @@ namespace VideoServer
                 MessageBox.Show(ex.Message);
             }
         }
+
         void ShowView()
         {
             try

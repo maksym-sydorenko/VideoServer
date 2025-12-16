@@ -21,9 +21,9 @@ namespace LocalCaptureDevice
         ~LocalCapture()
         {
         }
-        
+
         #region ISourceAdaptee Members
-        
+
         string name = "";
         public string CameraName
         {
@@ -62,7 +62,7 @@ namespace LocalCaptureDevice
                 moviDetect = value;
             }
         }
-        
+
         bool saveToFile = false;
         public bool SaveToFile
         {
@@ -91,7 +91,7 @@ namespace LocalCaptureDevice
 
         public string CameraType
         {
-            get 
+            get
             {
                 return "Local Capture Device";
             }
@@ -115,7 +115,7 @@ namespace LocalCaptureDevice
             get { return ""; }
             set { throw new NotImplementedException(); }
         }
-        
+
         public string Resolution
         {
             get { return ""; }
@@ -131,22 +131,25 @@ namespace LocalCaptureDevice
             }
             set
             {
-                sourcePath = value;;
+                sourcePath = value; ;
             }
         }
 
-
-        public string Login 
+        public string Login
         {
-            get { return"";}
+            get { return ""; }
             set { throw new NotImplementedException(); }
         }
 
-        public string Password 
+        public string Password
         {
             get { return ""; }
-            set { throw new NotImplementedException();  }
+            set { throw new NotImplementedException(); }
         }
+
+        public bool YoloEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string YoloUrl { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string[] YoloTargets { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         SourceTypes sourceType = SourceTypes.LOCAL;
         public SourceTypes SourceType
@@ -167,7 +170,7 @@ namespace LocalCaptureDevice
             if (sourceType == SourceTypes.LOCAL)
             {
                 FilterInfoCollection filters = new FilterInfoCollection(AForge.Video.DirectShow.FilterCategory.VideoInputDevice);
-                foreach (AForge.Video.DirectShow.FilterInfo filter in filters) 
+                foreach (AForge.Video.DirectShow.FilterInfo filter in filters)
                 {
                     if (filter.Name == sourcePath)
                         return filter.MonikerString;
@@ -182,7 +185,7 @@ namespace LocalCaptureDevice
             {
                 return (ISetupPage)setupPage;
             }
-         
+
         }
 
         public void SetConfiguration(System.Xml.XmlNode node)

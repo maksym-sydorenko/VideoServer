@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Security.AccessControl;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using Interfaces;
@@ -16,8 +16,9 @@ namespace IPCamera
         public SetupPage()
         {
             InitializeComponent();
-            mtbServerYOLO.ValidatingType = typeof(System.Net.IPAddress);
+            mtbUrlYOLO.ValidatingType = typeof(System.Net.IPAddress);
         }
+
         #region ISetupPage Members
         public event EventHandler StateChanged;
         
@@ -31,6 +32,12 @@ namespace IPCamera
         {
 
             this.node = node;
+
+            string[] objectsToDetect = clbxObjectsYOLO.CheckedItems
+                                              .Cast<object>()
+                                              .Select(item => item.ToString())
+                                              .ToArray();
+
             this.node.InnerXml = "<CameraName>" + tbName.Text + "</CameraName>" +
                "<CameraType>IP camera</CameraType>" +
                "<CameraDescription>" + rtbDescription.Text + "</CameraDescription>" +
@@ -38,7 +45,10 @@ namespace IPCamera
                "<MoviDetect>" + cbhSaveMoving.Checked + "</MoviDetect>" +
                "<FileDirectoryPath>" + tbPath.Text + "</FileDirectoryPath>" +
                "<Url>" + tbUrl.Text + "</Url>" +
-               "<SourceType>" + cbTypeStream.Text + "</SourceType>";
+               "<SourceType>" + cbTypeStream.Text + "</SourceType>" +
+               "<UseYOLO>" + cbxUseYOLO.Checked+ "</UseYOLO>" +
+               "<UrlYOLO>" + mtbUrlYOLO.Text + "</UrlYOLO>" +
+               "<ObjectsYOLO>" + String.Join(";", objectsToDetect) + "</ObjectsYOLO>";
         }
 
         public void SetConfiguration(XmlNode node)
@@ -61,6 +71,29 @@ namespace IPCamera
 
             if (node.SelectSingleNode("FileDirectoryPath") != null)
                 tbPath.Text = node.SelectSingleNode("FileDirectoryPath").InnerText;
+
+            if (node.SelectSingleNode("UseYOLO") != null)
+                cbxUseYOLO.Checked = bool.Parse(node.SelectSingleNode("UseYOLO").InnerText);
+
+            if (node.SelectSingleNode("UrlYOLO") != null)
+                mtbUrlYOLO.Text = node.SelectSingleNode("UrlYOLO").InnerText;
+
+            if (node.SelectSingleNode("ObjectsYOLO") != null)
+            {
+                string[] obj = node.SelectSingleNode("ObjectsYOLO").InnerText.Split(';');
+                for (int i = 0; i < clbxObjectsYOLO.Items.Count; i++)
+                {
+                    object item = clbxObjectsYOLO.Items[i];
+                    for (int j = 0; j < obj.Length; ++j)
+                    {
+                        if (item.ToString() == obj[j])
+                        {
+                            clbxObjectsYOLO.SetItemChecked(i, true);
+                        }
+                    }
+                }
+                clbxObjectsYOLO.Text = node.SelectSingleNode("ObjectsYOLO").InnerText;
+            }
 
             if (node.SelectSingleNode("SourceType") != null)
             {
@@ -101,6 +134,14 @@ namespace IPCamera
             ip_camera.MoviDetect = cbhSaveMoving.Checked;
             ip_camera.FileDirectoryPath = tbPath.Text;
             ip_camera.CameraDescription = rtbDescription.Text;
+            ip_camera.YoloEnabled = cbxUseYOLO.Checked;
+            ip_camera.YoloUrl = mtbUrlYOLO.Text;
+            string[] objectsToDetect = clbxObjectsYOLO.CheckedItems
+                                               .Cast<object>()
+                                               .Select(item => item.ToString())
+                                               .ToArray();
+            ip_camera.YoloTargets = objectsToDetect;
+
             sourcePath = tbPath.Text;
 
             string typeStream = cbTypeStream?.SelectedItem?.ToString();
@@ -154,6 +195,7 @@ namespace IPCamera
                 cbhSaveMoving.Enabled = true;
                 btSelectPath.Enabled = true;
                 lbFilePath.Enabled = true;
+                cbxUseYOLO.Enabled = true;
             }
             else
             {
@@ -162,6 +204,7 @@ namespace IPCamera
                 cbhSaveMoving.Enabled = false;
                 btSelectPath.Enabled = false;
                 lbFilePath.Enabled = false;
+                cbxUseYOLO.Enabled = false;
 
             }
             if (StateChanged != null)
@@ -219,7 +262,30 @@ namespace IPCamera
 
         private void cbxDetectObjects_CheckedChanged(object sender, EventArgs e)
         {
+            if (cbxUseYOLO.Checked)
+            {
+                mtbUrlYOLO.Enabled = true;
+                clbxObjectsYOLO.Enabled = true;
+            }
+            else
+            {
+                mtbUrlYOLO.Enabled = false;
+                clbxObjectsYOLO.Enabled = false;
+            }
+            if (StateChanged != null)
+                StateChanged(this, new EventArgs());
+        }
 
+        private void mtbServerYOLO_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            if (StateChanged != null)
+                StateChanged(this, new EventArgs());
+        }
+
+        private void clbxDetectedObjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (StateChanged != null)
+                StateChanged(this, new EventArgs());
         }
     }
 }

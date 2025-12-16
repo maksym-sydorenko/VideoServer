@@ -38,9 +38,9 @@
             this.tbName = new System.Windows.Forms.TextBox();
             this.tbUrl = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbxDetectObjects = new System.Windows.Forms.CheckBox();
-            this.clbxDetectedObjects = new System.Windows.Forms.CheckedListBox();
-            this.mtbServerYOLO = new System.Windows.Forms.MaskedTextBox();
+            this.cbxUseYOLO = new System.Windows.Forms.CheckBox();
+            this.clbxObjectsYOLO = new System.Windows.Forms.CheckedListBox();
+            this.mtbUrlYOLO = new System.Windows.Forms.MaskedTextBox();
             this.cbTypeStream = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lbServerYOLO = new System.Windows.Forms.Label();
@@ -63,7 +63,7 @@
             // btSelectPath
             // 
             this.btSelectPath.Enabled = false;
-            this.btSelectPath.Location = new System.Drawing.Point(492, 171);
+            this.btSelectPath.Location = new System.Drawing.Point(492, 167);
             this.btSelectPath.Margin = new System.Windows.Forms.Padding(4);
             this.btSelectPath.Name = "btSelectPath";
             this.btSelectPath.Size = new System.Drawing.Size(44, 28);
@@ -92,7 +92,7 @@
             this.cbhSaveMoving.Enabled = false;
             this.cbhSaveMoving.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbhSaveMoving.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.cbhSaveMoving.Location = new System.Drawing.Point(263, 146);
+            this.cbhSaveMoving.Location = new System.Drawing.Point(43, 176);
             this.cbhSaveMoving.Margin = new System.Windows.Forms.Padding(4);
             this.cbhSaveMoving.Name = "cbhSaveMoving";
             this.cbhSaveMoving.Size = new System.Drawing.Size(168, 21);
@@ -104,7 +104,7 @@
             // tbPath
             // 
             this.tbPath.Enabled = false;
-            this.tbPath.Location = new System.Drawing.Point(255, 175);
+            this.tbPath.Location = new System.Drawing.Point(255, 171);
             this.tbPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbPath.Name = "tbPath";
             this.tbPath.Size = new System.Drawing.Size(229, 22);
@@ -117,7 +117,7 @@
             this.lbFilePath.Enabled = false;
             this.lbFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbFilePath.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.lbFilePath.Location = new System.Drawing.Point(40, 176);
+            this.lbFilePath.Location = new System.Drawing.Point(252, 147);
             this.lbFilePath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFilePath.Name = "lbFilePath";
             this.lbFilePath.Size = new System.Drawing.Size(179, 17);
@@ -154,36 +154,45 @@
             this.label1.TabIndex = 31;
             this.label1.Text = "URL:";
             // 
-            // cbxDetectObjects
+            // cbxUseYOLO
             // 
-            this.cbxDetectObjects.AutoSize = true;
-            this.cbxDetectObjects.Enabled = false;
-            this.cbxDetectObjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cbxDetectObjects.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.cbxDetectObjects.Location = new System.Drawing.Point(43, 216);
-            this.cbxDetectObjects.Margin = new System.Windows.Forms.Padding(4);
-            this.cbxDetectObjects.Name = "cbxDetectObjects";
-            this.cbxDetectObjects.Size = new System.Drawing.Size(124, 21);
-            this.cbxDetectObjects.TabIndex = 40;
-            this.cbxDetectObjects.Text = "Детектування";
-            this.cbxDetectObjects.UseVisualStyleBackColor = true;
-            this.cbxDetectObjects.CheckedChanged += new System.EventHandler(this.cbxDetectObjects_CheckedChanged);
+            this.cbxUseYOLO.AutoSize = true;
+            this.cbxUseYOLO.Enabled = false;
+            this.cbxUseYOLO.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbxUseYOLO.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.cbxUseYOLO.Location = new System.Drawing.Point(43, 205);
+            this.cbxUseYOLO.Margin = new System.Windows.Forms.Padding(4);
+            this.cbxUseYOLO.Name = "cbxUseYOLO";
+            this.cbxUseYOLO.Size = new System.Drawing.Size(124, 21);
+            this.cbxUseYOLO.TabIndex = 40;
+            this.cbxUseYOLO.Text = "Детектування";
+            this.cbxUseYOLO.UseVisualStyleBackColor = true;
+            this.cbxUseYOLO.CheckedChanged += new System.EventHandler(this.cbxDetectObjects_CheckedChanged);
             // 
-            // clbxDetectedObjects
+            // clbxObjectsYOLO
             // 
-            this.clbxDetectedObjects.FormattingEnabled = true;
-            this.clbxDetectedObjects.Location = new System.Drawing.Point(255, 216);
-            this.clbxDetectedObjects.Name = "clbxDetectedObjects";
-            this.clbxDetectedObjects.Size = new System.Drawing.Size(281, 89);
-            this.clbxDetectedObjects.TabIndex = 41;
+            this.clbxObjectsYOLO.FormattingEnabled = true;
+            this.clbxObjectsYOLO.Items.AddRange(new object[] {
+            "car",
+            "bus",
+            "truck",
+            "train",
+            "human",
+            "bicecle"});
+            this.clbxObjectsYOLO.Location = new System.Drawing.Point(420, 199);
+            this.clbxObjectsYOLO.Name = "clbxObjectsYOLO";
+            this.clbxObjectsYOLO.Size = new System.Drawing.Size(116, 106);
+            this.clbxObjectsYOLO.TabIndex = 41;
+            this.clbxObjectsYOLO.SelectedIndexChanged += new System.EventHandler(this.clbxDetectedObjects_SelectedIndexChanged);
             // 
-            // mtbServerYOLO
+            // mtbUrlYOLO
             // 
-            this.mtbServerYOLO.Location = new System.Drawing.Point(43, 283);
-            this.mtbServerYOLO.Mask = "###.###.###.###:####";
-            this.mtbServerYOLO.Name = "mtbServerYOLO";
-            this.mtbServerYOLO.Size = new System.Drawing.Size(206, 22);
-            this.mtbServerYOLO.TabIndex = 42;
+            this.mtbUrlYOLO.Location = new System.Drawing.Point(43, 250);
+            this.mtbUrlYOLO.Name = "mtbUrlYOLO";
+            this.mtbUrlYOLO.Size = new System.Drawing.Size(186, 22);
+            this.mtbUrlYOLO.TabIndex = 42;
+            this.mtbUrlYOLO.Text = "127.0.0.1:7007";
+            this.mtbUrlYOLO.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbServerYOLO_MaskInputRejected);
             // 
             // cbTypeStream
             // 
@@ -219,7 +228,7 @@
             this.lbServerYOLO.Enabled = false;
             this.lbServerYOLO.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbServerYOLO.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.lbServerYOLO.Location = new System.Drawing.Point(40, 263);
+            this.lbServerYOLO.Location = new System.Drawing.Point(45, 230);
             this.lbServerYOLO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbServerYOLO.Name = "lbServerYOLO";
             this.lbServerYOLO.Size = new System.Drawing.Size(166, 17);
@@ -254,9 +263,9 @@
             this.BackColor = System.Drawing.Color.Gray;
             this.Controls.Add(this.rtbDescription);
             this.Controls.Add(this.lbServerYOLO);
-            this.Controls.Add(this.mtbServerYOLO);
-            this.Controls.Add(this.clbxDetectedObjects);
-            this.Controls.Add(this.cbxDetectObjects);
+            this.Controls.Add(this.mtbUrlYOLO);
+            this.Controls.Add(this.clbxObjectsYOLO);
+            this.Controls.Add(this.cbxUseYOLO);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btSelectPath);
             this.Controls.Add(this.cbhSave);
@@ -290,9 +299,9 @@
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.TextBox tbUrl;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox cbxDetectObjects;
-        private System.Windows.Forms.CheckedListBox clbxDetectedObjects;
-        private System.Windows.Forms.MaskedTextBox mtbServerYOLO;
+        private System.Windows.Forms.CheckBox cbxUseYOLO;
+        private System.Windows.Forms.CheckedListBox clbxObjectsYOLO;
+        private System.Windows.Forms.MaskedTextBox mtbUrlYOLO;
         private System.Windows.Forms.ComboBox cbTypeStream;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbServerYOLO;

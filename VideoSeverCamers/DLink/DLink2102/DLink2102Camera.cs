@@ -22,7 +22,7 @@ namespace DLink
         ~DLink2102Camera()
         {
         }
-        
+
         #region ISourceAdaptee Members
         string frameFrequncy = "";
         string quality = "Standard";
@@ -33,12 +33,12 @@ namespace DLink
 
         public string CameraType
         {
-            get 
+            get
             {
                 return "D-Link DCS-2102 web camera";
             }
         }
-        
+
         string cameraDescription = "";
         public string CameraDescription
         {
@@ -126,7 +126,7 @@ namespace DLink
                 quality = value;
             }
         }
-        
+
         public string Resolution
         {
             get
@@ -138,7 +138,7 @@ namespace DLink
                 resolution = value;
             }
         }
-        
+
         public string SourcePath
         {
             get
@@ -147,21 +147,26 @@ namespace DLink
             }
             set
             {
-                sourcePath = value;;
+                sourcePath = value; ;
             }
         }
 
-        public string Login 
+        public string Login
         {
             get { return login; }
             set { login = value; }
         }
 
-        public string Password 
+        public string Password
         {
             get { return password; }
             set { password = value; }
         }
+
+        public bool YoloEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string YoloUrl { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string[] YoloTargets { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
 
         SourceTypes sourceType = SourceTypes.MJPEG;
         public SourceTypes SourceType
@@ -189,22 +194,21 @@ namespace DLink
             }
             else if (sourceType == SourceTypes.M3U8)
             {
-               return "rtsp://" + sourcePath + "/play" + resolution + ".sdp"; //+"&Quality=" + quality; 
-              //return "rtsp://admin:123456@" + sourcePath + "/play" + resolution + ".sdp"; //+"&Quality=" + quality; 
-              //return "http:admin:123456@//" + sourcePath + "/video/mjpg.cgi?profileid=" + resolution;
+                return "rtsp://" + sourcePath + "/play" + resolution + ".sdp"; //+"&Quality=" + quality; 
+                                                                               //return "rtsp://admin:123456@" + sourcePath + "/play" + resolution + ".sdp"; //+"&Quality=" + quality; 
+                                                                               //return "http:admin:123456@//" + sourcePath + "/video/mjpg.cgi?profileid=" + resolution;
             }
             return "http://" + sourcePath + "/image/jpeg.cgi";// +resolution + "&Quality=" + quality; ;
         }
+
         public ISetupPage ISetupPage
         {
             get
             {
                 return (ISetupPage)setupPage;
             }
-         
+
         }
-        
-        
 
         public void SetConfiguration(System.Xml.XmlNode node)
         {

@@ -172,7 +172,14 @@ namespace Interfaces
 
                 if ((cameraAdapter.SaveToFile) && (!stopEvent.WaitOne(0, true)))
                 {
-                    if (cameraAdapter.MoviDetect)
+                    if (cameraAdapter.UseYOLO)
+                    {
+                        if (DetectObjects(ref safeCopy))
+                        {
+                            SaveToFileJpeg(safeCopy);
+                        }
+                    }
+                    else if (cameraAdapter.MoviDetect)
                     {
                         if (DetectMotion(ref safeCopy))
                         {

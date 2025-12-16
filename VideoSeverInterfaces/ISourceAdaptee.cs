@@ -111,6 +111,34 @@ namespace Interfaces
         }
 
         /// <summary>
+        /// Yolo Enabled
+        /// </summary>
+        bool YoloEnabled
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        ///  Yolo Url
+        /// </summary>
+        string YoloUrl
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Yolo Targets
+        /// </summary>
+        string[] YoloTargets
+        {
+            get;
+            set;
+        }
+
+
+        /// <summary>
         /// Source Type
         /// </summary>
         SourceTypes SourceType

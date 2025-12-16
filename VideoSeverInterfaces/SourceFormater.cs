@@ -105,6 +105,13 @@ namespace Interfaces
 
         #endregion
 
+        protected bool DetectObjects(ref Bitmap lastFrame)
+        {
+
+
+            return false;
+        }
+
         protected bool DetectMotion(ref Bitmap lastFrame)
         {
             if (motionDetecotor == null)

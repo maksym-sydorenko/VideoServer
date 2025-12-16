@@ -30,6 +30,10 @@ namespace IPCamera
         bool _moviDetect = false;
         bool _saveToFile = false;
         string _fileDirectoryPath = "D:\\";
+        bool _yoloEnabled = false;
+        string _yolo_url = "127.0.0.1:7007";
+        string[] _yolo_targets = null;
+
         SourceTypes _sourceType = SourceTypes.M3U8;
 
         public string CameraType
@@ -186,6 +190,42 @@ namespace IPCamera
             return _sourcePath;
         }
 
+        public bool YoloEnabled
+        {
+            get
+            {
+                return _yoloEnabled;
+            }
+            set
+            {
+                _yoloEnabled = value;
+            }
+        }
+
+        public string YoloUrl
+        {
+            get
+            {
+                return _yolo_url;
+            }
+            set
+            {
+                _yolo_url = value;
+            }
+        }
+
+        public string[] YoloTargets
+        {
+            get
+            {
+                return _yolo_targets;
+            }
+            set
+            {
+                _yolo_targets = value;
+            }
+        }
+
         public ISetupPage ISetupPage
         {
             get
@@ -193,6 +233,7 @@ namespace IPCamera
                 return (ISetupPage)setupPage;
             }
         }
+
 
         public void SetConfiguration(System.Xml.XmlNode node)
         {

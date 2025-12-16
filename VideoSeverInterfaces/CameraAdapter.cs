@@ -71,6 +71,16 @@ namespace Interfaces
 
         }
 
+        bool useYOLO = false;
+        public bool UseYOLO
+        {
+            get
+            {
+                return useYOLO;
+            }
+
+        }
+
         string fileDirectoryPath = "D:\\";
         public string FileDirectoryPath
         {
@@ -207,6 +217,9 @@ namespace Interfaces
 
             if (node.SelectSingleNode("FileDirectoryPath") != null)
                 fileDirectoryPath = node.SelectSingleNode("FileDirectoryPath").InnerText;
+
+            if (node.SelectSingleNode("UseYOLO") != null)
+                useYOLO = bool.Parse(node.SelectSingleNode("UseYOLO").InnerText);
 
 
             if (node.SelectSingleNode("SourceType") != null)
