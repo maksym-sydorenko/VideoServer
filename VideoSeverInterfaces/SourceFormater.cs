@@ -21,6 +21,7 @@ namespace Interfaces
         protected bool useSeparateConnectionGroup = true;
         protected object userData = null;
         private DetectorMotion motionDetecotor = null;
+        private DetectorYOLO detectorYOLO = null;
         protected AVIWriter writer = null;
         // alarm level
         private double alarmLevel = 0.03;
@@ -105,11 +106,21 @@ namespace Interfaces
 
         #endregion
 
-        protected bool DetectObjects(ref Bitmap lastFrame)
+        protected void DetectObjects(Bitmap lastFrame)
         {
+            if (detectorYOLO == null)
+            {
+                detectorYOLO = new DetectorYOLO(cameraAdapter.ISourceAdaptee.CameraName);
+            }
+            DateTime date = DateTime.Now;
+            String fileName = String.Format("{0}-{1}-{2} {3}-{4}-{5}.jpeg",
+                    date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second);
 
-
-            return false;
+            detectorYOLO.DetectObjects( lastFrame,
+                                        subPath,
+                                        fileName,
+                                        cameraAdapter.ISourceAdaptee.YoloTargets,
+                                        cameraAdapter.ISourceAdaptee.YoloUrl);
         }
 
         protected bool DetectMotion(ref Bitmap lastFrame)

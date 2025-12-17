@@ -18,6 +18,7 @@ namespace VideoServer
         UserInterface.AddCameraForm addCameraForm = null;
         UserInterface.ViewSettingForm viewSettingForm = null;
         UserInterface.AddViewForm viewForm = null;
+        UserInterface.AboutForm aboutForm = new UserInterface.AboutForm();
         UserInterface.SettingForm settingForm = null;
         Hashtable tableIAdaptee = null;
         Point mainWindowLocation;
@@ -293,7 +294,6 @@ namespace VideoServer
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VideoServer.UserInterface.AboutForm aboutForm = new VideoServer.UserInterface.AboutForm();
             aboutForm.ShowDialog();
         }
 

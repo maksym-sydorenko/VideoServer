@@ -40,11 +40,6 @@ namespace Interfaces
         public override void Stop()
         {
             Monitor.Enter(this);
-            if (writer != null)
-            {
-                writer.Dispose();
-                writer = null;
-            }
             // stop thread
             if (thread != null)
             {
@@ -52,8 +47,6 @@ namespace Interfaces
                 stopEvent.Set();
             }
             Monitor.Exit(this);
-
-
         }
 
         public override void WorkerThread()

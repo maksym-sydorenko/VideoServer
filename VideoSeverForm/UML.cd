@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="VideoServer.UserInterface.AddCameraForm" Collapsed="true">
-    <Position X="6.5" Y="5" Width="1.5" />
+    <Position X="5.75" Y="5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
@@ -12,61 +12,90 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VideoServer.Tools.Camera" Collapsed="true">
-    <Position X="6.25" Y="1.5" Width="1.5" />
+    <Position X="1.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACCEAAAgAAAACAQAAAAEAAAAAIQAAAAAAAAA=</HashCode>
       <FileName>Tools\Camera.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
+      <Field Name="adapter" />
       <Property Name="ISourceAdaptee" />
     </ShowAsAssociation>
   </Class>
   <Class Name="VideoServer.MainForm" Collapsed="true">
-    <Position X="8.25" Y="3" Width="1.5" />
+    <Position X="7.5" Y="3.25" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
+    <AssociationLine Name="settingForm" Type="VideoServer.UserInterface.SettingForm">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.323" Y="0.077" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="tableIAdaptee" Type="System.Collections.Hashtable">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.473" Y="0.143" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>ArZMBAU6RyAQAA4GgUKSFABDAMEAoSqQJqBq0MAAABE=</HashCode>
+      <HashCode>ArZMJAU6RSAQAA4GgUKSFABDAMEAoSqQJqBq0OAAABE=</HashCode>
       <FileName>MainForm.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="addCameraForm" />
-      <Field Name="settingForm" />
-      <Field Name="camera" />
-      <Field Name="camers" />
       <Field Name="viewForm" />
+      <Field Name="settingForm" />
       <Field Name="tableIAdaptee" />
+      <Field Name="aboutForm" />
     </ShowAsAssociation>
   </Class>
   <Class Name="VideoServer.UserInterface.SettingForm" Collapsed="true">
-    <Position X="10.5" Y="1.5" Width="1.5" />
+    <Position X="7.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAACCCAAAAAAACAACgCAAAAAAAAAAAAAgEAAAA=</HashCode>
+      <HashCode>AAAAAAAAACCAAAAAAACAACgCAAAAAAAAAAAAAgEAAAA=</HashCode>
       <FileName>UserInterface\SettingForm.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VideoServer.Tools.CameraCollection" Collapsed="true">
-    <Position X="8.25" Y="1.5" Width="1.5" />
+    <Position X="11" Y="6" Width="1.5" />
+    <AssociationLine Name="tableIAdaptee" Type="System.Collections.Hashtable">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.332" Y="0.285" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAIAgAAAAAAAAAAACAAAJEAAAAAAAAAABAAAAAAAAAA=</HashCode>
       <FileName>Tools\CameraCollection.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="tableIAdaptee" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="VideoServer.UserInterface.AddViewForm" Collapsed="true">
-    <Position X="8.25" Y="5" Width="1.5" />
+    <Position X="9.25" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAgAAAAiCAAQAAQhQSAAAACAIkhCRAAoAAAAQAAAQA=</HashCode>
       <FileName>UserInterface\AddViewForm.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="System.Collections.Hashtable" Collapsed="true">
-    <Position X="10" Y="5" Width="1.5" />
+    <Position X="11" Y="5.25" Width="1.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="VideoServer.UserInterface.AboutForm" Collapsed="true">
+    <Position X="3.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAACAAAAAAAAABBA=</HashCode>
+      <FileName>UserInterface\AboutForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interfaces.CameraAdapter" Collapsed="true">
+    <Position X="1.5" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
   <Interface Name="Interfaces.ISourceAdaptee" Collapsed="true">
-    <Position X="6" Y="3.5" Width="1.5" />
+    <Position X="1.5" Y="3" Width="1.5" />
     <TypeIdentifier />
   </Interface>
   <Font Name="Tahoma" Size="8.25" />

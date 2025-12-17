@@ -41,8 +41,8 @@ namespace IPCamera
             this.node.InnerXml = "<CameraName>" + tbName.Text + "</CameraName>" +
                "<CameraType>IP camera</CameraType>" +
                "<CameraDescription>" + rtbDescription.Text + "</CameraDescription>" +
-               "<SaveToFile>" + cbhSave.Checked + "</SaveToFile>" +
-               "<MoviDetect>" + cbhSaveMoving.Checked + "</MoviDetect>" +
+               "<SaveToFile>" + cbxSave.Checked + "</SaveToFile>" +
+               "<MoviDetect>" + cbxSaveMoving.Checked + "</MoviDetect>" +
                "<FileDirectoryPath>" + tbPath.Text + "</FileDirectoryPath>" +
                "<Url>" + tbUrl.Text + "</Url>" +
                "<SourceType>" + cbTypeStream.Text + "</SourceType>" +
@@ -64,10 +64,10 @@ namespace IPCamera
                 tbUrl.Text = node.SelectSingleNode("Url").InnerText;
 
             if (node.SelectSingleNode("SaveToFile") != null)
-                cbhSave.Checked = bool.Parse(node.SelectSingleNode("SaveToFile").InnerText);
+                cbxSave.Checked = bool.Parse(node.SelectSingleNode("SaveToFile").InnerText);
 
             if (node.SelectSingleNode("MoviDetect") != null)
-                cbhSaveMoving.Checked = bool.Parse(node.SelectSingleNode("MoviDetect").InnerText);
+                cbxSaveMoving.Checked = bool.Parse(node.SelectSingleNode("MoviDetect").InnerText);
 
             if (node.SelectSingleNode("FileDirectoryPath") != null)
                 tbPath.Text = node.SelectSingleNode("FileDirectoryPath").InnerText;
@@ -92,7 +92,6 @@ namespace IPCamera
                         }
                     }
                 }
-                clbxObjectsYOLO.Text = node.SelectSingleNode("ObjectsYOLO").InnerText;
             }
 
             if (node.SelectSingleNode("SourceType") != null)
@@ -130,8 +129,8 @@ namespace IPCamera
             ip_camera.CameraName = tbName.Text;
 
             ip_camera.SourcePath = tbUrl.Text;
-            ip_camera.SaveToFile = cbhSave.Checked;
-            ip_camera.MoviDetect = cbhSaveMoving.Checked;
+            ip_camera.SaveToFile = cbxSave.Checked;
+            ip_camera.MoviDetect = cbxSaveMoving.Checked;
             ip_camera.FileDirectoryPath = tbPath.Text;
             ip_camera.CameraDescription = rtbDescription.Text;
             ip_camera.YoloEnabled = cbxUseYOLO.Checked;
@@ -180,19 +179,24 @@ namespace IPCamera
                 StateChanged(this, new EventArgs());
         }
 
-        private void cbhSaveMoving_CheckedChanged(object sender, EventArgs e)
+        private void cbxSaveMoving_CheckedChanged(object sender, EventArgs e)
         {
-            if (StateChanged != null)
+            if (cbxSaveMoving.Checked)
+            {
+                cbxUseYOLO.Checked = false;
+            }
+            else if (StateChanged != null)
                 StateChanged(this, new EventArgs());
+
         }
 
-        private void cbhSave_CheckedChanged(object sender, EventArgs e)
+        private void cbxSave_CheckedChanged(object sender, EventArgs e)
         {
 
-            if (cbhSave.Checked)
+            if (cbxSave.Checked)
             {
                 tbPath.Enabled = true;
-                cbhSaveMoving.Enabled = true;
+                cbxSaveMoving.Enabled = true;
                 btSelectPath.Enabled = true;
                 lbFilePath.Enabled = true;
                 cbxUseYOLO.Enabled = true;
@@ -200,8 +204,8 @@ namespace IPCamera
             else
             {
                 tbPath.Enabled = false;
-                cbhSaveMoving.Checked = false;
-                cbhSaveMoving.Enabled = false;
+                cbxSaveMoving.Checked = false;
+                cbxSaveMoving.Enabled = false;
                 btSelectPath.Enabled = false;
                 lbFilePath.Enabled = false;
                 cbxUseYOLO.Enabled = false;
@@ -266,6 +270,7 @@ namespace IPCamera
             {
                 mtbUrlYOLO.Enabled = true;
                 clbxObjectsYOLO.Enabled = true;
+                cbxSaveMoving.Checked = false;
             }
             else
             {

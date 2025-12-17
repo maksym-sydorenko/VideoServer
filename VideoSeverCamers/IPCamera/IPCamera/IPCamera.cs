@@ -1,5 +1,6 @@
 ﻿using Interfaces;
 using System;
+using System.Linq;
 
 namespace IPCamera
 {
@@ -260,6 +261,18 @@ namespace IPCamera
 
             if (node.SelectSingleNode("FileDirectoryPath") != null)
                 _fileDirectoryPath = node.SelectSingleNode("FileDirectoryPath").InnerText;
+
+            if (node.SelectSingleNode("UseYOLO") != null)
+                _yoloEnabled = bool.Parse(node.SelectSingleNode("UseYOLO").InnerText);
+
+            if (node.SelectSingleNode("UrlYOLO") != null)
+                _yolo_url = node.SelectSingleNode("UrlYOLO").InnerText;
+
+            if (node.SelectSingleNode("ObjectsYOLO") != null)
+            {
+                string[] obj = node.SelectSingleNode("ObjectsYOLO").InnerText.Split(';');
+                YoloTargets = obj.ToArray();
+            }
 
             if (node.SelectSingleNode("SourceType") != null)
             {

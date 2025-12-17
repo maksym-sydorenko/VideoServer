@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using DirectShowLib;
 using LibVLCSharp.Shared;
 
 namespace Interfaces
@@ -31,6 +32,7 @@ namespace Interfaces
 
         public override event CameraEventHandler NewFrame;
         Bitmap safeCopy;
+        Bitmap yoloCopy;
 
         public override void Start()
         {
@@ -39,9 +41,9 @@ namespace Interfaces
             videoBuffer = Marshal.AllocHGlobal(bufferSize);
 
             safeCopy = new Bitmap((int)width, (int)height, (int)pitch,
-            PixelFormat.Format32bppRgb, videoBuffer);
+                    PixelFormat.Format32bppRgb, videoBuffer);
 
-            thread = new Thread(new ThreadStart(WorkerThread));
+            thread = new Thread(WorkerThread);
             thread.Name = String.Format("M3U8[{0}]", cameraAdapter.CameraName);
             thread.Start();
         }
@@ -68,6 +70,9 @@ namespace Interfaces
 
                     string playlistUrl = cameraAdapter.SourcePath;
                     var media = new Media(SharedLibVLC, playlistUrl, FromType.FromLocation);
+                    ////media.AddOption(":rate=0.1");
+                    ////media.AddOption(":live-caching=300");
+                    media.AddOption(":drop-late-frames");
                     if (!mediaPlayer.Play(media))
                     {
                         MessageBox.Show("Failed to start playback.");
@@ -114,9 +119,11 @@ namespace Interfaces
                 Console.WriteLine("Restarting stream...");
 
                 mediaPlayer.Stop();
-
                 using (var media = new Media(SharedLibVLC, playlistUrl, FromType.FromLocation))
                 {
+                    //media.AddOption(":rate=0.1");
+                    //media.AddOption(":live-caching=300");
+                    media.AddOption(":drop-late-frames");
                     mediaPlayer.Play(media);
                 }
             }
@@ -136,48 +143,81 @@ namespace Interfaces
             return videoBuffer;
         }
 
+        private void SafeCopy(ref Bitmap safeCopy)
+        {
+            BitmapData bmpData = safeCopy.LockBits(
+               new Rectangle(0, 0, safeCopy.Width, safeCopy.Height),
+               ImageLockMode.ReadOnly,
+               safeCopy.PixelFormat);
+
+            int bytesPerPixel = Image.GetPixelFormatSize(safeCopy.PixelFormat) / 8;
+            int stride = bmpData.Stride;
+
+            unsafe
+            {
+                byte* ptr = (byte*)bmpData.Scan0;
+
+                for (int y = 0; y < safeCopy.Height; y++)
+                {
+                    for (int x = 0; x < safeCopy.Width; x++)
+                    {
+                        byte blue = ptr[0];
+                        byte green = ptr[1];
+                        byte red = ptr[2];
+                        byte alpha = ptr[3];
+
+                        ptr += bytesPerPixel;
+                    }
+                    ptr += stride - (safeCopy.Width * bytesPerPixel);
+                }
+            }
+
+            safeCopy.UnlockBits(bmpData);
+        }
+        private Bitmap SafeCopy(Bitmap source)
+        {
+            Bitmap copy = new Bitmap(source.Width, source.Height, source.PixelFormat);
+
+            BitmapData srcData = source.LockBits(
+                new Rectangle(0, 0, source.Width, source.Height),
+                ImageLockMode.ReadOnly,
+                source.PixelFormat);
+
+            BitmapData dstData = copy.LockBits(
+                new Rectangle(0, 0, copy.Width, copy.Height),
+                ImageLockMode.WriteOnly,
+                copy.PixelFormat);
+
+            int bytes = Math.Abs(srcData.Stride) * source.Height;
+
+            unsafe
+            {
+                Buffer.MemoryCopy(
+                    srcData.Scan0.ToPointer(),
+                    dstData.Scan0.ToPointer(),
+                    bytes,
+                    bytes);
+            }
+
+            source.UnlockBits(srcData);
+            copy.UnlockBits(dstData);
+
+            return copy;
+        }
+
         private void OnDisplay(IntPtr opaque, IntPtr picture)
         {
             try
             {
                 try_cnt = 0;
-                BitmapData bmpData = safeCopy.LockBits(
-                new Rectangle(0, 0, safeCopy.Width, safeCopy.Height),
-                ImageLockMode.ReadOnly,
-                safeCopy.PixelFormat);
-
-                int bytesPerPixel = Image.GetPixelFormatSize(safeCopy.PixelFormat) / 8;
-                int stride = bmpData.Stride;
-
-                unsafe
-                {
-                    byte* ptr = (byte*)bmpData.Scan0;
-
-                    for (int y = 0; y < safeCopy.Height; y++)
-                    {
-                        for (int x = 0; x < safeCopy.Width; x++)
-                        {
-                            byte blue = ptr[0];
-                            byte green = ptr[1];
-                            byte red = ptr[2];
-                            byte alpha = ptr[3];
-
-                            ptr += bytesPerPixel;
-                        }
-                        ptr += stride - (safeCopy.Width * bytesPerPixel);
-                    }
-                }
-
-                safeCopy.UnlockBits(bmpData);
+                SafeCopy(ref safeCopy);
 
                 if ((cameraAdapter.SaveToFile) && (!stopEvent.WaitOne(0, true)))
                 {
                     if (cameraAdapter.UseYOLO)
                     {
-                        if (DetectObjects(ref safeCopy))
-                        {
-                            SaveToFileJpeg(safeCopy);
-                        }
+                        yoloCopy = SafeCopy(safeCopy);
+                        DetectObjects(yoloCopy);
                     }
                     else if (cameraAdapter.MoviDetect)
                     {

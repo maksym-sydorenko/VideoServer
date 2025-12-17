@@ -30,9 +30,9 @@
         {
             this.label6 = new System.Windows.Forms.Label();
             this.btSelectPath = new System.Windows.Forms.Button();
-            this.cbhSave = new System.Windows.Forms.CheckBox();
+            this.cbxSave = new System.Windows.Forms.CheckBox();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.cbhSaveMoving = new System.Windows.Forms.CheckBox();
+            this.cbxSaveMoving = new System.Windows.Forms.CheckBox();
             this.tbPath = new System.Windows.Forms.TextBox();
             this.lbFilePath = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
@@ -72,34 +72,34 @@
             this.btSelectPath.UseVisualStyleBackColor = true;
             this.btSelectPath.Click += new System.EventHandler(this.btSelectPath_Click);
             // 
-            // cbhSave
+            // cbxSave
             // 
-            this.cbhSave.AutoSize = true;
-            this.cbhSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cbhSave.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.cbhSave.Location = new System.Drawing.Point(43, 146);
-            this.cbhSave.Margin = new System.Windows.Forms.Padding(4);
-            this.cbhSave.Name = "cbhSave";
-            this.cbhSave.Size = new System.Drawing.Size(186, 21);
-            this.cbhSave.TabIndex = 36;
-            this.cbhSave.Text = "Зберегати потік в файл";
-            this.cbhSave.UseVisualStyleBackColor = true;
-            this.cbhSave.CheckedChanged += new System.EventHandler(this.cbhSave_CheckedChanged);
+            this.cbxSave.AutoSize = true;
+            this.cbxSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbxSave.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.cbxSave.Location = new System.Drawing.Point(43, 146);
+            this.cbxSave.Margin = new System.Windows.Forms.Padding(4);
+            this.cbxSave.Name = "cbxSave";
+            this.cbxSave.Size = new System.Drawing.Size(186, 21);
+            this.cbxSave.TabIndex = 36;
+            this.cbxSave.Text = "Зберегати потік в файл";
+            this.cbxSave.UseVisualStyleBackColor = true;
+            this.cbxSave.CheckedChanged += new System.EventHandler(this.cbxSave_CheckedChanged);
             // 
-            // cbhSaveMoving
+            // cbxSaveMoving
             // 
-            this.cbhSaveMoving.AutoSize = true;
-            this.cbhSaveMoving.Enabled = false;
-            this.cbhSaveMoving.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cbhSaveMoving.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.cbhSaveMoving.Location = new System.Drawing.Point(43, 176);
-            this.cbhSaveMoving.Margin = new System.Windows.Forms.Padding(4);
-            this.cbhSaveMoving.Name = "cbhSaveMoving";
-            this.cbhSaveMoving.Size = new System.Drawing.Size(168, 21);
-            this.cbhSaveMoving.TabIndex = 37;
-            this.cbhSaveMoving.Text = "Зберегати тільки рух";
-            this.cbhSaveMoving.UseVisualStyleBackColor = true;
-            this.cbhSaveMoving.CheckedChanged += new System.EventHandler(this.cbhSaveMoving_CheckedChanged);
+            this.cbxSaveMoving.AutoSize = true;
+            this.cbxSaveMoving.Enabled = false;
+            this.cbxSaveMoving.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbxSaveMoving.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.cbxSaveMoving.Location = new System.Drawing.Point(43, 176);
+            this.cbxSaveMoving.Margin = new System.Windows.Forms.Padding(4);
+            this.cbxSaveMoving.Name = "cbxSaveMoving";
+            this.cbxSaveMoving.Size = new System.Drawing.Size(168, 21);
+            this.cbxSaveMoving.TabIndex = 37;
+            this.cbxSaveMoving.Text = "Зберегати тільки рух";
+            this.cbxSaveMoving.UseVisualStyleBackColor = true;
+            this.cbxSaveMoving.CheckedChanged += new System.EventHandler(this.cbxSaveMoving_CheckedChanged);
             // 
             // tbPath
             // 
@@ -268,8 +268,8 @@
             this.Controls.Add(this.cbxUseYOLO);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btSelectPath);
-            this.Controls.Add(this.cbhSave);
-            this.Controls.Add(this.cbhSaveMoving);
+            this.Controls.Add(this.cbxSave);
+            this.Controls.Add(this.cbxSaveMoving);
             this.Controls.Add(this.cbTypeStream);
             this.Controls.Add(this.tbPath);
             this.Controls.Add(this.lbFilePath);
@@ -291,9 +291,9 @@
 
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btSelectPath;
-        private System.Windows.Forms.CheckBox cbhSave;
+        private System.Windows.Forms.CheckBox cbxSave;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
-        private System.Windows.Forms.CheckBox cbhSaveMoving;
+        private System.Windows.Forms.CheckBox cbxSaveMoving;
         private System.Windows.Forms.TextBox tbPath;
         private System.Windows.Forms.Label lbFilePath;
         private System.Windows.Forms.TextBox tbName;
