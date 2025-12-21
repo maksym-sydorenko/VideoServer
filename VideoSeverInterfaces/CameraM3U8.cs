@@ -75,13 +75,13 @@ namespace Interfaces
                     media.AddOption(":drop-late-frames");
                     if (!mediaPlayer.Play(media))
                     {
-                        MessageBox.Show("Failed to start playback.");
+                        MessageBox.Show(String.Format("Failed to start playback.\nCamera[{0}]", cameraAdapter.CameraName));
                         stopEvent.Set();
                     }
 
                     mediaPlayer.EncounteredError += (sender, e) =>
                     {
-                        MessageBox.Show("Failed to start playback.");
+                        MessageBox.Show(String.Format("Failed to play playback.\nCamera[{0}]", cameraAdapter.CameraName));
                         stopEvent.Set();
                     };
 
@@ -116,7 +116,7 @@ namespace Interfaces
         {
             try
             {
-                Console.WriteLine("Restarting stream...");
+                Console.WriteLine(String.Format("Restarting stream.Camera [{0}]", cameraAdapter.CameraName));
 
                 mediaPlayer.Stop();
                 using (var media = new Media(SharedLibVLC, playlistUrl, FromType.FromLocation))
@@ -129,7 +129,7 @@ namespace Interfaces
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Restart failed: " + ex.Message);
+                Console.WriteLine(String.Format("Camera [{0}]Restart failed:{1}",cameraAdapter.CameraName, ex.Message));
             }
         }
 
@@ -174,6 +174,7 @@ namespace Interfaces
 
             safeCopy.UnlockBits(bmpData);
         }
+
         private Bitmap SafeCopy(Bitmap source)
         {
             Bitmap copy = new Bitmap(source.Width, source.Height, source.PixelFormat);

@@ -45,6 +45,13 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\VideoServer\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Management" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Data" />
@@ -74,6 +81,9 @@
       <DependentUpon>ViewPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="email\Mapi.cs" />
+    <Compile Include="PostInstallActions.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Tools\Camera.cs" />
     <Compile Include="Tools\CameraCollection.cs" />
     <Compile Include="Tools\Win32.cs" />
@@ -214,6 +224,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>rem xcopy  $(ProjectDir)\xml\*.*   ..\bin\Debug\xml  /c /s</PostBuildEvent>
+    <PostBuildEvent>powershell -Command "Compress-Archive -Path $(TargetDir)libvlc\* -DestinationPath $(TargetDir)\libvlc.zip -Force"
+rem xcopy  $(ProjectDir)\xml\*.*   ..\bin\Debug\xml  /c /s</PostBuildEvent>
   </PropertyGroup>
 </Project>

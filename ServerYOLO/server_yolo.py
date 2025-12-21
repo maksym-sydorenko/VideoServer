@@ -38,9 +38,10 @@ async def upload_image(request: Request):
 
         results = model(image)
 
-        f_name = f"{file.filename}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
-        filepath = os.path.join(base_path, f_name)
-        results[0].save(filename=filepath)
+        # for debug
+        #f_name = f"{file.filename}.jpg"
+        #filepath = os.path.join(base_path, f_name)
+        #results[0].save(filename=filepath)
 
         detections = []
         for box in results[0].boxes:
