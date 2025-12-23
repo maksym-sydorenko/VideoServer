@@ -9,7 +9,6 @@ namespace Interfaces
 {
     class Mjpeg : SourceFormater
     {
-        bool finishThread = false;
 
         public override event CameraEventHandler NewFrame;
 
@@ -18,9 +17,9 @@ namespace Interfaces
             // create events
             stopEvent = new ManualResetEvent(false);
             reloadEvent = new ManualResetEvent(false);
-            thread = new Thread(new ThreadStart(WorkerThread));
-            //thread.Name = DateTime.Now.ToString();
-            // cameraAdapter.CameraName;
+
+            thread = new Thread(WorkerThread);
+            thread.Name = String.Format("MJPG[{0}]", cameraAdapter.CameraName);
             thread.Start();
         }
 
@@ -34,13 +33,12 @@ namespace Interfaces
         public override void WorkerThread()
         {
             byte[] buffer = new byte[bufSize];	// buffer to read stream
-            SetAllowUnsafeHeaderParsing20();
+            //SetAllowUnsafeHeaderParsing20();
             while (!stopEvent.WaitOne(0, true))
             {
                 // reset reload event
                 reloadEvent.Reset();
-                if (finishThread)
-                    return;
+
                 HttpWebRequest req = null;
                 WebResponse resp = null;
                 Stream stream = null;
@@ -51,37 +49,31 @@ namespace Interfaces
                 int read, todo = 0, total = 0, pos = 0, align = 1;
                 int start = 0, stop = 0;
 
-                // align
-                //  1 = searching for image start
-                //  2 = searching for image end
                 try
                 {
-                    // create request
                     req = (HttpWebRequest)WebRequest.Create(cameraAdapter.Connection);
-                    // set login and password
+                    Console.WriteLine(cameraAdapter.Connection);
                     if ((cameraAdapter.Login != null) && (cameraAdapter.Password != null) && (cameraAdapter.Login != ""))
                         req.Credentials = new NetworkCredential(cameraAdapter.Login, cameraAdapter.Password);
-                    // set connection group name
+
                     if (useSeparateConnectionGroup)
                         req.ConnectionGroupName = GetHashCode().ToString();
+                    else
+                        req.ConnectionGroupName = Guid.NewGuid().ToString();
+
                     req.Timeout = 10000;//10 sec
-                    // get response
                     resp = req.GetResponse();
 
-                    // check content type
                     string ct = resp.ContentType;
                     if (ct.IndexOf("multipart/x-mixed-replace") == -1)
                         throw new ApplicationException("Invalid URL");
 
-                    // get boundary
                     ASCIIEncoding encoding = new ASCIIEncoding();
                     boundary = encoding.GetBytes(ct.Substring(ct.IndexOf("boundary=", 0) + 9));
                     boundaryLen = boundary.Length;
 
-                    // get response stream
                     stream = resp.GetResponseStream();
 
-                    // loop
                     while ((!stopEvent.WaitOne(0, true)) && (!reloadEvent.WaitOne(0, true)))
                     {
                         // check total read
@@ -90,25 +82,20 @@ namespace Interfaces
                             total = pos = todo = 0;
                         }
 
-                        // read next portion from stream
                         if ((read = stream.Read(buffer, total, readSize)) == 0)
                             throw new ApplicationException();
 
                         total += read;
                         todo += read;
 
-                        // increment received bytes counter
                         bytesReceived += read;
 
-                        // does we know the delimiter ?
                         if (delimiter == null)
                         {
-                            // find boundary
                             pos = ByteArrayUtils.Find(buffer, boundary, pos, todo);
 
                             if (pos == -1)
                             {
-                                // was not found
                                 todo = boundaryLen - 1;
                                 pos = total - todo;
                                 continue;
@@ -119,7 +106,6 @@ namespace Interfaces
                             if (todo < 2)
                                 continue;
 
-                            // check new line delimiter type
                             if (buffer[pos + boundaryLen] == 10)
                             {
                                 delimiterLen = 2;
@@ -139,13 +125,11 @@ namespace Interfaces
                             todo = total - pos;
                         }
 
-                        // search for image
                         if (align == 1)
                         {
                             start = ByteArrayUtils.Find(buffer, delimiter, pos, todo);
                             if (start != -1)
                             {
-                                // found delimiter
                                 start += delimiterLen;
                                 pos = start;
                                 todo = total - pos;
@@ -153,13 +137,11 @@ namespace Interfaces
                             }
                             else
                             {
-                                // delimiter not found
                                 todo = delimiterLen - 1;
                                 pos = total - todo;
                             }
                         }
 
-                        // search for image end
                         while ((align == 2) && (todo >= boundaryLen))
                         {
                             stop = ByteArrayUtils.Find(buffer, boundary, pos, todo);
@@ -168,53 +150,45 @@ namespace Interfaces
                                 pos = stop;
                                 todo = total - pos;
 
-                                // increment frames counter
                                 framesReceived++;
-                                if (finishThread)
-                                    return;
 
-
-                                // image at stop
                                 if (NewFrame != null)
                                 {
-                                    Bitmap bmp = (Bitmap)Bitmap.FromStream(new MemoryStream(buffer, start, stop - start));
-                                    // notify client
-                                    this.lastFrame = bmp;
-                                    Graphics g = Graphics.FromImage(bmp);
-                                    Font drawFont = new Font("System", 12, FontStyle.Bold);
-                                    SolidBrush drawBrush = new SolidBrush(Color.Black);
-
-
-                                    //NewFrame(this, new CameraEventArgs(bmp));
-                                    if ((cameraAdapter.SaveToFile) && (!stopEvent.WaitOne(0, true)) && (!reloadEvent.WaitOne(0, true)))
+                                    using (var ms = new MemoryStream(buffer, start, stop - start))
+                                    using (var bmp = (Bitmap)Bitmap.FromStream(ms))
                                     {
-                                        if (cameraAdapter.MoviDetect)
+                                        this.lastFrame = bmp;
+
+                                        using (Graphics g = Graphics.FromImage(bmp))
+                                        using (Font drawFont = new Font("System", 12, FontStyle.Bold))
+                                        using (SolidBrush drawBrush = new SolidBrush(Color.Black))
                                         {
-                                            if (DetectMotion(ref bmp))
+                                            if (cameraAdapter.SaveToFile &&
+                                                !stopEvent.WaitOne(0, true) &&
+                                                !reloadEvent.WaitOne(0, true))
                                             {
-                                                SaveToFile(bmp);
+                                                if (cameraAdapter.MoviDetect)
+                                                {
+                                                    if (DetectMotion(ref this.lastFrame))
+                                                        SaveToFileJpeg(bmp);
+                                                }
+                                                else
+                                                {
+                                                    SaveToFileJpeg(bmp);
+                                                }
                                             }
-                                            else
-                                            {
-                                                CloseFile();
-                                            }
+
+                                            g.DrawString(DateTime.Now.ToString(),
+                                                         drawFont,
+                                                         drawBrush,
+                                                         new PointF(5, bmp.Height - 20));
                                         }
-                                        else
-                                        {
-                                            SaveToFile(bmp);
-                                        }
+
+                                        if(NewFrame != null)
+                                            NewFrame(this, new CameraEventArgs(bmp));
                                     }
-                                    g.DrawString(DateTime.Now.ToString(), drawFont, drawBrush, new PointF(5, bmp.Height - 20));
-                                    NewFrame(this, new CameraEventArgs(bmp));
-                                    drawBrush.Dispose();
-                                    drawFont.Dispose();
-                                    g.Dispose();
-                                    // release the image
-                                    bmp.Dispose();
-                                    bmp = null;
                                 }
 
-                                // shift array
                                 pos = stop + boundaryLen;
                                 todo = total - pos;
                                 Array.Copy(buffer, pos, buffer, 0, todo);
@@ -225,24 +199,11 @@ namespace Interfaces
                             }
                             else
                             {
-                                // delimiter not found
                                 todo = boundaryLen - 1;
                                 pos = total - todo;
                             }
                         }
                     }
-                }
-                catch (WebException ex)
-                {
-                    System.Diagnostics.Debug.WriteLine("=============: " + ex.Message);
-                    // wait for a while before the next try
-                    Thread.Sleep(250);
-                }
-                catch (ApplicationException ex)
-                {
-                    System.Diagnostics.Debug.WriteLine("=============: " + ex.Message);
-                    // wait for a while before the next try
-                    Thread.Sleep(250);
                 }
                 catch (Exception ex)
                 {
@@ -250,20 +211,16 @@ namespace Interfaces
                 }
                 finally
                 {
-                    CloseFile();
-                    // abort request
                     if (req != null)
                     {
                         req.Abort();
                         req = null;
                     }
-                    // close response stream
                     if (stream != null)
                     {
                         stream.Close();
                         stream = null;
                     }
-                    // close response
                     if (resp != null)
                     {
                         resp.Close();

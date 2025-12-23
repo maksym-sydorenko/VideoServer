@@ -3,7 +3,7 @@ using Interfaces;
 
 namespace axis
 {
-    public class Axis2110Camera : Interfaces.ISourceAdaptee 
+    public class Axis2110Camera : Interfaces.ISourceAdaptee
     {
         SetupPage setupPage = null;
         bool _saveToFile = false;
@@ -49,7 +49,7 @@ namespace axis
         {
             get
             {
-               return _cameraName;
+                return _cameraName;
             }
             set
             {
@@ -61,7 +61,7 @@ namespace axis
         {
             get
             {
-               return _moviDetect;
+                return _moviDetect;
             }
             set
             {
@@ -202,8 +202,6 @@ namespace axis
             }
 
         }
-       
-
 
         public string FileDirectoryPath
         {
@@ -213,7 +211,7 @@ namespace axis
             }
             set
             {
-                _fileDirectoryPath =  value;
+                _fileDirectoryPath = value;
             }
         }
 

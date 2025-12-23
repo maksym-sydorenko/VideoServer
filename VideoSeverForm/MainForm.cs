@@ -54,6 +54,7 @@ namespace VideoServer
             _setting = new XmlDocument();
 
             _setting.Load(appPath + "\\Setting.xml");
+            _camers =  new CameraCollection();
         }
 
         void MainForm_MouseClick(object sender, MouseEventArgs e)
@@ -424,22 +425,14 @@ namespace VideoServer
                 if ((_setting == null) || (treeView?.SelectedNode?.Name == "1") || (treeView?.SelectedNode?.Name == "2"))
                     return;
 
-                if (_camera != null)
-                {
-                    _camera.Stop();
-                    _camera = null;
-                }
+                _camera?.Stop();
 
-                if (_camers != null)
+                foreach (Camera cam in _camers)
                 {
-                    foreach (Camera cam in _camers)
-                    {
-                        if (cam != null)
-                            cam.Stop();
-                    }
-                    _camers.Clear();
-                    _camers = null;
+                    cam?.Stop();
                 }
+                _camers?.Clear();
+
 
                 _camera = CreateCamera(treeView?.SelectedNode?.Text);
                 _viewPanel.SetCamera(0, 0, _camera);
@@ -524,27 +517,16 @@ namespace VideoServer
             {
                 if ((_setting == null) || (treeView?.SelectedNode == null) || (treeView?.SelectedNode?.Name == "1") || (treeView?.SelectedNode?.Name == "2"))
                     return;
+                _camera?.Stop();
+                foreach (Camera cam in _camers)
+                {
+                    cam?.Stop();
+                }
+                _camers.Clear();
 
                 XmlNode node = _setting?.SelectSingleNode("/ROOT/CamerasViews/CamerasView[@ViewName=\"" + treeView.SelectedNode.Text + "\"]");
                 if (node != null)
                 {
-                    if (_camera != null)
-                    {
-                        _camera.Stop();
-                        _camera = null;
-                    }
-                    if (_camers != null)
-                    {
-                        foreach (Camera cam in _camers)
-                        {
-                            cam?.Stop();
-                        }
-                        _camers.Clear();
-                        _camers = null;
-                    }
-                    //_viewPanel = new VideoServer.Controls.ViewPanel();
-
-                    _camers = new CameraCollection();
 
                     if (node.SelectSingleNode("row") != null)
                         _viewPanel.Rows = int.Parse(node.SelectSingleNode("row").InnerText);
@@ -566,15 +548,11 @@ namespace VideoServer
 
                     foreach (XmlNode nodeCamera in nodesCameras)
                     {
-                        Camera camera = null;
-                        string cameraName = "";
                         int row = 0;
                         int col = 0;
 
-                        cameraName = nodeCamera.Attributes["CameraName"].Value;
-                        camera = CreateCamera(cameraName);
-
-                        _camers.Add(camera);
+                        string cameraName = nodeCamera.Attributes["CameraName"].Value;
+                        Camera camera = CreateCamera(cameraName);
 
                         if (nodeCamera.SelectSingleNode("row") != null)
                             row = int.Parse(nodeCamera.SelectSingleNode("row").InnerText);
@@ -584,6 +562,8 @@ namespace VideoServer
 
                         if(camera != null)
                             _viewPanel.SetCamera(row, col, camera);
+
+                        _camers.Add(camera);
                     }
 
                     foreach (Camera camera in _camers)

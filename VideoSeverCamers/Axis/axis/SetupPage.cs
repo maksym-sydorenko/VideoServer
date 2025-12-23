@@ -7,7 +7,7 @@ namespace axis
 {
     public partial class SetupPage : System.Windows.Forms.UserControl, Interfaces.ISetupPage
     {
-        string frameFrequncy = "";
+        string frameFrequncy = "1";
         string sourcePath = "";
         string description = "Axis camera";
         XmlNode node = null;

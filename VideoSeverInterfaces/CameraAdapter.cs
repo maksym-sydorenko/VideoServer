@@ -226,18 +226,6 @@ namespace Interfaces
             {
                 string str = node.SelectSingleNode("SourceType").InnerText;
 
-                if (str == SourceTypes.LOCAL.ToString())
-                {
-                    sourceType = SourceTypes.LOCAL;
-                }
-                else if (str == SourceTypes.MJPEG.ToString())
-                {
-                    sourceType = SourceTypes.MJPEG;
-                }
-                else if (str == SourceTypes.JPEG.ToString())
-                {
-                    sourceType = SourceTypes.JPEG;
-                }
                 switch (str)
                 {
                     case "JPEG":
@@ -271,8 +259,6 @@ namespace Interfaces
 
         public void Start()
         {
-
-            connection = iSourceAdaptee.UpdateSource();
 
             switch (sourceType)
             {
