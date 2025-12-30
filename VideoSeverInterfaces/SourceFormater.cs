@@ -24,7 +24,7 @@ namespace Interfaces
         private DetectorYOLO detectorYOLO = null;
         protected AVIWriter writer = null;
         // alarm level
-        private double alarmLevel = 0.03;
+        private double alarmLevel = Settings.AlarmLevel;
         protected Thread thread = null;
         protected ManualResetEvent stopEvent = null;
         protected ManualResetEvent reloadEvent = null;
@@ -54,7 +54,24 @@ namespace Interfaces
                 cameraAdapter = value;
                 if (cameraAdapter.SaveToFile)
                 {
-                    subPath = Path.Combine(cameraAdapter.FileDirectoryPath, DateTime.Now.ToString("yyyyMMdd"));
+                    if (Settings.GlobalPathEnabled)
+                    {
+                        subPath = Path.Combine(Settings.GlobalDisk, Settings.GlobalPath);
+                        if (!Directory.Exists(subPath))
+                        {
+                            Directory.CreateDirectory(subPath);
+                        }
+                        subPath = Path.Combine(subPath, cameraAdapter.CameraName);
+                        if (!Directory.Exists(subPath))
+                        {
+                            Directory.CreateDirectory(subPath);
+                        }
+                        subPath = Path.Combine(subPath, DateTime.Now.ToString("yyyyMMdd"));
+                    }
+                    else
+                    {
+                        subPath = Path.Combine(cameraAdapter.FileDirectoryPath, DateTime.Now.ToString("yyyyMMdd"));
+                    }
                     if (!Directory.Exists(subPath))
                     {
                         Directory.CreateDirectory(subPath);
@@ -96,6 +113,7 @@ namespace Interfaces
             }
             return false;
         }
+
 
         #region Abstract
         public abstract void Start();
@@ -200,8 +218,9 @@ namespace Interfaces
                     lastFrame.Save(subPath + "\\" + fileName, ImageFormat.Jpeg);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
             }
         }
 

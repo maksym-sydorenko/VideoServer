@@ -19,7 +19,7 @@ namespace VideoServer
         UserInterface.ViewSettingForm viewSettingForm = null;
         UserInterface.AddViewForm viewForm = null;
         UserInterface.AboutForm aboutForm = new UserInterface.AboutForm();
-        UserInterface.SettingForm settingForm = null;
+        UserInterface.SettingForm settingForm = new VideoServer.UserInterface.SettingForm();
         Hashtable tableIAdaptee = null;
         Point mainWindowLocation;
         Size mainWindowSize;

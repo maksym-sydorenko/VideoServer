@@ -68,6 +68,9 @@
     <Compile Include="Controls\CameraViwer.Designer.cs">
       <DependentUpon>CameraViwer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DoubleTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ViewGrid.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -196,7 +196,6 @@ namespace VideoServer
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             this.settingToolStripMenuItem.Size = new System.Drawing.Size(125, 24);
             this.settingToolStripMenuItem.Text = "Налаштування";
-            this.settingToolStripMenuItem.Visible = false;
             this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
             // 
             // previewToolStripMenuItem

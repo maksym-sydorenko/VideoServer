@@ -192,6 +192,7 @@
     <Compile Include="Mjpeg.cs" />
     <Compile Include="DetectorMotion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="SourceFormater.cs" />
     <Compile Include="SourseTypes.cs" />
   </ItemGroup>
