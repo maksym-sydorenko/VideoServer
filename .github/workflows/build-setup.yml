@@ -1,9 +1,13 @@
-name: Build Setup
+﻿name: Build Setup
 
 on:
+  workflow_dispatch:
   push:
+    branches:
+      - ci-setup
     tags:
       - 'v*'
+
 
 jobs:
   build:
@@ -11,22 +15,29 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Install Visual Studio Installer Projects extension
+      - name: Install Visual Studio Build Tools with Installer Projects support
         run: |
-          choco install visualstudio2022buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.CoreBuildTools --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --add Microsoft.VisualStudio.ComponentGroup.MSBuild --add Microsoft.VisualStudio.Component.NuGet.BuildTools --add Microsoft.VisualStudio.Component.VC.Redist.14.Latest --add Microsoft.VisualStudio.Component.VC.ATL --add Microsoft.VisualStudio.Component.VC.ATLMFC --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.Llvm.Clang --add Microsoft.VisualStudio.Component.VC.Llvm.ClangToolset --add Microsoft.VisualStudio.Component.VC.MFC --add Microsoft.VisualStudio.Component.VC.TestAdapterForBoostTest --add Microsoft.VisualStudio.Component.VC.TestAdapterForGoogleTest --add Microsoft.VisualStudio.Component.VC.v141.x86.x64 --add Microsoft.VisualStudio.Component.VC.v141.ATL --add Microsoft.VisualStudio.Component.VC.v141.MFC --add Microsoft.VisualStudio.Component.VC.v141.x86.x64.Spectre --add Microsoft.VisualStudio.Component.VC.v141.ATL.Spectre --add Microsoft.VisualStudio.Component.VC.v141.MFC.Spectre --add Microsoft.VisualStudio.Component.VC.v143.x86.x64 --add Microsoft.VisualStudio.Component.VC.v143.ATL --add Microsoft.VisualStudio.Component.VC.v143.MFC --add Microsoft.VisualStudio.Component.VC.v143.x86.x64.Spectre --add Microsoft.VisualStudio.Component.VC.v143.ATL.Spectre --add Microsoft.VisualStudio.Component.VC.v143.MFC.Spectre"
-          choco install vswhere
-          choco install microsoft-visualstudio-installer-projects
+          curl -L -o vs_buildtools.exe https://aka.ms/vs/17/release/vs_buildtools.exe
+          .\vs_buildtools.exe --quiet --wait --norestart --nocache `
+            --add Microsoft.VisualStudio.Workload.MSBuildTools `
+            --add Microsoft.VisualStudio.Component.VSInstallerProjects
+
+      - name: Install vswhere
+        run: choco install vswhere -y
 
       - name: Find MSBuild
         id: msbuild
         run: |
           echo "MSBUILD_PATH=$(vswhere -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)" >> $env:GITHUB_ENV
 
+      - name: List repository files (debug)
+        run: dir
+
       - name: Build solution (including Setup project)
         run: |
-          & "$env:MSBUILD_PATH" VideoServer.sln /t:Rebuild /p:Configuration=Release
+          & "$env:MSBUILD_PATH" VideoSeverForm/VideoSever.sln /t:Rebuild /p:Configuration=Release
 
       - name: Upload MSI/EXE artifacts
         uses: actions/upload-artifact@v4
@@ -37,6 +48,7 @@ jobs:
             **/Release/*.exe
 
       - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
           files: |
