@@ -213,7 +213,7 @@
     <Content Include="ico\Camera.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VideoSeverInterfaces\Interfaces.csproj">
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{78e56702-1926-4f72-938c-935293779aa2}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>

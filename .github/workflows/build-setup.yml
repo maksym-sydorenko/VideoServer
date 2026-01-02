@@ -35,9 +35,12 @@ jobs:
       - name: List repository files (debug)
         run: dir
 
+      - name: Restore NuGet packages
+        run: nuget restore VideoServer/VideoServer.sln
+
       - name: Build solution (including Setup project)
         run: |
-          & "$env:MSBUILD_PATH" VideoSeverForm/VideoSever.sln /t:Rebuild /p:Configuration=Release
+          & "$env:MSBUILD_PATH" VideoServer/VideoServer.sln /t:Rebuild /p:Configuration=Release
 
       - name: Upload MSI/EXE artifacts
         uses: actions/upload-artifact@v4
