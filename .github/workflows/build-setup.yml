@@ -17,12 +17,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup DevEnv
+        uses: seanmiddleditch/gha-setup-vsdevenv@v4
+
       - name: Install Visual Studio Build Tools with Installer Projects support
         run: |
           curl -L -o vs_buildtools.exe https://aka.ms/vs/17/release/vs_buildtools.exe
           .\vs_buildtools.exe --quiet --wait --norestart --nocache `
             --add Microsoft.VisualStudio.Workload.MSBuildTools `
             --add Microsoft.VisualStudio.Component.VSInstallerProjects
+
+      - name: Install VS Installer Projects
+        run: |
+          vs_installer.exe modify --installPath "C:\Program Files\Microsoft Visual Studio\2022\Enterprise" --add Microsoft.VisualStudio.Component.VDProject
 
       - name: Install vswhere
         run: choco install vswhere -y
@@ -35,9 +42,16 @@ jobs:
       - name: List repository files (debug)
         run: dir
 
-      - name: Build solution (including Setup project)
+      - name: Restore NuGet packages
+        run: nuget restore VideoServer/VideoServer.sln
+
+      - name: Fix HRESULT 8000000A (Universal Registry Fix)
         run: |
-          & "$env:MSBUILD_PATH" VideoSeverForm/VideoSever.sln /t:Rebuild /p:Configuration=Release
+          reg add "HKCU\SOFTWARE\Microsoft\VisualStudio\17.0_Config\MSBuild" /v EnableOutOfProcBuild /t REG_DWORD /d 0 /f
+
+      - name: Build Setup project (vdproj)
+        run: |
+           devenv.com "VideoServer/VideoServer.sln" /build "Release|x64" /project "Setup"
 
       - name: Upload MSI/EXE artifacts
         uses: actions/upload-artifact@v4
