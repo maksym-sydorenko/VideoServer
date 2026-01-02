@@ -29,7 +29,7 @@ jobs:
           & "$env:MSBUILD_PATH" VideoServer.sln /t:Rebuild /p:Configuration=Release
 
       - name: Upload MSI/EXE artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: installer
           path: |
