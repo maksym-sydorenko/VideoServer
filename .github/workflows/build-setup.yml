@@ -8,7 +8,6 @@ on:
     tags:
       - 'v*'
 
-
 jobs:
   build:
     runs-on: windows-latest
@@ -17,56 +16,56 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup DevEnv
-        uses: seanmiddleditch/gha-setup-vsdevenv@v4
-
-      - name: Install Visual Studio Build Tools with Installer Projects support
-        run: |
-          curl -L -o vs_buildtools.exe https://aka.ms/vs/17/release/vs_buildtools.exe
-          .\vs_buildtools.exe --quiet --wait --norestart --nocache `
-            --add Microsoft.VisualStudio.Workload.MSBuildTools `
-            --add Microsoft.VisualStudio.Component.VSInstallerProjects
-
-      - name: Install VS Installer Projects
-        run: |
-          vs_installer.exe modify --installPath "C:\Program Files\Microsoft Visual Studio\2022\Enterprise" --add Microsoft.VisualStudio.Component.VDProject
-
+      # Встановлюємо vswhere для пошуку шляхів
       - name: Install vswhere
         run: choco install vswhere -y
 
-      - name: Find MSBuild
-        id: msbuild
+      # Знаходимо VS Developer Command Prompt і devenv.com
+      - name: Setup Visual Studio paths
         run: |
-          echo "MSBUILD_PATH=$(vswhere -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)" >> $env:GITHUB_ENV
-
-      - name: List repository files (debug)
-        run: dir
+          $vsPath = vswhere -latest -products * -property installationPath
+          $vsDevCmd = Join-Path $vsPath "Common7\Tools\vsdevcmd.bat"
+          $devenvPath = Join-Path $vsPath "Common7\IDE\devenv.com"
+          echo "VSDEVCMD=$vsDevCmd" >> $env:GITHUB_ENV
+          echo "DEVENV_PATH=$devenvPath" >> $env:GITHUB_ENV
 
       - name: Restore NuGet packages
         run: nuget restore VideoServer/VideoServer.sln
 
-      - name: Fix HRESULT 8000000A (Universal Registry Fix)
+      - name: Setup VS environment
+        shell: cmd
         run: |
-          reg add "HKCU\SOFTWARE\Microsoft\VisualStudio\17.0_Config\MSBuild" /v EnableOutOfProcBuild /t REG_DWORD /d 0 /f
+          call "%VSDEVCMD%" -arch=amd64
 
-      - name: Build Setup project (vdproj)
+      - name: Fix VDPROJ Build Error (HRESULT 8000000A)
+        shell: pwsh
         run: |
-           devenv.com "VideoServer/VideoServer.sln" /build "Release|x64" /project "Setup"
+          # Find the Visual Studio installation path
+          $vsPath = & vswhere -latest -property installationPath
 
-      - name: Upload MSI/EXE artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: installer
-          path: |
-            **/Release/*.msi
-            **/Release/*.exe
+          # Path to the fix utility
+          $fixExe = Join-Path $vsPath "Common7\IDE\CommonExtensions\Microsoft\VSI\DisableOutOfProcBuild\DisableOutOfProcBuild.exe"
+          
+          if (Test-Path $fixExe) {
+            Write-Host "Running DisableOutOfProcBuild.exe..."
+            Start-Process -FilePath $fixExe -Wait
+          } else {
+            Write-Error "Fix utility not found at $fixExe"
+          }
+
+      - name: Build Setup project (.vdproj)
+        shell: cmd
+        continue-on-error: true
+        run: |
+          "%DEVENV_PATH%" "VideoServer/VideoServer.sln" /build "Release|x64" /project "Setup"
+
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            **/Release/*.msi
-            **/Release/*.exe
+            **/Release/Setup.msi
+            **/Release/setup.exe
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN}}
